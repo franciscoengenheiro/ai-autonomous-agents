@@ -5,10 +5,14 @@ import iasa_jogo.src.ambiente.Comando;
 import iasa_jogo.src.ambiente.Evento;
 
 import java.util.Map;
+import java.util.Scanner;
 
 public class AmbienteJogo implements Ambiente {
 
-    private static final Map<String, EventoJogo> eventos = Map.of(
+    private EventoJogo evento;
+
+    // Programação Declarativa
+    private final Map<String, EventoJogo> eventos = Map.of(
             "s", EventoJogo.SILENCIO,
             "r", EventoJogo.RUIDO,
             "a", EventoJogo.ANIMAL,
@@ -16,6 +20,8 @@ public class AmbienteJogo implements Ambiente {
             "o", EventoJogo.FOTOGRAFAR,
             "t", EventoJogo.TERMINAR
     );
+
+    private Scanner scanner = new Scanner(System.in);
 
     public AmbienteJogo() {
 
@@ -28,20 +34,27 @@ public class AmbienteJogo implements Ambiente {
 
     @Override
     public void evoluir() {
-
+        evento = gerarEvento();
     }
 
     @Override
     public Evento observar() {
-        return null;
+        evento.mostrar();
+        return evento;
     }
 
     @Override
     public void executar(Comando comando) {
-
+        comando.mostrar();
     }
 
     private EventoJogo gerarEvento() {
+        System.out.println("\nEvento? ");
+        String textoComando = scanner.next();
+        return eventos.get(textoComando);
+    }
 
+    public EventoJogo getEvento() {
+        return evento;
     }
 }

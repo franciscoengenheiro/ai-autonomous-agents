@@ -7,7 +7,7 @@ public enum ComandoJogo implements Comando {
 
     @Override
     public void mostrar() {
-
+        System.out.printf("Acção: %s\n", this);
     }
 
 }
