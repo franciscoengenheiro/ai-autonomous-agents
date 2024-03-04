@@ -5,7 +5,7 @@ import iasa_jogo.src.ambiente.Comando;
 import iasa_jogo.src.ambiente.Evento;
 
 /**
- * Representa um sistema computacional inteligente responsável por percecionar/captar eventos,
+ * Representa um sistema computacional inteligente autónomo responsável por percecionar/captar eventos,
  * provenientes do ambiente, atráves de sensosres, processá-los e gerar ações como resposta, atráves de atuadores.
  */
 public class Agente {
