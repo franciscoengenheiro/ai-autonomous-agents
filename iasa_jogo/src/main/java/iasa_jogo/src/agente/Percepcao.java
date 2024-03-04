@@ -19,7 +19,7 @@ public class Percepcao {
         return evento;
     }
 
-    public Percepcao(Evento evento) {
+    Percepcao(Evento evento) {
         this.evento = evento;
     }
 }

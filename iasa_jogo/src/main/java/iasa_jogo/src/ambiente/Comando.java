@@ -1,9 +1,8 @@
 package iasa_jogo.src.ambiente;
 
 /**
- * Caracteriza um comando que pode ser executado no Ambiente.
+ * Caracteriza um comando que pode ser executado num Ambiente.
  */
-@FunctionalInterface
-public interface Comando extends Observavel{
+public interface Comando extends Observavel {
 
 }

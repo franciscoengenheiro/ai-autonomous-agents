@@ -20,12 +20,12 @@ public class Agente {
      * Adicionalmente, ambos os parametros representam interfaces, colocando o Agente numa posição de independência em relação
      * à respetiva implementação destes (injeção de dependências).
      */
-    Agente(Ambiente ambiente, Controlo controlo) {
+    public Agente(Ambiente ambiente, Controlo controlo) {
         this.ambiente = ambiente;
         this.controlo = controlo;
     }
 
-    void executar() {
+    public void executar() {
         // TODO(use control?)
     }
 
