@@ -4,6 +4,41 @@ import iasa_jogo.src.ambiente.Ambiente;
 import iasa_jogo.src.ambiente.Comando;
 import iasa_jogo.src.ambiente.Evento;
 
+/*
+Implementação -> Arquitetura -> Modelo -> (volta para) Implementação
+
+Implementação pode ser estrutural ou comportamental:
+UML -> Estrutura: define a estrutura de um sistema, ou seja, a forma como os componentes se relacionam entre si;
+Sequence Diagram -> Comportamento: mostra a interação entre objetos, ou seja, a forma como os componentes comunicam entre si.
+
+Diagramas de Atividade:
+- Representam o fluxo de controlo de um sistema, ou seja, a sequência de atividades que um sistema executa;
+- Compostos por:
+    - Nós (nó inicial, nó final, nó de decisão, nó de fusão, nó de bifurcação, nó de junção, nó de atividade);
+    - Guardas (condições de transição);
+    - Partições (divisão do fluxo de controlo, que são as atividades realizadas por uma parte específica do modelo)
+
+Acoplamento (inter-modular):
+- Unidirecional vs Bidirecional (uni representa menos acoplamento);
+- Visibilidade (menos visibilidade representa menos acoplamento);
+- (ordem de menos acoplamento para mais):
+Herança -> Composição -> Agregação -> Associação -> Dependência
+
+Coesão (intra-modular):
+- Os módulos que constituem o software estão organizados por conteúdo;
+- Cada módulo deve ter uma única responsabilidade (Single Responsibility Principle)
+
+Inteligência => (implica) Autonomia
+- vice-versa não é verdadeiro
+
+Principios de Arquitetura:
+- Abstração;
+- Modularização;
+- Factorização;
+  - Herança (estrutural);
+  - Delegação (funcional)
+*/
+
 /**
  * Representa um sistema computacional inteligente autónomo responsável por percecionar/captar eventos,
  * provenientes do ambiente, atráves de sensosres, processá-los e gerar ações como resposta, atráves de atuadores.
@@ -25,8 +60,13 @@ public class Agente {
         this.controlo = controlo;
     }
 
+    /**
+     * O Agente executa o seu ciclo de vida, delegando, ao módulo de Controlo, o processamento da perceção e a geração da ação resultante.
+     */
     public void executar() {
-        // TODO(use control?)
+        Percepcao percepcao = percepcionar();
+        Accao accao = controlo.processar(percepcao);
+        atuar(accao);
     }
 
     /**

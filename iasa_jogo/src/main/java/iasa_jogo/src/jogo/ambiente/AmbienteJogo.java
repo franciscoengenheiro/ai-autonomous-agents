@@ -57,7 +57,7 @@ public class AmbienteJogo implements Ambiente {
      * segundo o mapeamento de comandos para eventos, devolver o evento correspondente.
      */
     private EventoJogo gerarEvento() {
-        System.out.println("\nEvento? ");
+        System.out.print("\nEvento?: ");
         String textoComando = scanner.next();
         return eventos.get(textoComando);
     }

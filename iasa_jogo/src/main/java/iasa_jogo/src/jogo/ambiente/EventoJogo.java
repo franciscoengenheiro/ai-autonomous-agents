@@ -10,6 +10,6 @@ public enum EventoJogo implements Evento {
 
     @Override
     public void mostrar() {
-        System.out.printf("Evento: %s\n", this);
+        System.out.printf("\nEvento: %s", this);
     }
 }

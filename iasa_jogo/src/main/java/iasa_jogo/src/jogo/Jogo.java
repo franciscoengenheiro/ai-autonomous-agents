@@ -30,7 +30,7 @@ public class Jogo {
         do  {
             // É utilizado o *do-while* em vez do *while* porque o ambiente deve ser evoluído
             // pelo menos uma vez para que o evento associado seja populado pela primeira vez,
-            // senão temos NullPointerException
+            // senão temos NullPointerException (NPE)
             ambiente.evoluir();
             personagem.executar();
         } while (ambiente.getEvento() != EventoJogo.TERMINAR);
