@@ -58,7 +58,7 @@ public class ControloPersonagem implements Controlo {
         registo
                 .transicao(EventoJogo.ANIMAL, registo, fotografar)
                 .transicao(EventoJogo.FUGA, procura)
-                .transicao(EventoJogo.FOTOGRAFAR, procura);
+                .transicao(EventoJogo.FOTOGRAFIA, procura);
 
         // Inspeção:
         inspecao

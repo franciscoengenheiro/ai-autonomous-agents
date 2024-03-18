@@ -26,7 +26,7 @@ public class AmbienteJogo implements Ambiente {
             "r", EventoJogo.RUIDO,
             "a", EventoJogo.ANIMAL,
             "f", EventoJogo.FUGA,
-            "o", EventoJogo.FOTOGRAFAR,
+            "o", EventoJogo.FOTOGRAFIA,
             "t", EventoJogo.TERMINAR
     );
 

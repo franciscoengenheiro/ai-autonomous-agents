@@ -6,7 +6,7 @@ import iasa_jogo.src.ambiente.Evento;
  * Representa os eventos que podem ocorrer durante o jogo.
  */
 public enum EventoJogo implements Evento {
-    SILENCIO, RUIDO, ANIMAL, FUGA, FOTOGRAFAR, TERMINAR;
+    SILENCIO, RUIDO, ANIMAL, FUGA, FOTOGRAFIA, TERMINAR;
 
     @Override
     public void mostrar() {
