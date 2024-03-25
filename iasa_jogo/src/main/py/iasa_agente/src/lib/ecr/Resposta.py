@@ -8,7 +8,7 @@ class Resposta:
         self._accao = accao # protected attribute
 
 
-    def ativar(self, percepcao, intensidade = 0):
+    def activar(self, percepcao, intensidade = 0):
 
         """
         A ativação de uma resposta consiste em retornar a ação que a compõe, alterando a sua prioridade através do parâmetro intensidade. Se nenhuma intensidade for fornecida, a prioridade da ação baixa para a menor possível (0)

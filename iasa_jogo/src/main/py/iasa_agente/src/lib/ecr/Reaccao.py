@@ -14,11 +14,11 @@ class Reaccao(Comportamento):
     """
     Ao estimulo inerente a esta reacção, é feita a deteção da percepção recebida. Se a intensidade do estimulo for superior a 0, é ativada a resposta associada a percepção e retornada a acção resultante, podendo ser uma acção sem efeito.
     """
-    def ativar(self, percepcao):
+    def activar(self, percepcao):
         # pass # equals no-op
         # raise NotImplementedError
         intensidade = self.__estimulo.detectar(percepcao)
         if intensidade > 0:
-            accao = self.__resposta.ativar(percepcao, intensidade)
+            accao = self.__resposta.activar(percepcao, intensidade)
 
         return accao # None or accao

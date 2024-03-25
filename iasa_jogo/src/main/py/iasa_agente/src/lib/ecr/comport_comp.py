@@ -10,14 +10,14 @@ class ComportComp(Comportamento):
     def __init__(self, comportamentos):
         self.__comportamentos = comportamentos
     
-    def ativar(self, percepcao):
+    def activar(self, percepcao):
         """
         A ativação de um comportamento composto consiste em iterar cada comportamento que o compõe e ativá-lo com a percepção recebida.
         No final é utilizado o mecanismo de seleção de acção para determinar a acção a realizar em função das acçoes obtidas pela ativação dos comportamentos.
         """
         accoes = []
         for comportamento in self.__comportamentos:
-            accao = comportamento.ativar(percepcao)
+            accao = comportamento.activar(percepcao)
             if accao:
                 accoes.append(accao)
 
@@ -27,4 +27,5 @@ class ComportComp(Comportamento):
     @abstractmethod
     def seleccionar_accao(accoes):
         """
+        TODO
         """
