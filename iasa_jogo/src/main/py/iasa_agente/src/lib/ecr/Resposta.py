@@ -1,16 +1,17 @@
 class Resposta:
+
     """
-    Encapsula a resposta a uma percepção, inerentemente ligada a uma ação a ser executada e à sua respetiva prioridade.
-    Várias respostas podes ser ativas por uma única percepção, sendo que esta é um agregado de estímulos.
-    Uma resposta pode ser ativada por um estímulo ou pela perceção, de forma a garantir guardas de ativação.
+    Representa a geração de uma resposta a estímulos, inerentemente ligada a uma ação a ser executada e à sua respetiva prioridade.
+    Várias respostas podes ser ativadas por uma única percepção. Além de poder ser ativada por um estímulo, uma resposta pode ser ativada também por uma percepção, de forma a garantir restrições de ativação (guardas)
     """
     def __init__(self, accao):
         self._accao = accao # protected attribute
 
 
-    def ativar(self, percepcao, intensidade : float = 0):
+    def ativar(self, percepcao, intensidade = 0):
+
         """
-        A ativação de uma reposta consiste em retornar a ação que a compõe, alterando a sua prioridade através do parâmetro intensidade. Se nenhuma intensidade for fornecida, a prioridade da ação baixa para 0.
-        """ 
+        A ativação de uma resposta consiste em retornar a ação que a compõe, alterando a sua prioridade através do parâmetro intensidade. Se nenhuma intensidade for fornecida, a prioridade da ação baixa para a menor possível (0)
+        """
         self._accao.prioridade = intensidade
         return self._accao
