@@ -1,0 +1,2 @@
+class AproximarDir:
+    raise NotImplementedError

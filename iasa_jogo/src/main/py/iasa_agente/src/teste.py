@@ -1,10 +1,4 @@
-""" from sae import Agente
-from ecr.comport_comp import ComportComp
-from agente.controlo_react.controlo_react import ControloReact
-
-print("am I a test?") """
-
-# Serve para testar todos os agentes
+# Módulo para testar todos os agentes
 
 from sae import Simulador
 # Comment all lines except the one you want to test

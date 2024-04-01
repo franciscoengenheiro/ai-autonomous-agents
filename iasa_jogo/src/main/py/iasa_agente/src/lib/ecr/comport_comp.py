@@ -27,5 +27,11 @@ class ComportComp(Comportamento):
     @abstractmethod
     def seleccionar_accao(accoes):
         """
-        TODO
+        Define o módulo de seleção de ação associado a um comportamento composto.
+        Mecanismos de combinação e seleção de acções:
+        - Execução paralela de ações (As ações são executadas em paralelo porque não interferem entre si);
+        - Seleção por prioridade (As ações são selecionadas em função de uma prioridade);
+        - Combinação de ações (As ações são combinadas numa única resposta por composição e.g., soma vectorial);
+        - Seleção aleatória (As ações são selecionadas aleatoriamente)
         """
+    

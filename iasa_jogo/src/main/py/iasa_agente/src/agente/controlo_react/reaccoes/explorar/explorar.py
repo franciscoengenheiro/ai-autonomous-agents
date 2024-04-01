@@ -6,15 +6,14 @@ from agente.controlo_react.reaccoes.resposta.resposta_mover import RespostaMover
 class Explorar(Comportamento):
 
     """
-    Define um comportamento fixo associado à Exploração, com uma resposta fixa, pois gera uma ação em permanência.
+    Define um comportamento fixo associado ao objetivo "explorar". Caracteriza-se por ter uma resposta fixa, pois gera uma ação em permanência, que consiste em mover-se numa direção aleatória.
     """
 
     def activar(self, percepcao):
 
         """
-        Ativa o comportamento associado à exploração.
-        Na ativação da resposta não é preciso usar o parametro da intensidade
-        do método da ativação porque não depende de nenhum estímulo para ser ativado.
+        Ativa a funcionalidade que este comportamento representa consoante a perceção recebida.
+        Na ativação da resposta não é preciso usar o paramêtro intensidade do método da ativação porque não depende de nenhum estímulo para ser ativado, relembrando que uma resposta pode ser ativada tanto por um estímulo como por uma percepção diretamente.
         """
 
         direccao = self.__direccao_aleatoria()
@@ -24,7 +23,7 @@ class Explorar(Comportamento):
     def __direccao_aleatoria(self):
 
         """
-        Retorna uma direção aleatória de entre os possíveis valores do enumerado Direccao
+        Retorna uma direção aleatória de entre os possíveis valores no plano cartesiano.
         """
 
         direccoes = list(Direccao)
