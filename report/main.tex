@@ -1,0 +1,21 @@
+\documentclass[a4paper,twoside,11pt]{article}
+\usepackage{hyperref}
+\usepackage{hhline}
+\usepackage{amstex}
+
+% ----------------------------------------------------------------------
+% Define external packages, language, margins, fonts and new commands
+% ----------------------------------------------------------------------
+\input{preamble}
+
+\begin{document}
+
+    \input{frontcover}
+
+    \section{Introdução}\label{sec:introduction}
+    \input{sections/01_introduction.tex}
+
+    \bibliographystyle{unsrt}
+    \bibliography{bibliography}
+
+\end{document}

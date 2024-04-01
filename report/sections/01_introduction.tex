@@ -1,0 +1,43 @@
+\subsection{Necessidade de Desenho de Software Resiliente}\label{subsec:necessidade-de-desenho-de-software-resiliente}
+Os sistemas distribuídos representam um conjunto de computadores independentes e interligados em rede, que se apresentam aos utilizadores como um sistema único e coerente~\cite{fcc-distributed-systems}.
+
+Dado a constante necessidade destes sistemas estarem disponíveis, aliados à sua complexidade de funcionamento, é natural que estejam suscetíveis a falhas de comunicação, de hardware, de software, entre outras.
+Por esse motivo, existe a necessidade de garantir que os serviços que disponibilizam sejam resilientes, e mais concretamente, tolerantes a falhas.
+
+Um serviço tolerante a falhas, é um serviço que é capaz de manter a sua funcionalidade total ou parcial, ou apresentar uma alternativa, quando um ou mais componentes que lhes estão associados falham.
+De forma a alcançar este objetivo, foram desenhados mecanismos de resiliência.
+Alguns exemplos:
+
+\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+    \item \textbf{Retry}: Tenta novamente uma operação que falhou, aumentando a sua probabilidade de sucesso;
+    \item \textbf{Rate Limiter}: Limita a taxa de requisições que um determinado serviço pode receber;
+    \item \textbf{Circuit Breaker}: Interrompe, temporariamente, a comunicação com um serviço que está a falhar, de forma a evitar que o mesmo sobrecarregue o sistema. Semelhante a um disjuntor elétrico;
+    \item \textbf{Fallback}: Fornece um valor ou executa uma ação alternativa caso uma operação falhe.
+\end{itemize}
+
+\subsection{Mecanismos de Resiliência}\label{subsec:bibliotecas-que-fornecem-mecanismos-de-resiliencia}
+
+Existem bibliotecas que fornecem mecanismos de resiliência (Tabela~\ref{tab:resilience_libraries}).
+Estes atuam em tempo de execução e implementam uma determinada estratégia.
+A configuração de um mecanismo de resiliência é feita através de uma política que define o seu comportamento.
+
+\begin{table}[h]
+    \centering
+    \caption{Exemplos de bibliotecas que fornecem mecanismos de resiliência.}
+    \label{tab:resilience_libraries}
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        \textbf{Biblioteca}                      & \textbf{Linguagem} & \textbf{Plataforma} \\ \hline
+        Netflix's Hystrix~\cite{netflix-hystrix} & Java               & JVM                 \\ \hline
+        Resilience4j~\cite{resilience4j}         & Java/Kotlin        & JVM                 \\ \hline
+        Polly ~\cite{polly-dotnet}               & C\#                & .NET                \\
+        \hline
+    \end{tabular}
+\end{table}
+
+A biblioteca \textit{Polly}~\cite{polly-dotnet} divide os mecanismos de resiliência em duas categorias:
+
+\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+    \item \textbf{Resiliência Reativa}: Reage a falhas e mitiga o seu impacto (e.g., \textit{Retry, Circuit Breaker});
+    \item \textbf{Resiliência Proativa}: Previne que as falhas aconteçam (e.g., \textit{Rate Limiter, Timeout}).
+\end{itemize}
