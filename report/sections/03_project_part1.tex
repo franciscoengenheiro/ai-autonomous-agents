@@ -1,0 +1,64 @@
+\subsection{Arquitetura de software}\label{subsec:arquitetura-de-software}
+
+A arquitetura de software aborda a complexidade inerente ao desenvolvimento de software por meio de uma série de vertentes que estão interligadas. 
+
+\subsubsection{Métricas}\label{subsubsec:acoplamento}
+
+As métricas são medidas de quantificação da arquitectura de um software indicadoras da qualidade dessa arquitectura;
+
+O acomplamento é uma métrica inter-modular que mede o grau de interdependência entre os módulos de um sistema.
+\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+    \item \tb{Direção}: Unidirecional vs Bidirecional (uni representa menos acoplamento);
+    \item \tb{Visibilidade}: Menos visibilidade representa menos acoplamento;
+    \item \tb{Ordem de menos acoplamento para mais}: Herança $\rightarrow$ Composição $\rightarrow$ Agregação $\rightarrow$ Associação $\rightarrow$ Dependência.
+\end{itemize}
+
+A coesão é uma métrica intra-modular que determina o nível de coerência funcional de um subsistema/módulo, seja pela sua organização ou pela sua funcionalidade (e.g., single responsibility principle).
+
+\subsubsection{Princípios}\label{subsubsec:principios}
+
+Os princípios no contexto da arquitectura de software são um conjunto de convenções que orientam a definição da arquitectura de um software, garantindo a qualidade da arquitectura produzida.
+
+Alguns exemplos:
+\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+    \item \tb{Abstração};
+    \item \tb{Modularização}: Ao qual está associado a decomposição e o encapsulamento dos diversos módulos;
+    \item \tb{Factorização}: Onde a arquitectura é dividida em camadas, cada uma com um conjunto de responsabilidades bem definidas. Pode ser estrutural (e.g, Herança) e Funcional (e.g, Delegação);
+\end{itemize}
+    
+\subsection{Processo de Desenvolvimento de Software}\label{subsec:processo-de-desenvolvimento-de-software}
+
+O processo de desenvolvimento de software consiste na
+criação da organização de um sistema de forma
+progressiva, através de diferentes níveis de abstracção:
+
+\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+    \item \tb{Modelo (Conceptual)}: Representação abstrata do sistema, que define o que o sistema deve fazer, sem especificar como;
+    \item \tb{Arquitetura (Modelo Concreto)}: Representação concreta do sistema, que define como o sistema deve ser implementado;
+    \item \tb{Implementação}: Código fonte que implementa o sistema.
+\end{itemize}
+
+Consiste num processo iterativo, em que as diferentes actividades de desenvolvimento são alternadas ao longo do tempo em função do conhecimento e do nível de detalhe
+envolvido. Essa alternância poderá ser circular (i.e., implementação $\rightarrow$ arquitectura $\rightarrow$ modelo $\rightarrow$ implementação).
+
+\begin{table}[h]
+    \centering
+    \caption{Tipos de Implementação}
+    \label{tab:tipos-de-implementacao}
+    \begin{tabular}{|l|l|p{8cm}|}
+        \hline
+        \tb{Tipo}                      & \tb{Modelo Associado}  & \tb{Designação} \\ \hline
+        Estrutural & \ti{UML} & Define a estrutura de um sistema, ou seja, a forma como os componentes se relacionam entre si. \\ \hline
+        Comportamental & \ti{Sequence Diagram} & Define o comportamento de um sistema, ou seja, a forma como os componentes interagem e comunicam entre si. \\ \hline
+    \end{tabular}
+\end{table}
+
+Os diagramas de atividade ou sequência representam o fluxo de controlo de um sistema, ou seja, a sequência de atividades que um sistema executa. São compostos por:
+
+\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+    \item \tb{Nós}: definem a forma como o fluxo de controlo é dividido (e.g., nó inicial, nó final, nó de decisão, nó de fusão, nó de bifurcação, nó de junção, nó de atividade);
+    \item \tb{Guardas}: definem as condições de transição
+    \item \tb{Partições}: definem a divisão do fluxo de controlo, que são as atividades realizadas por uma parte específica do modelo.
+\end{itemize}
+
+TODO: falar mais sobre UML
