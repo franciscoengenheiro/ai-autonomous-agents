@@ -1,6 +1,5 @@
 from sae import Agente
 from agente.controlo_react.controlo_react import ControloReact
-# from agente.controlo_react.reaccoes.explorar.explorar import Explorar
 from agente.controlo_react.reaccoes.recolher import Recolher   
 
 class AgenteReactivo(Agente):

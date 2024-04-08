@@ -14,5 +14,5 @@ class Comportamento(ABC):
     @abstractmethod
     def activar(self, percepcao):
         """
-        TODO
+        A ativação de um comportamento consiste em processar a informação de entrada (percepção) e gerar uma ação de saída. Este método será chamado pelo agente reativo para ativar o comportamento de cada vez que o agente percecionar o ambiente.
         """

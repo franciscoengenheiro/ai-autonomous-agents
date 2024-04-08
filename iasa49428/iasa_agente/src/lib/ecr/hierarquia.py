@@ -3,7 +3,12 @@ from ecr.comport_comp import ComportComp
 class Hierarquia(ComportComp):
 
     """
-    Representa uma forma de comportamento composto com um mecanismo de seleção de ação de prioridade por hierarquia fixa de subsunção (supressão e substituição). Os comportamentos mais altos na hierarquia têm prioridade sobre os mais baixos (correção de acção), e não variam consoante o tempo. (e.g., o comportamento "carregar bateria", tem sempre prioridade sobre "explorar" ou "evitar obstáculo, pois representa um comportamento mais básico e fundamental para a sobrevivência do agente)
+    Representa uma forma de comportamento composto com um mecanismo de seleção de ação de prioridade por hierarquia fixa de subsunção. 
+    Módulos comportamentais de subsunção:
+    - inibição de entradas: a informação de entrada não é cosniderada:
+    - Supressão das saídas: a informação de saída não é considerada;
+    - Reinício do estado interno: reset.
+    Os comportamentos mais altos na hierarquia têm prioridade sobre os mais baixos (correção de acção), e não variam consoante o tempo (e.g., o comportamento "carregar bateria", tem sempre prioridade sobre "explorar" ou "evitar obstáculo, pois representa um comportamento mais básico e fundamental para a sobrevivência do agente no ambiente).
     """
 
     def seleccionar_accao(self, accoes):

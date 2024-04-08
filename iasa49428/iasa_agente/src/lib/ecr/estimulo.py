@@ -9,7 +9,6 @@ class Estimulo(ABC):
     @abstractmethod
     def detectar(self, percepcao):
         """
-        A deteção de um estimulo consiste em extraír informação relevante de uma percepção
-        TODO: falar sobre o retorno depois de implementar
+        A deteção de um estimulo consiste em extraír informação relevante de uma percepção (e.g., intensidade).
         """
     

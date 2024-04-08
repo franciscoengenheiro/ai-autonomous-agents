@@ -1,13 +1,12 @@
 from agente.controlo_react.reaccoes.aproximar.aproximar_dir import AproximarDir
 from ecr.comportamento import Comportamento
-# from agente.controlo_react.reaccoes.aproximar.aproximar_dir import AproximarDir
 from agente.controlo_react.reaccoes.resposta.resposta_mover import RespostaMover
 from sae import Direccao
 
 class ContarPassos(Comportamento):
-
+    
     """
-    TODO
+    Define um comportamento fixo com memória ou estado que está associado ao objetivo "contar passos". Caracteriza-se por ter uma resposta fixa, pois gera uma ação em permanência, que consiste em mover-se numa direção fixa (Norte) após o Agente ter efetuado 10 passos. Não depende de nenhum estímulo para ser ativado.
     """
 
     def __init__(self):
@@ -17,19 +16,12 @@ class ContarPassos(Comportamento):
 
     def activar(self, percepcao):
 
-        """
-        each time this method is called means that the agent is taking action
-        for each step the agent takes, it will increment the number of steps taken
-        and shows the number of steps taken in the console
-        when 10 steps are taken, the agent will move North
-        """ 
-
         self.__passos += 1
         print(f"Passos: {self.__passos}")
 
         """
-        If no action is returned by this method then the next behaviour is selected from
-        the list of behaviours in the Recolher class which uses a hierarchy of behaviours
+        Se este método não retornar nenhuma ação, então o comportamento seguinte é selecionado da
+        da lista de comportamentos do comportamento composto, que utiliza uma hierarquia de comportamentos
         """
         if self.__passos >= 10:
             return self.__resposta.activar(percepcao)        

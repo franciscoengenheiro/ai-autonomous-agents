@@ -1,8 +1,7 @@
+from agente.controlo_react.reaccoes.evitar.evitar_obst import EvitarObst
 from ecr.hierarquia import Hierarquia
 from agente.controlo_react.reaccoes.aproximar.aproximar_alvo import AproximarAlvo
-# from agente.controlo_react.reaccoes.evitar import EvitarObst
 from agente.controlo_react.reaccoes.explorar.explorar import Explorar
-from agente.controlo_react.reaccoes.contar_passos import ContarPassos
 
 class Recolher(Hierarquia):
 
@@ -12,7 +11,7 @@ class Recolher(Hierarquia):
     - "evitar obstáculos" 
     - "aproximar alvo"
     - "contar passos"
-    - "explorar"ç
+    - "explorar"
     """
 
     def __init__(self):
@@ -21,10 +20,9 @@ class Recolher(Hierarquia):
         Inicializa este comportamento composto com os comportamentos que o compõem pela ordem de prioridade por hierarquia predefinida.
         """
         aproximar_alvo = AproximarAlvo()
-        # evitar_obst = EvitarObst()
+        evitar_obst = EvitarObst()
         explorar = Explorar()
         # contar_passos = ContarPassos()
-        # comportamentos = [aproximar_alvo, evitar_obst, explorar]
-        comportamentos = [aproximar_alvo, explorar]
+        comportamentos = [aproximar_alvo, evitar_obst, explorar]
         super().__init__(comportamentos)
     

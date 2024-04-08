@@ -4,7 +4,7 @@ from ecr.reaccao import Reaccao
 
 class AproximarDir(Reaccao):
     """
-    TODO
+    Reacção que faz o agente mover-se na direcção do alvo
     """
     
     def __init__(self, direccao):
