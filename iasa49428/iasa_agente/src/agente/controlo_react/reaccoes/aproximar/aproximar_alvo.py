@@ -9,7 +9,6 @@ class AproximarAlvo(Prioridade):
     """
 
     def __init__(self):
-
         aproximar_dir_este = AproximarDir(Direccao.ESTE)
         aproximar_dir_oeste = AproximarDir(Direccao.OESTE)
         aproximar_dir_norte = AproximarDir(Direccao.NORTE)

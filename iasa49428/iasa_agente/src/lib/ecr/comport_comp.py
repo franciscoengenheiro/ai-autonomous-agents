@@ -25,7 +25,7 @@ class ComportComp(Comportamento):
             return self.seleccionar_accao(accoes)
             
     @abstractmethod
-    def seleccionar_accao(accoes):
+    def seleccionar_accao(self, accoes):
         """
         Define o módulo de seleção de ação associado a um comportamento composto.
         Mecanismos de combinação e seleção de acções:

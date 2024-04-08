@@ -18,6 +18,7 @@ class Reaccao(Comportamento):
         # pass # equals no-op
         # raise NotImplementedError
         intensidade = self.__estimulo.detectar(percepcao)
+        accao = None
         if intensidade > 0:
             accao = self.__resposta.activar(percepcao, intensidade)
 

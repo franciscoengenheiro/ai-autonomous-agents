@@ -10,7 +10,7 @@ O acomplamento é uma métrica inter-modular que mede o grau de interdependênci
 \begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
     \item \tb{Direção}: Unidirecional vs Bidirecional (uni representa menos acoplamento);
     \item \tb{Visibilidade}: Quando menor for a visibilidade de um módulo, menor é o  seu acoplamento;
-    \item \tb{Ordem (de menos acoplamento para mais)}: Herança $\rightarrow$ Composição $\rightarrow$ Agregação $\rightarrow$ Associação $\rightarrow$ Dependência.
+    \item \tb{Ordem}: (de menos acoplamento para mais) Herança $\rightarrow$ Composição $\rightarrow$ Agregação $\rightarrow$ Associação $\rightarrow$ Dependência.
 \end{itemize}
 
 A coesão é uma métrica intra-modular que determina o nível de coerência funcional de um subsistema/módulo, seja pela sua organização (i.e., cada modulo está organizado por conteúdo) ou pela sua funcionalidade (e.g., \ti{single responsibility principle} - cada modulo tem uma única responsabilidade).
@@ -51,12 +51,6 @@ envolvido. Essa alternância poderá ser circular (i.e., implementação $\right
     \end{tabular}
 \end{table}
 
-Os diagramas de atividade ou sequência representam o fluxo de controlo de um sistema, ou seja, a sequência de atividades que um sistema executa. São compostos por:
+Os diagramas de sequência ou atividade representam o fluxo de controlo de um sistema, ou seja, a sequência de atividades que um sistema executa e a sua ordem. Definem-se como modelos de interação com uma organização bidirecional (i.e., horizontal $\rightarrow$ tempo e vertical $\rightarrow$ estrutura) e são compostos por diferentes elementos de modelação (e.g., mensagens, operadores, linha de vida).
 
-\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
-    \item \tb{Nós}: definem a forma como o fluxo de controlo é dividido (e.g., nó inicial, nó final, nó de decisão, nó de fusão, nó de bifurcação, nó de junção, nó de atividade);
-    \item \tb{Guardas}: definem as condições de transição
-    \item \tb{Partições}: definem a divisão do fluxo de controlo, que são as atividades realizadas por uma parte específica do modelo.
-\end{itemize}
-
-TODO: falar mais sobre UML
+A linguagem de modelação unificada (UML) representa um modelo de comportamento com interação como perspetiva principal de modelação. Este tipo de modelação descreve a forma como as partes de um sistema interagem entre si e com o exterior para produzir o comportamento do sistema.
