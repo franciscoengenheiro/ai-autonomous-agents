@@ -1,6 +1,6 @@
 from ecr.hierarquia import Hierarquia
-from agente.controlo_react.reaccoes.aproximar import AproximarAlvo
-from agente.controlo_react.reaccoes.evitar import EvitarObst
+# from agente.controlo_react.reaccoes.aproximar import AproximarAlvo
+# from agente.controlo_react.reaccoes.evitar import EvitarObst
 from agente.controlo_react.reaccoes.explorar import Explorar
 
 class Recolher(Hierarquia):
@@ -18,8 +18,8 @@ class Recolher(Hierarquia):
         """
         Inicializa este comportamento composto com os comportamentos que o compõem pela ordem de prioridade por hierarquia predefinida.
         """
-        aproximar_alvo = AproximarAlvo()
-        evitar_obst = EvitarObst()
+        # aproximar_alvo = AproximarAlvo()
+        # evitar_obst = EvitarObst()
         explorar = Explorar()
         # comportamentos = [aproximar_alvo, evitar_obst, explorar]
         comportamentos = [explorar]
