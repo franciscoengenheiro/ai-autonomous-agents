@@ -495,4 +495,4 @@ iasa49428.zip
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
->>>>>>> 06868a1197f6a8dd29bd2d90d2e04b2ddc731a1c
+*.iml
