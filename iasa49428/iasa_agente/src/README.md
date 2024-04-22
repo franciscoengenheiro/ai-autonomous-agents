@@ -56,7 +56,6 @@ Procura termina quando:
 
 Hashable -> redefinem o hashcode e o equals, não usam o default (i.e., o endereço de memória)
 
-
 Pode não existir estado sucessor, ou seja, o operador não gerou uma transição de estado dado o estado recebido
 
 Procura em largura (i.e., breadth-first search): explorar os nós em largura primeiro, mais antigos primeiro. Fronteira do tipo FIFO (First In First Out), utiiliza a estrutura de explorados (abertos e fechados) para eliminar estados repetidos
@@ -66,4 +65,58 @@ Para definir uma solução ótima é necessário definir um critério de seleç�
 Critério de avaliação, custo, neste caso, para resolver o problema
 de estados repetidos, o melhor nó é o que tem menor custo.
 
-Modelar o problema
+Modelar o problema:
+
+Problema:
+- estado inicial
+- operadores
+- função objetivo
+
+Complexidade computacional: tempo (quanto tempo demora a encontrar a solução) e espaço (memoria) (quanta memória é necessária para produzir uma solução)
+
+quanta memoria?
+quanto tempo?
+
+Arvore de Procura:
+
+Factor de ramificação: número de sucessores de um nó (branching factor), b = 4
+d = 1, nós processados = 1 + 4
+
+Profundidade da procur (depth): nr de passos da raiz até ao nó
+
+Complexidade temporal: O(b^d), onde b é o fator de ramificação e d é a profundidade da árvore, 
+
+| procura      | complexidade espacial   | complexidade temporal |
+|--------------|-------------------------|-----------------------|
+| largura      | O(b^d)   exponencial    | O(b^d)    exponencial |
+| profundidade | O(bd)    linear         | O(b^d)    exponencial |
+| profundidade limitada | O(bd) linear    | O(b^d)    exponencial |
+
+Cacteristicas dos metodos de procura:
+- Completo: se existir solução, a solução é encontrada
+- Ótimo: quando devolve uma solução é garantidamente a melhor solução
+- Complexidade de espaço: quantos nos vao ser mantidos em memória
+- Complexidade de tempo: quanto tempo demora a encontrar a solução
+
+procura de profundidade, com limite de profundidade de procura: profundidade máxima que a procura pode atingir, tornando-se procura em largura após atingir o limite
+
+como encontrar a profundidade?
+- definir um limite de profundidade que vai sendo incrementado até encontrar a solução
+
+1 - procura em profundidade
+2 - procura em profundidade com limite de profundidade
+3 - procura em profundidade iterativa, com profundidades incrementais
+
+Procura melhor-primeiro
+O nr de passos não reflete necessariamente a qualidade da solução
+Associada a uma função de avaliação f, que avalia a qualidade de um nó (e.g., distância ao objetivo, tempo, custo)
+
+Ordenar os nós na fronteira de acordo com a função de avaliação
+
+Ordenação da fronteira ocorre quando é inserido um valor na fronteira.
+
+Ter cuidado a eliminar os nós antigos porque os mais antigos podem ser melhores em relação ao custo associado
+
+Procura de custo uniforme, funciona como a procura em largura, mas em vez de ordenar por profundidade, ordena por custo na fronteira. Caso particular da procura melhor-primeiro, onde a função de avaliação é o custo acumulado até ao nó
+
+Se não tiver nos nós explorados ou se o custo do nó for menor que o custo do nó explorado, então o nó é inserido na fronteira

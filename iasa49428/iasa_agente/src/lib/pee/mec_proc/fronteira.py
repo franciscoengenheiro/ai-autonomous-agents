@@ -11,7 +11,7 @@ class Fronteira(ABC):
         Propriedade derivada. 
         Indica se a fronteira está vazia.
         """
-        return self.dimensao() == 0
+        return self.dimensao == 0 # or maybe self.dimensao()
     
     @property
     def dimensao(self):
@@ -42,5 +42,5 @@ class Fronteira(ABC):
         """
         Remove um nó da fronteira se a fronteira não estiver vazia e devolve-o.
         """        
-        if self.vazia:
+        if not self.vazia:
             return self._nos.pop(0)

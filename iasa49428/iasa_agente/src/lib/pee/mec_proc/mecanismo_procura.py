@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from pee.mec_proc.no import No
+from pee.mec_proc.solucao import Solucao
 
 class MecanismoProcura(ABC):
     """

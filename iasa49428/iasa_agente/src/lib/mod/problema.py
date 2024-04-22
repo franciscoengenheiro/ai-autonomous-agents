@@ -13,7 +13,7 @@ class Problema(ABC):
     @abstractmethod
     def objetivo(self, estado):
         """
-        Função predicado que verifica se o estado passado como argumento é um estado objetivo. Permitindo, desta forma, a resolução do problema.
+        Função predicado que verifica se o estado passado como argumento é um estado objetivo. Permitindo, desta forma, a resolução do problema associado.
         """
         
     @property # equivalente a um getter do Java
