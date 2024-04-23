@@ -1,4 +1,4 @@
-\chapter{Enquadramento Téorico}\label{ch:enquadramento}
+\chapter{Enquadramento Téorico}\label{ch:enquadramento-teorico}
 
 A inteligência artificial, um ramo da engenharia informática, concentra-se no desenvolvimento de algoritmos e sistemas que imitam a capacidade humana de raciocínio.
 Entre as suas diversas aplicações, destacam-se a visão computacional, o processamento de linguagem natural, a robótica e a aprendizagem automática (machine learning).
@@ -8,7 +8,7 @@ Já a autonomia é a habilidade de um sistema operar de forma independente, sem 
 Representa uma característica da inteligência e portanto ser autónomo não significa ser inteligente, no entanto, ser inteligente implica ser autónomo.
 
 
-\section{Agente Inteligente}
+\section{Agente Inteligente}\label{sec:agente-inteligente}
 O modelo de um sistema inteligente é uma abstracção que permite representar a interacção de um sistema com o seu ambiente.
 Este implementa um ciclo realimentado percepção-processamento-acção (ver figura~\ref{fig:modelo-agente-ambiente}), através do qual é realizado o controlo da função do sistema de modo a concretizar a finalidade desse sistema (e.g., a travagem automática de um automóvel quando deteta um obstáculo à sua frente).
 
@@ -30,22 +30,23 @@ Além da autonomia, as caracteristicas principais de um agente inteligente, que 
 \end{figure}
 
 
-\section{Ambiente}
+\section{Ambiente}\label{sec:ambiente}
 
-O espaço onde um agente opera é designado por ambiente, e que pode ser real, com sensores e atuadores físicos (e.g., um sala de aula), ou virtual (e.g., um jogo de computador).
+O espaço onde um agente opera é designado por ambiente.
 É caracterizado (ver figura~\ref{fig:ambientes-exemplos}) pelas seguintes propriedades:
 
 \begin{itemize}
-    \item \textbf{Determinístico vs. Estocástico}: um ambiente é determinístico se o estado seguinte é unicamente determinado pelo estado actual e pela acção do agente; caso contrário, é estocástico.
+    \item \textbf{Físico vs. Virtual}: Um ambiente pode existir fisicamente (e.g., uma sala de aula) ou ser simulado de forma virtual (e.g., um jogo de computador);
+    \item \textbf{Totalmente Observável vs. Parcialmente Observável}: Um ambiente é totalmente observável se o agente tem acesso a uma descrição completa do ambiente, que lhe permite resolver o problema em questão sem necessitar de guardar estado interno; caso contrário, é parcialmente observável;
+    \item \textbf{Tipo de Agente}: Os ambientes podem ser de agente único (i.e., apenas existe um agente a atuar) ou multi-agente (i.e., existem vários agentes a atuar, iguais ou diferentes entre si);
+    \item \textbf{Determinístico vs. Estocástico}: Um ambiente é determinístico se o estado seguinte é unicamente determinado pelo estado actual e pela acção do agente; caso contrário, é estocástico.
     Mais ainda, dizemos que um ambiente continua a ser determinístico, mas mais concretamente estratégico, caso estejamos num ambiente multi-agente onde o próximo estado pode estar também dependente das ações de outros agentes (e.g., num jogo de xadrez);
-    \item \textbf{Episódico vs. Sequencial}: um ambiente é episódico se a experiência do agente é dividida em episódios independentes; caso contrário, é sequencial;
-    \item \textbf{Estático vs. Dinâmico}: um ambiente é estático se não se altera enquanto o agente está a tomar uma decisão; caso contrário, é dinâmico;
-    \item \textbf{Discreto vs. Contínuo}: um ambiente é discreto se o número de estados possíveis é finito; caso contrário, é contínuo;
-    \item \textbf{Conhecido vs. Desconhecido}: um ambiente é conhecido se o agente tem acesso a uma descrição completa do ambiente; caso contrário, é desconhecido;
-    \item \textbf{Tipo de Agente}: Os ambientes podem ser de agente único (i.e., apenas existe um agente a atuar) ou multi-agente (i.e., existem vários agentes a atuar, iguais ou diferentes entre si).
+    \item \textbf{Episódico vs. Sequencial}: Um ambiente é episódico se a experiência do agente é dividida em episódios independentes; caso contrário, é sequencial (i.e., pode ser representado por uma sequência de estados);
+    \item \textbf{Estático vs. Dinâmico}: Um ambiente é estático se não se altera enquanto o agente está a tomar uma decisão; caso contrário, é dinâmico;
+    \item \textbf{Discreto vs. Contínuo}: Um ambiente é discreto se o número de estados possíveis é finito; caso contrário, é contínuo.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \begin{center}
         \resizebox{100mm}{!}{\includegraphics{../figures/ambientes-exemplos}}
     \end{center}
@@ -54,7 +55,7 @@ O espaço onde um agente opera é designado por ambiente, e que pode ser real, c
 \end{figure}
 
 
-\section{Agente Relacional}
+\section{Agente Relacional}\label{sec:agente-relacional}
 
 Um agente racional é um tipo de agente que realiza as ações corretas, ou seja, deve conseguir, a partir da exploração e aprendizagem, descobrir estratégias para chegar ao seu objetivo de forma ótima.
 Para esse efeito, é escolhida a ação que maximiza o valor esperado da medida de desempenho segundo a informação que lhe é fornecida (i.e., percepções) e o conhecimento adquirido até ao momento (e.g., conhecimento disponível sobre o ambiente).

@@ -5,7 +5,7 @@ import iasa_jogo.src.jogo.ambiente.EventoJogo;
 import iasa_jogo.src.jogo.personagem.Personagem;
 
 /**
- * Representa um jogo que é composto, de forma intrínseca, por um ambiente e uma personagem específicos do mesmo.
+ * Representa um jogo que é composto por um ambiente e uma personagem específicos do mesmo.
  */
 public class Jogo {
 
@@ -27,6 +27,7 @@ public class Jogo {
      * Este método é privado porque depende da implementação de um ambiente e de uma personagem, e não deve ser executado no exterior.
      */
     private static void executar() {
+        ambiente.getEventos().forEach((k, v) -> System.out.println(k + " - " + v));
         do  {
             // É utilizado o *do-while* em vez do *while* porque o ambiente deve ser evoluído
             // pelo menos uma vez para que o evento associado seja populado pela primeira vez,
