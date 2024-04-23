@@ -6,7 +6,7 @@ Para tal, foi necessário definir uma arquitetura de software que permitisse a i
 
 Associado à elaboração da arquitetura de software, foi necessário definir um processo de desenvolvimento de software (ver secção~\ref{sec:processo-de-desenvolvimento-de-software}) que permitisse a implementação dos diferentes subsistemas de forma progressiva, através de diferentes níveis de abstracção (i.e., modelo, arquitetura e implementação).
 
-A implementação da biblioteca foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas e a sua interação.
+A implementação da biblioteca foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas.
 
 
 \section{Arquitetura de software}\label{sec:arquitetura-de-software}
@@ -57,36 +57,100 @@ envolvido. Essa alternância poderá ser circular (i.e., implementação $\right
     \centering
     \caption{Tipos de Implementação}
     \label{tab:tipos-de-implementacao}
+    \vspace{0.2cm}
     \begin{tabular}{|l|l|p{8cm}|}
         \hline
-        \textbf{Tipo}  & \textbf{Modelo Associado} & \textbf{Designação}                                                                                        \\ \hline
-        Estrutural     & \ti{UML}                  & Define a estrutura de um sistema, ou seja, a forma como os componentes se relacionam entre si.             \\ \hline
-        Comportamental & \ti{Sequence Diagram}     & Define o comportamento de um sistema, ou seja, a forma como os componentes interagem e comunicam entre si. \\ \hline
+        \textbf{Tipo}  & \textbf{Modelo Associado}  & \textbf{Designação}                                                                                        \\ \hline
+        Estrutural     & \ti{UML}                   & Define a estrutura de um sistema, ou seja, a forma como os componentes se relacionam entre si.             \\ \hline
+        Comportamental & \ti{Diagrama de Sequência} & Define o comportamento de um sistema, ou seja, a forma como os componentes interagem e comunicam entre si. \\ \hline
     \end{tabular}
 \end{table}
 
 Mais detalhadamente, os diagramas de sequência ou atividade representam o fluxo de controlo de um sistema, ou seja, a sequência de atividades que um sistema executa e a sua ordem. Definem-se como modelos de interação com uma organização bidirecional (i.e., horizontal $\rightarrow$ tempo e vertical $\rightarrow$ estrutura) e são compostos por diferentes elementos de modelação (e.g., mensagens, operadores, linha de vida).
 
-Já a linguagem de modelação unificada (UML) representa um modelo de comportamento com interação como perspetiva principal de modelação. Este tipo de modelação descreve a forma como as partes de um sistema interagem entre si e com o exterior para produzir o comportamento do sistema.
+Já a linguagem de modelação unificada (UML) representa um modelo de comportamento com interação como perspetiva principal de modelação.
+Este tipo de modelação descreve a forma como as partes de um sistema interagem entre si e com o exterior para produzir o comportamento do sistema.
+No contexto do projeto, esta linguagem também ajudou a compreender os conceitos fundamentais associados a um sistema computacional (ver secção~\ref{sec:modelacao-de-um-sistema-computacional}) através da representação de diagramas de transição de estado.
+
+
+\section{Modelação de um Sistema Computacional}\label{sec:modelacao-de-um-sistema-computacional}
+
+Um sistema computacional geral, pode ser caracterizado de forma abstrata (ver figura~\ref{fig:sistema-computacional-abstrato}), através de uma representação de estado, que define em cada momento a configuração interna do
+sistema, e de uma função de transformação que gera as saídas e o próximo estado em
+função das entradas e do estado actual do sistema~\cite{isel:iasa:slides:intro-eng-soft-parte-3}.
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/sistema-computacional-abstrato}}
+    \end{center}
+    \caption{Modelo abstrato de um sistema computacional.
+    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}.}\label{fig:sistema-computacional-abstrato}
+\end{figure}
+
+Os conceitos fundamentais de um sistema computacional são:
+
+\begin{itemize}
+    \item \textbf{Dinâmica}: Descreve os estados que um sistema pode assumir
+    e a forma como eles evoluem ao longo do tempo,
+    determinando o comportamento do sistema;
+    \item \textbf{Comportamento}: Expressa a estrutura de controlo do sistema, que corresponde à forma como o sistema age (gera as
+    saídas) perante a informação proveniente do
+    exterior (entradas) e do seu estado interno;
+\end{itemize}
+
+\subsection{Modelo formal de computação}\label{subsec:modelo-formal-de-computacao}
+
+A função de transformação, mencionada anteriormente, pode ser decomposta em duas funções distintas (ver tabela~\ref{tab:funcoes-transformacao}), em que \textbf{Q} representa o conjunto de estados possíveis do sistema (regularmente designado por espaço de estados), \textbf{$\Sigma$} representa o conjunto de entradas possíveis e \textbf{Z} representa o conjunto de saídas possíveis.
+
+\begin{table}[H]
+    \centering
+    \caption{Funções de Transformação de um Sistema Computacional}
+    \label{tab:funcoes-transformacao}
+    \vspace{0.2cm}
+    \begin{tabular}{|l|l|p{8cm}|}
+        \hline
+        \textbf{Designação}          & \textbf{Expressão}                     & \textbf{Descrição}                                                                       \\ \hline
+        Função de Transição (\delta) & \delta : Q \times \Sigma \rightarrow Q & Define a relação entre o estado do sistema e as entradas que recebe, e o próximo estado. \\ \hline
+        Função de Saída (\lambda) & \lambda : Q \times \Sigma \rightarrow Z
+        & Define a relação entre o estado do sistema e as entradas que recebe, e a saídas que produz. \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/modelo-sistema-computacional}}
+    \end{center}
+    \caption{Modelo de um sistema computacional.
+    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}.}\label{fig:modelo-sistema-computacional}
+\end{figure}
+
+Associado a um determinado modelo de um sistema computacional, está uma máquina de estados, que representa, de forma abstrata, o comportamento do sistema em função do tempo. Pode ser caracterizada por:
+
+\begin{itemize}
+    \item \textbf{Estado}: Se o número de estados possíveis é finito, então a máquina de estados é finita; caso contrário, é infinita;
+    \item \textbf{Determinismo}: Uma máquina de estados finita também pode ser subcaracterizada em determinística (existe apenas uma transição para o mesmo estado e entrada) ou não determinística (existe mais do que uma transição para o mesmo estado e entrada).
+    Para qualquer máquina de estados não determinística, existe uma máquina de estados determinística equivalente; \cite{wiki:finite-state-machine,freecodecamp:state-machines}
+    \item \textbf{Função de Saída}: Se a função de saída $\lambda$ depende das entradas $\Sigma$, então a máquina de estados é do tipo \textit{Mealy} ($\lambda : Q \times \Sigma \rightarrow Z$); caso contrário, é do tipo \textit{Moore} ($\lambda : Q \rightarrow Z$).
+\end{itemize}
 
 
 \section{Desenvolvimento do Jogo}\label{sec:desenvolvimento-do-jogo}
 
-Tendo por base os conceitos anteriormente abordados, que consolidaram a aprendizagem inerente à implementação da biblioteca, foi desenvolvido um jogo que a utiliza.
-No processo de desenvolvimento do jogo, foi definido um conjunto de componentes que providenciam implementações concretas dos conceitos mencionados, adaptados ao contexto específico do jogo:
+Tendo por base os conceitos anteriormente abordados, que consolidaram a aprendizagem inerente à implementação da biblioteca, foi desenvolvido um jogo. No seu processo de desenvolvimento, foi definido um conjunto de componentes que providenciam implementações concretas dos subsistemas expostos pela biblioteca, adaptados ao contexto específico do jogo:
 
 \begin{itemize}
     \item \textbf{Personagem}: Representa o agente do jogo;
     \item \textbf{Ambiente}: Representa o ambiente onde a Personagem opera;
     \item \textbf{Máquina de Estados}: Representa a máquina de estados associada ao controlo da Personagem.
-    Ver figura~~\ref{fig:projeto-parte1-maqest-personagem}.
+    Caracterizada por ser finita, não determinística e do tipo \textit{Mealy} (Ver figura~~\ref{fig:projeto-parte1-maqest-personagem}).
 \end{itemize}
 
 \begin{figure}[H]
     \begin{center}
         \resizebox{100mm}{!}{\includegraphics{../figures/projeto-parte1-maqest-personagem}}
     \end{center}
-    \caption{Máquina de estados associada ao controlo da Personagem.}\label{fig:projeto-parte1-maqest-personagem}
+    \caption{Máquina de estados associada ao controlo da Personagem.
+    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}.}\label{fig:projeto-parte1-maqest-personagem}
 \end{figure}
 
 O jogo consiste num ambiente onde a personagem tem por objectivo registar a presença de animais através de fotografias.
@@ -102,7 +166,7 @@ O ambiente deste jogo, pode ser caracterizado (ver secção~\ref{sec:ambiente}) 
     \item \textbf{Discreto}: O número de estados possíveis é finito.
 \end{itemize}
 
-Foi criada uma aplicação~\ref{fig:projeto-parte1-jogo} de \textif{cli} (i.e., command-line interface) em Java, que possibilita a interação com o jogador por meio de comandos em texto.
+Foi criada uma aplicação (ver figura~\ref{fig:projeto-parte1-jogo}) de \textif{cli} (i.e., command-line interface) em Java, que possibilita a interação com o jogador por meio de comandos em texto.
 Tendo em conta que a interface gráfica não era o foco desta parte do projeto, foi emulada através de texto descritivo.
 
 \begin{figure}[H]
@@ -111,6 +175,7 @@ Tendo em conta que a interface gráfica não era o foco desta parte do projeto, 
     \end{center}
     \caption{Utilização da aplicação do jogo.}\label{fig:projeto-parte1-jogo}
 \end{figure}
+
 
 \section{Estrutura do Projeto}\label{sec:estrutura-do-projeto}
 
