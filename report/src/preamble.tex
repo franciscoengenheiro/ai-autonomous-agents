@@ -33,3 +33,12 @@
 \addtolength{\leftmargin}{\labelsep}
 \renewcommand{\makelabel}[1]{##1\hfil}}}
 {\end{list}}
+
+% removes paragraph indentation
+\usepackage{parskip}% http://ctan.org/pkg/parskip
+\setlength{\parindent}{0pt}
+
+\usepackage{enumitem}
+% defines a new list with bold enumerate
+\newlist{boldenumerate}{enumerate}{1}
+\setlist[boldenumerate]{label=\textbf{\arabic*.}}

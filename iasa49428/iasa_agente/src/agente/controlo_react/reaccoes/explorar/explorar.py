@@ -6,7 +6,7 @@ from agente.controlo_react.reaccoes.resposta.resposta_mover import RespostaMover
 class Explorar(Comportamento):
 
     """
-    Define um comportamento fixo sem memória (i.e., representação interna de percepções anteriores)e que, por isso está condenado à repetição. Está associado ao objetivo "explorar" e caracteriza-se por ter uma resposta fixa, pois gera uma ação em permanência, que consiste em mover-se numa direção aleatória. Não depende de nenhum estímulo para ser ativado.
+    Define um comportamento fixo sem memória (i.e., representação interna de percepções anteriores) e que, por isso está condenado à repetição. Está associado ao objetivo "explorar" e caracteriza-se por ter uma resposta fixa, pois gera uma ação em permanência, que consiste em mover-se numa direção aleatória. Não depende de nenhum estímulo para ser ativado.
     """
 
     def activar(self, percepcao):
@@ -19,7 +19,7 @@ class Explorar(Comportamento):
         direccao = self.__direccao_aleatoria()
         resposta = RespostaMover(direccao)
         return resposta.activar(percepcao)
-    
+
     def __direccao_aleatoria(self):
 
         """

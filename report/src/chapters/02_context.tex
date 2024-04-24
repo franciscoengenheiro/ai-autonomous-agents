@@ -32,11 +32,9 @@ Além da autonomia, as caracteristicas principais de um agente inteligente, que 
 
 \section{Ambiente}\label{sec:ambiente}
 
-O espaço onde um agente opera é designado por ambiente.
-É caracterizado (ver figura~\ref{fig:ambientes-exemplos}) pelas seguintes propriedades:
+O espaço onde um agente opera é designado por ambiente, e que pode ser real (e.g., uma sala de aula) ou virtual (e.g., um jogo de computador). É caracterizado pelas seguintes propriedades:
 
 \begin{itemize}
-    \item \textbf{Físico vs. Virtual}: Um ambiente pode existir fisicamente (e.g., uma sala de aula) ou ser simulado de forma virtual (e.g., um jogo de computador);
     \item \textbf{Totalmente Observável vs. Parcialmente Observável}: Um ambiente é totalmente observável se o agente tem acesso a uma descrição completa do ambiente, que lhe permite resolver o problema em questão sem necessitar de guardar estado interno; caso contrário, é parcialmente observável;
     \item \textbf{Tipo de Agente}: Os ambientes podem ser de agente único (i.e., apenas existe um agente a atuar) ou multi-agente (i.e., existem vários agentes a atuar, iguais ou diferentes entre si);
     \item \textbf{Determinístico vs. Estocástico}: Um ambiente é determinístico se o estado seguinte é unicamente determinado pelo estado actual e pela acção do agente; caso contrário, é estocástico.
@@ -45,6 +43,8 @@ O espaço onde um agente opera é designado por ambiente.
     \item \textbf{Estático vs. Dinâmico}: Um ambiente é estático se não se altera enquanto o agente está a tomar uma decisão; caso contrário, é dinâmico;
     \item \textbf{Discreto vs. Contínuo}: Um ambiente é discreto se o número de estados possíveis é finito; caso contrário, é contínuo.
 \end{itemize}
+
+Na figura~\ref{fig:ambientes-exemplos} são apresentados exemplos de caracterização de ambientes.
 
 \begin{figure}[H]
     \begin{center}
@@ -58,7 +58,7 @@ O espaço onde um agente opera é designado por ambiente.
 \section{Agente Relacional}\label{sec:agente-relacional}
 
 Um agente racional é um tipo de agente que realiza as ações corretas, ou seja, deve conseguir, a partir da exploração e aprendizagem, descobrir estratégias para chegar ao seu objetivo de forma ótima.
-Para esse efeito, é escolhida a ação que maximiza o valor esperado da medida de desempenho segundo a informação que lhe é fornecida (i.e., percepções) e o conhecimento adquirido até ao momento (e.g., conhecimento disponível sobre o ambiente).
+Para esse efeito, é escolhida a ação que maximiza o valor esperado da medida de desempenho segundo a informação que lhe é fornecida (i.e., perceções) e o conhecimento adquirido até ao momento (e.g., conhecimento disponível sobre o ambiente).
 
 O conceito de recolha de informação entra neste contexto, visto que a exploração pode ser feita fora do âmbito do objetivo com vista a adquirir conhecimento (e.g., estado do ambiente, ações possíveis, recompensas associadas a cada ação, etc) e, assim, melhorar a tomada de decisão seguinte.
 
@@ -68,12 +68,12 @@ No entanto, a racionalidade não implica clarividência, isto é, a ação tomad
 \section{Arquiteturas de Agente}\label{sec:arquiteturas-agente}
 
 A arquitetura de um agente é a estrutura que define quais os componentes do agente e a forma como estes interagem entre si.
-Um dos componentes de um agente é o módulo de controlo, que é responsável por processar percepções e gerar ações.
+Um dos componentes de um agente é o módulo de controlo, que é responsável por processar perceções e gerar ações.
 A forma como este módulo é implementado determina o modelo de arquitetura do agente, que pode ser:
 
 \begin{itemize}
     \item \textbf{Reativo}: Associado a um paradigma comportamental, é caracterizado por associações diretas entre perceções e ações.
-    A finalidade deste modelo é a concretização de objetivos implícitos, presentes nas associacões estímulo-resposta (i.e., as ações são diretamente ativadas em função das perceções);
+    A finalidade deste modelo é a concretização de objetivos implícitos, presentes nas associações estímulo-resposta (i.e., as ações são diretamente ativadas em função das perceções);
     \item \textbf{Deliberativo}: Associado a um paradigma simbólico, é caracterizado pela existência de um módulo de deliberação que se situa entre a perceção e a ação.
     É neste módulo que ocorre o raciocínio e a tomada de decisão, com base em objetivos explícitos;
     \item \textbf{Híbrido}: Combinação dos modelos reativo e deliberativo, com o objetivo de tirar partido das vantagens que cada um oferece.

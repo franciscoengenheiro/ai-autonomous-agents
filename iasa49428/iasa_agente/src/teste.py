@@ -1,10 +1,10 @@
-# Módulo para testar todos os agentes
+# Module to test the agents
 
 from sae import Simulador
 # Comment all lines except the one you want to test
 from agente.agente_reactivo import AgenteReactivo as Agente
 
-# Executar simulador de SAE
-# param 1: index of the chosen simulation
-# param 2: agente
+# Execute simulation:
+# param 1: index of the chosen ambient configuration
+# param 2: agent to be tested
 Simulador(1, Agente()).executar()

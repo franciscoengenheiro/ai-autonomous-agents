@@ -2,11 +2,11 @@
 
 Esta parte do projeto incidiu principalmente sobre desenvolvimento de uma biblioteca, em Java, para providenciar abstrações dos subsistemas que representam conceito gerais de Inteligência Artificial (e.g., agente, ambiente) e outros conceitos relacionados (e.g., máquina de estados).
 
-Para tal, foi necessário definir uma arquitetura de software que permitisse a implementação dos diferentes subsistemas de forma independente e modular, seguindo as diretrizes (i.e., métricas (ver secção~~\ref{subsec:metricas}) e princípios (ver secção~\ref{subsec:principios})) que garantem a qualidade da arquitetura.
-
-Associado à elaboração da arquitetura de software, foi definido um processo de desenvolvimento de software (ver secção~\ref{sec:processo-de-desenvolvimento-de-software}) que permitisse a implementação dos diferentes subsistemas de forma progressiva, através de diferentes níveis de abstracção (i.e., modelo, arquitetura e implementação).
+Para tal, foi necessário definir uma arquitetura de software que permitisse a implementação dos diferentes subsistemas de forma independente e modular, seguindo as diretrizes (i.e., métricas (ver secção~\ref{subsec:metricas}) e princípios (ver secção~\ref{subsec:principios})) que garantem a qualidade da arquitetura.
 
 A implementação da biblioteca foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas.
+
+Por fim foi desenvolvido um jogo (ver secção~\ref{sec:desenvolvimento-do-jogo}) que integra a biblioteca desenvolvida, permitindo a interação com o jogador por meio de comandos em texto.
 
 
 \section{Arquitetura de software}\label{sec:arquitetura-de-software}
@@ -84,7 +84,7 @@ função das entradas e do estado actual do sistema~\cite{isel:iasa:slides:intro
         \resizebox{100mm}{!}{\includegraphics{../figures/sistema-computacional-abstrato}}
     \end{center}
     \caption{Modelo abstrato de um sistema computacional.
-    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}.}\label{fig:sistema-computacional-abstrato}
+    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}, slide 3.}\label{fig:sistema-computacional-abstrato}
 \end{figure}
 
 Os conceitos fundamentais de um sistema computacional são:
@@ -121,7 +121,7 @@ A função de transformação, mencionada anteriormente, pode ser decomposta em 
         \resizebox{100mm}{!}{\includegraphics{../figures/modelo-sistema-computacional}}
     \end{center}
     \caption{Modelo de um sistema computacional.
-    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}.}\label{fig:modelo-sistema-computacional}
+    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}, slide 3.}\label{fig:modelo-sistema-computacional}
 \end{figure}
 
 Associado a um determinado modelo de um sistema computacional, está uma máquina de estados, que representa, de forma abstrata, o comportamento do sistema em função do tempo. Pode ser caracterizada por:
@@ -142,7 +142,7 @@ Tendo por base os conceitos anteriormente abordados, que consolidaram a aprendiz
     \item \textbf{Personagem}: Representa o agente do jogo;
     \item \textbf{Ambiente}: Representa o ambiente onde a Personagem opera;
     \item \textbf{Máquina de Estados}: Representa a máquina de estados associada ao controlo da Personagem.
-    Caracterizada por ser finita, não determinística e do tipo \textit{Mealy} (Ver figura~~\ref{fig:projeto-parte1-maqest-personagem}).
+    Caracterizada por ser finita, não determinística e do tipo \textit{Mealy} (Ver figura~\ref{fig:projeto-parte1-maqest-personagem}).
 \end{itemize}
 
 \begin{figure}[H]
@@ -150,16 +150,15 @@ Tendo por base os conceitos anteriormente abordados, que consolidaram a aprendiz
         \resizebox{100mm}{!}{\includegraphics{../figures/projeto-parte1-maqest-personagem}}
     \end{center}
     \caption{Máquina de estados associada ao controlo da Personagem.
-    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}.}\label{fig:projeto-parte1-maqest-personagem}
+    Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}, slide 14.}\label{fig:projeto-parte1-maqest-personagem}
 \end{figure}
 
-O jogo consiste num ambiente onde a personagem tem por objectivo registar a presença de animais através de fotografias.
+O jogo consiste num ambiente virtual onde a personagem tem por objectivo registar a presença de animais através de fotografias.
 O ambiente deste jogo, pode ser caracterizado (ver secção~\ref{sec:ambiente}) por ser:
 
 \begin{itemize}
-    \item \textbf{Virtual}: O ambiente é simulado e não existe fisicamente;
     \item \textbf{Totalmente Observável}: O agente tem acesso a uma descrição completa do ambiente e que lhe permite resolver o problema em questão sem necessitar de guardar estado interno;
-    \item \textbf{De agente único}: Apenas existe um agente a atuar, neste caso, uma Personagem;
+    \item \textbf{De Agente Único}: Apenas existe um agente a atuar, neste caso, uma Personagem;
     \item \textbf{Determinístico}: O estado seguinte é unicamente determinado pelo estado actual e pela acção do agente;
     \item \textbf{Sequencial}: Pois existe uma linha de acontecimentos que se sucedem (e.g., não é possível inspeccionar, registar ou observar algo sem ser feita primeiro uma procura);
     \item \textbf{Estático}: Não se altera enquanto o agente está a tomar uma decisão;
@@ -179,7 +178,7 @@ Tendo em conta que a interface gráfica não era o foco desta parte do projeto, 
 
 \section{Estrutura do Projeto}\label{sec:estrutura-do-projeto}
 
-No processo de desenvolvimento de software associado a este projeto, foi definida a seguinte estrutura em módulos e que está presente na pasta \ti{iasa\_jogo/src}:
+No processo de desenvolvimento de software associado a esta fase do projeto, foi definida a seguinte estrutura em módulos e que está presente na pasta \ti{iasa\_jogo/src}:
 
 \begin{itemize}
     \item \textit{agente}: Integra classes e interfaces que definem o Agente e os seus componentes (e.g., módulo de controlo);

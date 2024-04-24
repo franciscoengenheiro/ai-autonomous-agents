@@ -1,44 +1,50 @@
 \chapter{Projecto - Parte 2}\label{ch:projeto-parte2}
 
-Nesta fase do projeto, o objetivo foi criar um sistema autónomo inteligente capaz de se movimentar num espaço com dimensões fixas onde existem obstáculos e alvos.
-A finalidade do agente prospetor é recolher os alvos e evitar os obstáculos presentes no ambiente (ver figura~\ref{fig:agente-prospetor}).
+Nesta fase do projeto, o objetivo foi criar, em python, um sistema autónomo inteligente capaz de se movimentar num espaço com dimensões fixas onde existem obstáculos.
+A finalidade do agente prospetor é recolher os alvos e evitar os obstáculos presentes no ambiente (ver figura~\ref{fig:agente-prospetor}). O agente pode mover-se nos quatro sentidos cardeais (i.e., norte, sul, este e oeste).
 
 \begin{figure}[H]
-    \label{fig:agente-prospetor}
     \begin{center}
         \resizebox{100mm}{!}{\includegraphics{../figures/agente-prospetor}}
     \end{center}
-    \caption{Representação visual desta fase do projeto.}
+    \caption{Representação visual desta fase do projeto.}\label{fig:agente-prospetor}
 \end{figure}
+
+Para que o agente possa atingir os objetivos propostos, foi necessário implementar (ver secção~\ref{sec:implementacao-agente-reativo}) um agente reativo e os módulos comportamentais associados, que lhe permitam reagir a estímulos e gerar respostas de forma a alcançar tais objetivos.
+
+Tal como em fases anteriores, a implementação foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas.
+
 
 \section{Agentes Reativos}\label{sec:agentes-reativos}
 
-Na secção da arquitetura de agentes (ver secção~\ref{sec:arquiteturas-agente}), foi referido que uma arquitetura reativa é caracterizada pela associação direta entre a perceções e ações.
+Na secção da arquitetura de agentes (ver secção~\ref{sec:arquiteturas-agente}), foi referido que uma arquitetura reativa é caracterizada pela associação direta entre perceções e ações.
 
-Inerente a esta arquitetura, está o conceito de mecanismo de reação.
-Este mecanismo apresenta os seguintes componentes:
+\subsection{Reação}\label{subsec:reacao}
+
+Inerente a arquitetura de agentes reativos, está o conceito de mecanismo de reação e que apresenta os seguintes elementos:
 
 \begin{itemize}
     \item \textbf{Estímulo}: Define a informação que é extraída de uma percepção, de forma a ser utilizada na ativação de uma resposta.
     Vários estímulos podem ser ativados por uma única perceção.
     Estão regularmente associados a um parâmetro de intensidade.
     \item \textbf{Resposta}: Representa a geração de uma resposta a estímulos, inerentemente ligada a uma ação a ser executada e à sua respetiva prioridade.
-    Além de poder ser ativada por um estímulo, uma resposta pode ser ativada diretamente por uma percepção, de forma a garantir restrições de ativação (guardas) se necessário.
+    Além de poder ser ativada por um estímulo, uma resposta pode ser ativada diretamente por uma percepção, de forma a garantir restrições de ativação (i.e., guardas) se necessário.
     \item \textbf{Reação}: Associa estímulos a respostas.
 \end{itemize}
 
 Um agente reativo é composto por um conjunto de reações, que devem ser organizadas de forma modular em módulos comportamentais designados por comportamentos.
 Isto permite as reações internas do agente sejam encapsuladas, facilitando a sua manutenção e escalabilidade.
 
+\subsection{Comportamento}\label{subsec:comportamento}
+
 Um comportamento (ver figura~\ref{fig:agente-reativo-comportamento}) define um módulo comportamental associado a um agente reativo. Encapsula um conjunto de reações relacionadas entre si, possivelmente com uma sequência temporal, de forma a atingir um ou ou mais objetivos (e.g., evitar obstáculos, recolher alvos, etc). Associado a um objetivo podem existir sub-objetivos.
 
 \begin{figure}[H]
-    \label{fig:agente-reativo-comportamento}
     \begin{center}
         \resizebox{100mm}{!}{\includegraphics{../figures/agente-reativo-comportamento}}
     \end{center}
     \caption{Módulo comportamental de um agente reativo.
-    Retirado de~\cite{isel:iasa:slides:arq-agentes-reativos-parte-1}.}
+    Retirado de~\cite{isel:iasa:slides:arq-agentes-reativos-parte-1}, slide 11.}\label{fig:agente-reativo-comportamento}
 \end{figure}
 
 Tipos de Comportamento:
@@ -46,14 +52,146 @@ Tipos de Comportamento:
 \begin{itemize}
     \item \textbf{Comportamento Fixo}: Caracterizado por ter uma resposta fixa, pois gera uma ação em permanência;
     \item \textbf{Comportamento Simples}: Reação;
-    \item \textbf{Comportamento Composto}: Agrega sub-comportamentos, ao qual está associado um mecanismo de seleção de ação de forma a determinar a ação a realizar em função das respostas dos mesmos).
+    \item \textbf{Comportamento Composto}: Agrega sub-comportamentos, ao qual está associado um mecanismo de seleção de ação de forma a determinar a ação a realizar em função das respostas dos mesmos.
 \end{itemize}
 
-Visto que, em comportamentos compostos, uma perceção pode ativar várias múltiplas reacções, as quais geram diferentes ações, é necessário definir mecanismos aos quais estão associados políticas de seleção de ação:
+\subsection{Comportamento Composto}\label{subsec:comportamento-composto}
 
-%\begin{itemize}
-    TODO
+Como em comportamentos compostos, uma perceção pode ativar múltiplas reacções, as quais geram diferentes ações, é necessário definir um mecanismo de seleção de ação.
+Alguns dos mecanismos de seleção de ação mais comuns são:
 
-\section{Biblioteca ECR}\label{sec:biblioteca-ecr}
+\begin{itemize}
+    \item \textbf{Execução paralela}: As ações são executadas em paralelo porque não interferem entre si;
+    \item \textbf{Seleção por prioridade}: As ações são selecionadas em função de uma prioridade.
+    É possível distinguir dois tipos de comportamentos compostos com seleção por prioridade:
+    \begin{itemize}
+        \item \textbf{Prioridade}: Representa uma forma de comportamento composto com um mecanismo de seleção de ação de prioridade dinâmica, e que portanto a prioridade dos comportamentos associados varia consoante o tempo (e.g., o comportamento ``evitar obstáculo'' tem prioridade sobre ``explorar'' quando o agente se encontra próximo de um obstáculo, mas ``explorar'' tem prioridade sobre ``evitar obstáculo'' quando não existem obstáculos próximos).
+        \item \textbf{Hierarquia}: Representa uma forma de comportamento composto com um mecanismo de seleção de ação de prioridade por hierarquia fixa de subsunção (i.e., as camadas superiores controlam as inferiores, através da inibição, supressão e/ou reinício dos comportamentos associados).
+        Os comportamentos mais altos na hierarquia têm prioridade sobre os mais baixos (correção de acção), e não variam consoante o tempo (e.g., o comportamento ``carregar bateria'', tem prioridade mais alta sobre os comportamentos ``explorar'' ou ``evitar obstáculo'', pois representa um comportamento mais básico e fundamental para a sobrevivência do agente);
+    \end{itemize}
+    \item \textbf{Combinação}: As ações são combinadas numa única resposta por composição (e.g., soma vectorial);
+    \item \textbf{Seleção aleatória}: As ações são selecionadas aleatoriamente.
+\end{itemize}
 
-TODO
+
+\section{Controlo Reativo}\label{sec:controlo-reativo}
+
+Como foi apresentado na secção de arquiteturas de agentes (ver secção~\ref{sec:arquiteturas-agente}), um agente tem associado um módulo de controlo que é responsável por processar perceções e gerar ações.
+No caso de um agente reativo, o módulo de controlo é composto por um conjunto de comportamentos que são ativados em função de estímulos e que geram respostas (ver figura~\ref{fig:controle-reativo}).
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/controlo-reativo}}
+    \end{center}
+    \caption{Módulo de controlo reativo.
+    Retirado de~\cite{isel:iasa:slides:arq-agentes-reativos-parte-2}, slide 11.}\label{fig:controle-reativo}
+\end{figure}
+
+
+\section{Arquitetura Reativa com Memória}\label{sec:arquiteturas-reativa-memoria}
+
+Numa arquitectura reactiva com memória, as reações dependem não só das perceções, mas
+também da memória de perceções anteriores (ou de informação delas derivada) para gerar as
+ações. Para esse efeito é necessário manter internamente memória, a qual é atualizada a partir das
+perceções e das reações ativadas, influenciando essas mesmas reações, bem como as ações
+geradas~\cite{isel:iasa:slides:arq-agentes-reativos-parte-3}.
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/arquitetura-reativa-memoria}}
+    \end{center}
+    \caption{Arquitetura reativa com memória.
+    Retirado de~\cite{isel:iasa:slides:arq-agentes-reativos-parte-3}, slide 5.}\label{fig:arquitetura-reativa-memoria}
+\end{figure}
+
+O conceito de memória associado a um comportamento pode ser implementado de várias formas, como, por exemplo:
+
+\begin{itemize}
+    \item \textbf{Estado}: As perceções anteriores que sejam relevantes são armazenadas num estado interno do comportamento, que é atualizado e consultado em função das perceções atuais e que influencia a geracão de ações;
+    \item \textbf{Máquina de Estados}: Além de ter em conta as perceções atuais e as reações correspondentes, o comportamento pode ter em consideração entradas ou até um mecanismo de reset, que influenciam a próxima transição de estado e a consequente geração de ações e possíveis saídas. As entradas e saídas representam, neste contexto, interligações entre comportamentos.
+\end{itemize}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Vantagens e desvantagens da manutenção de estado em arquiteturas reativas \cite{isel:iasa:slides:arq-agentes-reativos-parte-3}.}
+    \label{tab:vantagens_desvantagens}
+    \vspace{0.2cm}
+    \begin{tabular}{|p{8cm}|p{8cm}|}
+        \hline
+        \textbf{Vantagens} & \textbf{Desvantagens} \\
+        \hline
+        \begin{itemize}
+            \item Poder produzir todo o tipo de comportamentos;
+            \item Representar a evolução temporal do comportamento do agente;
+            \item Representar comportamentos complexos baseados na evolução temporal das perceções (e.g., agir devido à inexistência de um alvo após um determinado número de passos);
+            \item Lidar com falhas, explorando novas ações (e.g., por este novo caminho chegarei ao alvo?).
+        \end{itemize}
+        &
+        \begin{itemize}
+            \item Aumento da complexidade espacial;
+            \item Aumento da complexidade computacional (i.e., manter as representações de estado);
+            \item Limitações no suporte de representações complexas e exploração de planos alternativos de ação.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\section{Biblioteca SAE}\label{sec:biblioteca-sae}
+
+Para esta fase do projeto foi disponibilizada uma biblioteca em python que apresenta e extende os conceitos expostos pela biblioteca realizada na primeira fase do projeto (ver capítulo~\ref{ch:projeto-parte1}).
+Além disso, a biblioteca SAE (Simulador de Ambiente de Execução) permite a execução de um agente autónomo num ambiente simulado bidimensional, composto por alvos e obstáculos~\cite{isel:iasa:slides:sae-documentacao}.
+Oferece, além de outras funcionalidades, a possibilidade de utilizar sete configurações de ambiente predefinidas.
+
+A interface gráfica é composta por duas áreas de visualização (ver figura~\ref{fig:sae-interface-grafica}): a primeira área (à esquerda) apresenta a configuração do ambiente escolhida e com a indicação do agente; e a segunda área (à direita) é uma área de visualização de informação interna do agente.
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/sae-interface-grafica}}
+    \end{center}
+    \caption{Interface gráfica do SAE.
+    Retirado de~\cite{isel:iasa:slides:sae-documentacao}, pág.
+    3.}\label{fig:sae-interface-grafica}
+\end{figure}
+
+
+\section{Implementação do Agente Reativo}\label{sec:implementacao-agente-reativo}
+
+No âmbito desta fase do projeto, foram realizadas as seguintes tarefas:
+
+\begin{boldenumerate}
+    \item Definição de uma biblioteca denominada ECR (Estímulos, Comportamentos e Respostas) que expõe mecanismos base de Comportamento, Reação, Estímulo, Resposta e Comportamento Composto;
+    \item Implementação de um conjunto de comportamentos e subcomportamentos que permitem ao agente autónomo atingir os objetivos propostos (i.e., recolher alvos e evitar obstáculos) utilizando a biblioteca ECR;
+    \item Observação do comportamento do agente e da sua interação com o ambiente através da interface gráfica da biblioteca SAE;
+    \item Adição de comportamentos mais complexos ao controlo do agente reativo de forma a melhorar o seu desempenho tendo em conta os objetivos propostos (e.g., inicialmente o agente apenas explorava numa direção aleatória, mas posteriormente foram adicionados comportamentos compostos de recolha de alvos e evitação de obstáculos); Ocorreu em simultâneo com o ponto \textbf{3}.
+\end{boldenumerate}
+
+Em relação ao ponto \textbf{2}, foram implementados os seguintes comportamentos:
+
+\begin{itemize}
+    \item \textbf{Recolher Alvo}: Representa um comportamento composto com um mecanismo de seleção de ação por hierarquia fixa de prioridade, que corresponde ao objetivo do agente prospector de recolher alvos.
+    O agente deve, por esta ordem de prioridade, ter em consideração os seguintes subcomportamentos: (1) aproximar alvo; (2) evitar obstáculos; e (3) explorar o ambiente.
+    \item \textbf{Aproximar Alvo}: Representa um comportamento composto com um mecanismo de seleção de ação por prioridade dinâmica, que corresponde ao objetivo do agente prospector de se aproximar de um alvo.
+    Como a distância entre o agente e os diversos alvos varia consoante a posição do agente no ambiente (i.e., a intensidade do estímulo varia), o agente deve selecionar o alvo mais próximo (i.e., prioritizar o estímulo que apresenta maior intensidade) e por isso é que é usado um mecanismo de seleção por prioridade dinâmica (ver secção~\ref{subsec:comportamento-composto}).
+    \item \textbf{Evitar Obstáculo}: Representa um comportamento composto com um mecanismo de seleção de ação por hierarquia fixa de prioridade, que corresponde ao objetivo do agente prospector de evitar obstáculos.
+    É usado este mecanismo de seleção de ação, porque a próxima direção livre de obstáculos é calculada em função da posição do agente e dos obstáculos presentes à sua volta, de forma aleatória.
+    E portanto, num dado momento, não existe uma direção livre mais prioritária (no sentido literal) que outra, mas sim, uma hierarquia onde estão definidas, pela ordem de descoberta aleatória, as direções livres de obstáculos encontradas.
+    \item \textbf{Explorar}: Define um comportamento fixo sem memória (i.e., representação interna de perceções anteriores) e que, por isso está condenado à repetição. Está associado ao objetivo ``explorar'' e caracteriza-se por ter uma resposta fixa, pois gera uma ação em permanência, que consiste em mover-se numa direção aleatória. Não depende de nenhum estímulo para ser ativado.
+\end{itemize}
+
+Além dos comportamentos descritos, para os comportamentos compostos, foram implementados estímulos, respostas e reações, de forma a garantir a descrição e execução correta dos comportamentos associados.
+
+Em paralelo ao desenvolvimento da implementação descrita e de forma a introduzir os conceitos de arquitetura reativa com memória, foi introduzido um comportamento com a finalidade de contar os passos do agente e tomar decisões com base no número de passos efetuados.
+Mas tal comportamento não consta na implementação final reativo, pois não é relevante para os objetivos propostos.
+
+
+\section{Estrutura do Projeto}\label{sec:estrutura-projeto}
+
+No processo de desenvolvimento de software associado a esta fase do projeto, foi definida a seguinte estrutura em módulos e que está presente na pasta \ti{iasa\_agente/src}:
+
+\begin{itemize}
+    \item \textit{agente}: Integra a implementação do agente reativo e do seu controlo, bem como os componentes dos módulos comportamentais associados;
+    \item \textit{lib/ecr}: Integra a implementação da biblioteca ECR;
+    \item \textit{lib/sae}: Integra a implementação da biblioteca SAE;
+    \item ficheiro \textit{teste.py}: Executa o agente reativo no ambiente simulado providenciado pela biblioteca SAE.
+\end{itemize}

@@ -6,11 +6,10 @@ from agente.controlo_react.reaccoes.explorar.explorar import Explorar
 class Recolher(Hierarquia):
 
     """
-    Representa um comportamento composto com um mecanismo de seleção de ação por hierarquia fixa de prioridade, que corresponde ao objetivo do Agente Prospector de "recolher alvos". 
+    Representa um comportamento composto com um mecanismo de seleção de ação por hierarquia fixa de prioridade, que corresponde ao objetivo do Agente Prospector de "recolher alvos".
     Associado a este objetivo podem existir os seguintes sub-objetivos:
-    - "evitar obstáculos" 
+    - "evitar obstáculos"
     - "aproximar alvo"
-    - "contar passos"
     - "explorar"
     """
 
@@ -25,4 +24,3 @@ class Recolher(Hierarquia):
         # contar_passos = ContarPassos()
         comportamentos = [aproximar_alvo, evitar_obst, explorar]
         super().__init__(comportamentos)
-    
