@@ -1,4 +1,17 @@
 \chapter{Conclusão}\label{ch:conclusao}
 
-A primeira fase do projeto consistiu na
-Ter em conta que corresponde a uma arquitetura reativa com memória, mas ao nível do módulo de controlo, e não ao nível do módulo comportamental.
+O projeto permitiu adquirir conhecimentos sobre inteligência artificial e a implementação de agentes autónomos inteligentes, com recurso a diferentes arquiteturas.
+
+Outras temáticas como a arquitetura de software e as suas vertentes, bem como o processo de desenvolvimento de software, foram também abordadas, aprendidas e aplicadas ao longo do projeto, o que permitiu a aquisição de competências em áreas como a análise, o design e a implementação de sistemas de software.
+
+Foram adquiridas competências de programação em Java e Python, especialmente vocacionadas para a programação orientada a objetos, o que permitiu modular, de forma incremental, os diferentes subsistemas das arquiteturas implementadas.
+
+Em relação as diferentes partes do projeto, na primeira parte, foi desenvolvida uma biblioteca em Java onde foram implementados os mecanismos bases relacionados com os conceitos gerais de inteligência artificial (e.g., agente, ambiente) e um jogo que integra essa biblioteca.
+O jogo consistia num ambiente virtual onde a personagem tinha por objectivo registar a presença de animais através de fotografias, simulando a exploração no mundo real.
+O agente foi implementado com uma arquitetura reativa com memória, mais concretamente, criou-se uma máquina de estados finita no seu módulo de controlo, que permitia a tomada de decisões com base no estado anterior, em eventos pre-definidos do ambiente e na acção a executar pelo agente.
+Com esta arquitetura observou-se que o agente conseguia atingir os objetivos propostos, mas não conseguia reagir a situações inesperadas (i.e., eventos não previstos que podessem ocorrer no ambiente).
+
+Na segunda parte do projeto, foi desenvolvido um agente reativo em Python com módulos comportamentais para recolher alvos e evitar obstáculos num ambiente virtual com dimensões fixas.
+O agente foi implementado com uma arquitetura reativa simples (i.e., sem memória), onde um comportamento composto (que englobava os subcomportamentos: aproximar alvo, evitar obstáculo, explorar) foi integrado no módulo de controlo. Esta integração permitiu a escolha da ação a executar com base num mecanismo de seleção de ação, mais concretamente, por hierarquia fixa de prioridade. Com esta arquitetura observou-se, através da interface gráfica da biblioteca SAE, que o agente conseguia atingir os objetivos propostos, mas não de forma ótima (i.e., o caminho mais rápido para recolher todos os alvos, evitando os obstáculos, não era seguido).
+
+Após análise dos resultados obtidos, concluiu-se que ainda não se encontrou a arquitetura ideal para o agente autónomo inteligente no contexto destes problemas, e a resposta possa estar nas arquiteturas deliberativas e híbridas que não foram abordadas neste projeto.

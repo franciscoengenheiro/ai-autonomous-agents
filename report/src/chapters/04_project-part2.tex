@@ -154,13 +154,26 @@ A interface gráfica é composta por duas áreas de visualização (ver figura~\
     3.}\label{fig:sae-interface-grafica}
 \end{figure}
 
+\section{Caracterização do Ambiente}\label{sec:caracterizacao-ambiente}
+
+O ambiente onde o agente reativo se movimenta é virtual, bidimensional, com dimensões fixas e composto por alvos e obstáculos estáticos. Pode ser caracterizado (ver secção~\ref{sec:ambiente}) por ser:
+
+\begin{itemize}
+    \item \textbf{Totalmente observável}: O agente tem acesso a toda a informação do ambiente;
+    \item \textbf{De agente único}: O ambiente contém apenas um agente a atuar;
+    \item \textbf{Determinístico}: O próximo estado do ambiente é determinado pelo estado atual e pela ação do agente;
+    \item \textbf{Sequencial}: As ações do agente afetam as etapas consequentes (e.g., a recolha de um alvo implica a sua remoção do ambiente);
+    \item \textbf{Estático}: O ambiente não muda enquanto o agente está a decidir a próxima ação a realizar;
+    \item \textbf{Discreto}: O ambiente é composto por um número finito de estados possíveis.
+\end{itemize}
+
 
 \section{Implementação do Agente Reativo}\label{sec:implementacao-agente-reativo}
 
 No âmbito desta fase do projeto, foram realizadas as seguintes tarefas:
 
 \begin{boldenumerate}
-    \item Definição de uma biblioteca denominada ECR (Estímulos, Comportamentos e Respostas) que expõe mecanismos base de Comportamento, Reação, Estímulo, Resposta e Comportamento Composto;
+    \item Definição de uma biblioteca denominada ECR (Estímulos, Comportamentos e Respostas) que expõe os mecanismos base de Comportamento, Reação, Estímulo, Resposta e Comportamento Composto;
     \item Implementação de um conjunto de comportamentos e subcomportamentos que permitem ao agente autónomo atingir os objetivos propostos (i.e., recolher alvos e evitar obstáculos) utilizando a biblioteca ECR;
     \item Observação do comportamento do agente e da sua interação com o ambiente através da interface gráfica da biblioteca SAE;
     \item Adição de comportamentos mais complexos ao controlo do agente reativo de forma a melhorar o seu desempenho tendo em conta os objetivos propostos (e.g., inicialmente o agente apenas explorava numa direção aleatória, mas posteriormente foram adicionados comportamentos compostos de recolha de alvos e evitação de obstáculos); Ocorreu em simultâneo com o ponto \textbf{3}.

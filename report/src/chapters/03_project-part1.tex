@@ -68,7 +68,7 @@ envolvido. Essa alternância poderá ser circular (i.e., implementação $\right
 
 Mais detalhadamente, os diagramas de sequência ou atividade representam o fluxo de controlo de um sistema, ou seja, a sequência de atividades que um sistema executa e a sua ordem. Definem-se como modelos de interação com uma organização bidirecional (i.e., horizontal $\rightarrow$ tempo e vertical $\rightarrow$ estrutura) e são compostos por diferentes elementos de modelação (e.g., mensagens, operadores, linha de vida).
 
-Já a linguagem de modelação unificada (UML) representa um modelo de comportamento com interação como perspetiva principal de modelação.
+Já a linguagem de modelação unificada (i.e., UML - \ti{Unified Modeling Language}) representa um modelo de comportamento com interação como perspetiva principal de modelação.
 Este tipo de modelação descreve a forma como as partes de um sistema interagem entre si e com o exterior para produzir o comportamento do sistema.
 No contexto do projeto, esta linguagem também ajudou a compreender os conceitos fundamentais associados a um sistema computacional (ver secção~\ref{sec:modelacao-de-um-sistema-computacional}) através da representação de diagramas de transição de estado.
 
@@ -153,16 +153,16 @@ Tendo por base os conceitos anteriormente abordados, que consolidaram a aprendiz
     Retirado de~\cite{isel:iasa:slides:intro-eng-soft-parte-3}, slide 14.}\label{fig:projeto-parte1-maqest-personagem}
 \end{figure}
 
-O jogo consiste num ambiente virtual onde a personagem tem por objectivo registar a presença de animais através de fotografias.
-O ambiente deste jogo, pode ser caracterizado (ver secção~\ref{sec:ambiente}) por ser:
+O jogo consiste num ambiente virtual onde a personagem tem por objectivo registar a presença de animais através de fotografias, simulando a exploração no mundo real.
+Pode ser caracterizado (ver secção~\ref{sec:ambiente}) por ser:
 
 \begin{itemize}
-    \item \textbf{Totalmente Observável}: O agente tem acesso a uma descrição completa do ambiente e que lhe permite resolver o problema em questão sem necessitar de guardar estado interno;
-    \item \textbf{De Agente Único}: Apenas existe um agente a atuar, neste caso, uma Personagem;
-    \item \textbf{Determinístico}: O estado seguinte é unicamente determinado pelo estado actual e pela acção do agente;
-    \item \textbf{Sequencial}: Pois existe uma linha de acontecimentos que se sucedem (e.g., não é possível inspeccionar, registar ou observar algo sem ser feita primeiro uma procura);
-    \item \textbf{Estático}: Não se altera enquanto o agente está a tomar uma decisão;
-    \item \textbf{Discreto}: O número de estados possíveis é finito.
+    \item \textbf{Parcialmente observável}: A Personagem apenas sabe o que está no seu campo de visão, e por isso precisa de explorar o ambiente para descobrir o que está à sua volta, necessitando de guardar estado interno para tomar decisões (e.g., se observou um animal anteriormente, então pode registar a sua presença);
+    \item \textbf{Agente único}: Considerou-se que a Personagem é a única a atuar no ambiente no contexto do problema, visto que os animais são tratados como objetos passivos e integrantes do ambiente;
+    \item \textbf{Estocástico}: Porque o estado seguinte pode depender de eventos aleatórios (e.g., a fuga de um animal) e não somente do estado atual e da ação da Personagem;
+    \item \textbf{Sequencial}: Pois existe uma linha de acontecimentos que se sucedem (e.g., não é possível inspecionar, registar ou observar algo sem ser feita primeiro uma procura);
+    \item \textbf{Dinâmico}: Pois o ambiente pode mudar enquanto a Personagem está a tomar uma decisão (e.g., os animais podem fugir);
+    \item \textbf{Discreto}: Pois o número de estados possíveis é finito (e.g., pode ser mapeado para uma máquina de estados finita).
 \end{itemize}
 
 Foi criada uma aplicação (ver figura~\ref{fig:projeto-parte1-jogo}) de \textif{cli} (i.e., command-line interface) em Java, que possibilita a interação com o jogador por meio de comandos em texto.
