@@ -1,7 +1,6 @@
-from abc import ABC
 from pee.mec_proc.mecanismo_procura import MecanismoProcura
 
-class ProcuraGrafo(ABC, MecanismoProcura):
+class ProcuraGrafo(MecanismoProcura):
 
     """
     Representa um mecanismo de procura em grafo. Caracteriza-se por não explorar um nó se este já tiver sido explorado.

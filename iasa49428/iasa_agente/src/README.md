@@ -120,3 +120,50 @@ Ter cuidado a eliminar os nós antigos porque os mais antigos podem ser melhores
 Procura de custo uniforme, funciona como a procura em largura, mas em vez de ordenar por profundidade, ordena por custo na fronteira. Caso particular da procura melhor-primeiro, onde a função de avaliação é o custo acumulado até ao nó
 
 Se não tiver nos nós explorados ou se o custo do nó for menor que o custo do nó explorado, então o nó é inserido na fronteira
+
+
+Num comportamento de ações é preciso de um modelo de ações
+Procura melhor-primeiro
+
+Para utilizar métodos de raciocínio automático, temos de otimizar medidas de desempenho. Essa função f, função de avaliação. Verificar os melhores nós.
+
+g(n) custo do percursos até ao nó n
+h(n) estimativa do custo de n até ao objetivo, sem que o percurso respetivo tenha sido
+
+Métodos de procura:
+- Procura de custo uniforme: explorar primeiro os nós com menor custo acumulado, baseada na ordernação dos nós na fronteirada. 
+Cada nó tem um custo acumulado até ao nó
+
+Problema: (complexidade computacional) na inserção dos nós visto que é preciso ordenar a fronteira
+
+Solução: Trocar tempo por complexidade (reduzir o tempo de procura). Usar uma priority queue, que ordena os nós de acordo com o custo acumulado
+
+Relação de ordem, é uma função matemática que compara dois elementos de um conjunto, devolvendo um valor booleano. Relação de ordem natural, é uma relação de ordem que é naturalmente definida num conjunto (e.g., números inteiros)
+
+A fronteira recebe tuplos:
+2 parametros:
+- custo primeiro
+- nó segundo
+
+o custo tem que estar no primeiro argumento porque a priority queue ordena por ordem natural dos números inteiros ao quais o custo está associado
+
+!!IMPORTANTE!!: Na arquitetura da fronteira de procura, foi alterado a visibilidade do avaliador na fronteira prioridade, de privado para protegido, para que ...
+
+
+Explicação dos resultados com as diferentes procuras:
+- procura custo uniforme, dá a melhor em termos de custo
+
+procura cega vs conhecimento do dominio do problema o que maximiza a eficiência da procura (exploração seletiva do espaço de estados)
+
+Procura não informada (cega) vs procura informada (heurística) (heurística é algo que fornece informação para resolver algo de forma expedidita, são estimativas rápidas e por isso não são garantidamente ótimas (não produzem indicações robustas que garantidamente levam a boas soluções, no entanto são boas indicações e ajudam a orientar a procura)
+
+- Na procura de custo uniforme, a função de avaliação é o custo acumulado até ao nó (f(n) = g(n)), procura não informada. Variante da procura melhor primeiro, tipo de procura não informada, pouco eficiente, mas produz solução ótima
+
+- Na procura sôfrega, a função de avaliação é a distância ao objetivo (f(n) = h(n)), procura informada, exponentialmente mais eficiente que a procura de custo uniforme, porque é seletiva, no entanto não é garantidamente ótima. Variante da procura melhor primeiro, tipo de procura informada, mais eficiente que a procura de custo uniforme, mas subótima
+
+- Para a procura A*, a procura é informada, a função de avaliação é a soma do custo acumulado até ao nó e a distância ao objetivo (f(n) = g(n) + h(n)), é garantidamente ótima, no entanto, a procura é mais lenta que a procura sôfrega
+- heuristica admisível: necessário para uma procura A* ser ótima, a heurística tem de ser admissível, ou seja, a heurística tem de ser menor ou igual ao custo real
+f(n) = g(n) + h(n)
+Variante da procura melhor primeiro, tipo de procura informada, menos eficiente que a procura sôfrega, mas garantidamente ótima
+
+!!IMPORTANTE!!: na procura informada, o atribuito heuristica não vai existir (na arquiteuraa base é protected)

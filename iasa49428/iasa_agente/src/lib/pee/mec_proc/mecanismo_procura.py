@@ -3,6 +3,7 @@ from pee.mec_proc.no import No
 from pee.mec_proc.solucao import Solucao
 
 class MecanismoProcura(ABC):
+    
     """
     Mecanismo de procura genérico que permite abstrair a forma como a procura é feita, não estando portanto, comprometido com a implementação do algoritmo de procura.
     """

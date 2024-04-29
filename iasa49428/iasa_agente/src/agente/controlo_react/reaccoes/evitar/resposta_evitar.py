@@ -1,8 +1,8 @@
 
 from random import choice
 from agente.controlo_react.reaccoes.resposta.resposta_mover import RespostaMover
-from sae.agente.accao import Accao
-from sae.ambiente.direccao import Direccao
+from sae import Accao
+from sae import Direccao
 
 class RespostaEvitar(RespostaMover):
 
