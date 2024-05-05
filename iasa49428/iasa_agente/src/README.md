@@ -131,8 +131,7 @@ g(n) custo do percursos até ao nó n
 h(n) estimativa do custo de n até ao objetivo, sem que o percurso respetivo tenha sido
 
 Métodos de procura:
-- Procura de custo uniforme: explorar primeiro os nós com menor custo acumulado, baseada na ordernação dos nós na fronteirada. 
-Cada nó tem um custo acumulado até ao nó
+- Procura de custo uniforme: explorar primeiro os nós com menor custo acumulado, baseada na ordernação dos nós na fronteira. Cada nó tem um custo acumulado até ao nó
 
 Problema: (complexidade computacional) na inserção dos nós visto que é preciso ordenar a fronteira
 

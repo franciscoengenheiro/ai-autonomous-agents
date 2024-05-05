@@ -1,3 +1,134 @@
-\chapter{Projecto - Parte 3}\label{ch:projeto-parte3}
+\chapter{Projeto - Parte 3}\label{ch:projeto-parte3}
 
-\lipsum[1-2]
+Nesta fase do projeto, o objetivo foi criar, em \textit{python}, TODO
+
+
+\section{Raciocínio Automático}\label{sec:raciocinio-automatico}
+
+O raciocínio automático é uma área da inteligência artificial que se dedica a desenvolver algoritmos capazes de inferir conclusões a partir de um conjunto de premissas.
+Pode ser visto como um processo computacional, onde se parte de uma representação de conhecimento de um determinado problema e se chega a conclusões, com base em regras de inferência (i.e., processo de manipulação de representações simbólicas para deduzir novas informações baseadas em conhecimento do domínio).
+
+Associado ao processo de raciocínio automático, estão dois tipos de atividades principais:
+
+\begin{itemize}
+    \item \textbf{Exploração}: A exploração das opções possíveis, e que requer antecipação e previsão das suas consequências (raciocínio prospectivo) (e.g., num determinado momento, quantas jogadas possíveis existem num jogo de xadrez para que o jogador possa ganhar o jogo)
+    \item \textbf{Avaliação}: A avaliação das opções exploradas, que requer a comparação das opções possíveis e a escolha da melhor opção.
+    Associadas a escolha estão métricas como o custo e a utilidade (e.g., de todas as jogadas possíveis, qual a que maximiza a probabilidade de ganhar o jogo de xadrez)
+\end{itemize}
+
+De forma a resolver um determinado problema, através do raciocínio automático, é necessário representar o conhecimento do seu domínio através de representações simbólicas internas ao sistema - modelo do problema - com a informação necessária para a resolução do mesmo.
+Estas representações servem de base à simulação para exploração e avaliação de opções possíveis, e são obtidas através de processos de codificação (i.e., da informação concreta do problema em estruturas simbólicas internas) e de descodificação (i.e., processo inverso).
+A imagem~\ref{fig:representacao-problema} ilustra um exemplo de codificação e descodificação de um problema.
+
+\begin{figure}[H]
+    \label{fig:representacao-problema}
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/representacao-problema}}
+    \end{center}
+    \caption{Representação de um problema.
+    Retirado de~\cite{isel:iasa:slides:racicionio-automatico}, slide 8.}
+\end{figure}
+
+\subsection{Modelo de um Problema}\label{subsec:modelo-problema}
+
+O modelo de um problema é uma representação simbólica interna ao sistema, que contém a informação necessária para a resolução do problema.
+O mecanismo de raciocínio automático é responsável por manipular esta representação, de forma a inferir conclusões e a resolver o problema. Esta representação tem como base os seguintes conceitos:
+
+\begin{itemize}
+    \item \textbf{Estado}: Representação única e simbólica de um conjunto de informações concretas que caracterizam um estado da modelação de um problema. No âmbito do raciocínio automático, os estados abstraem os aspetos (configurações) estruturais que caracterizam o problema. Ao conjunto de estados possíveis de um problema e às transições entre eles, dá-se o nome de espaço de estados;
+    \item \textbf{Operadores}: Representação de uma ação geradora de uma transição de um estado para outro.
+    No âmbito do raciocínio automático, os operadores abstraem as transformações (dinâmicas) que ocorrem.
+    Associado a um operador estão duas funções: uma que gera o estado sucessor a partir de um dado estado e outra que define o custo associado a essa transição, e que pode depender ou não do estado atual e do estado sucessor;
+    \item \textbf{Transição}: Em contraste com o operador, a transição é a ação efetiva da passagem de um estado para outro (geram o estado sucessor), que ocorre quando um operador é aplicado sobre as representações internas dos estados.
+    \item \textbf{Problema}: Dá suporte ao raciocínio automático, modelando um problema ao qual está inerente uma finalidade;
+    Associado a um problema está o estado inicial, um conjunto de operadores e uma função predicado~\cite{stanford:fp:function-predicates} que verifica se um estado recebido é um estado objetivo ou objetivos explicítos.
+    O problema considera-se resolvido quando um estado objetivo é atingido.
+\end{itemize}
+
+
+\section{Mecanismo de procura}\label{sec:mecanismo-procura}
+
+O mecanismo de procura é um dos mecanismos de raciocínio automático, que tem como objetivo encontrar uma solução para um problema de procura.
+
+Associado a um mecanismo de procura está o conceito de árvore de procura, que é uma estrutura responsável por manter a informação gerada durante o processo de procura.
+Caracteriza-se pelos seguintes conceitos:
+
+\begin{itemize}
+    \item \textbf{Nó}: Representa um estado do problema.
+    Além disso, contém informação, tal como: operador (que foi aplicado para gerar o estado sucessor, e que pode não existir); antecessor (nó antecessor ao qual foi aplicado o operador para gerar este nó, e que pode não existir).
+    E informação complementar para controlo do processo de procura: profundidade (do nó na árvore de procura, incremental a cada nível da árvore de procura); custo (associado ao caminho que vai do nó raiz ao nó, incremental a cada transição de um nó para o nó sucessor).
+    Existe ainda o conceito de nós abertos (que ainda não foram expandidos) e nós fechados (que já foram expandidos);
+    Os nós são comparáveis entre si através do seu custo;
+    \item \textbf{Fronteira}: Representa os nós folhas da árvore de procura.
+    Estes nós são candidatos a serem expandidos.
+    A forma como é feita essa expansão dependerá da estratégia de procura utilizada (ver secção~\ref{sec:estrategias-procura}).
+    \item \textbf{Solução}: Representa um percurso (sequência de estados e operadores), no espaço de estados, nomeadamente, corresponde ao caminho que vai do nó raiz (estado inicial) a um dos nós objetivo (estado objetivo).
+    Podem existir várias soluções para um problema de procura, que dependem também da estratégia de procura utilizada (ver secção~\ref{sec:estrategias-procura}), ou até mesmo não existir solução.
+\end{itemize}
+
+\subsection{Processo de Procura}\label{subsec:processo-procura}
+
+O processo de procura (ver figura~\ref{fig:processo-procura}) é um processo iterativo que tem como objetivo encontrar uma solução para um problema de procura, através da exploração do espaço de estados a partir do estado inicial.
+É caracterizado pelos seguintes passos~\cite{isel:iasa:slides:proc-espaco-estados-parte-1}:
+
+\begin{itemize}
+    \item É verificado se o estado atual corresponde ao estado objetivo.
+    Se corresponder ao objetivo, o processamento termina e é retornado o percurso do estado inicial ao estado objetivo (i.e., a solução);
+    \item Não sendo o estado atual um objetivo, esse estado é expandido, sendo gerados todos os estados sucessores por aplicação dos vários operadores possíveis;
+    \item Para cada estado sucessor é repetido o processo;
+    \item Se não existirem estados sucessores, o processo de procura termina com a indicação de que não existe solução. A não existência de estados sucessores resulta, por exemplo, da exploração de todo o espaço de estados sem ter sido encontrada solução.
+\end{itemize}
+
+\begin{figure}[H]
+    \label{fig:processo-procura}
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/processo-de-procura}}
+    \end{center}
+    \caption{Processo de procura.
+    Retirado de~\cite{isel:iasa:slides:proc-espaco-estados-parte-1}, slide 7.}
+\end{figure}
+
+
+\section{Estratégias de Procura}\label{sec:estrategias-procura}
+As estratégias de procura são responsáveis por definir a forma como a árvore de procura é explorada, ou seja, a ordem pela qual os nós são expandidos.
+Existem várias estratégias de procura que se podem dividir em dois grupos: estratégias de procura não informada (cega) (ver secção~\ref{subsec:procuras-nao-informadas}) e estratégias de procura informada (heurística) (ver secção~\ref{subsec:procuras-informadas}).
+
+Alguns dos critérios de classificação das estratégias de procura são~\cite{ist:leic:resumos:procura-cega, isel:iasa:slides:proc-espaco-estados-parte-2}:
+
+\begin{itemize}
+    \item \textbf{Completa}: Se a estratégia encontra \textbf{sempre} uma solução para o problema proposto, caso exista (e caso não exista, diz que não há solução).
+    \item \textbf{Ótima}: Se a estratégia encontra a solução com o menor custo possível.
+    \item \textbf{Complexidade de espaço}: Espaço de memória necessário para encontrar a solução (i.e., número máximo de nós que a estratégia mantém em memória)
+    \item \textbf{Complexidade de tempo}: Tempo necessário para encontrar a solução (i.e., número de operações necessárias para encontrar a solução)
+    \item \textbf{Profundidade Máxima}: Corresponde à quantidade máxima de espaços entre um qualquer par de estados ($m$).
+    \item \textbf{Fator de Ramificação}: Número máximo de sucessores de um dado nó ($b$).
+    \item \textbf{Profundidade da solução}: Profundidade do nó objetivo na árvore de procura ($d$).
+\end{itemize}
+
+\subsection{Procuras Não-Informadas}\label{subsec:procuras-nao-informadas}
+
+As procuras não-informadas (ver figura~\ref{fig:tabela-estrategias-procura-nao-informadas}) são estratégias de procura que não utilizam informação adicional para guiar o processo de procura.
+
+\begin{figure}[H]
+    \label{fig:tabela-estrategias-procura-nao-informadas}
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/tabela-estrategias-procura-nao-informadas}}
+    \end{center}
+    \caption{Tabela de estratégias de procura não-informadas.
+    Retirado de~\cite{isel:iasa:slides:proc-espaco-estados-parte-2}, slide 12.}
+\end{figure}
+
+\subsubsection{Procura em Profundidade}\label{subsubsec:procura-profundidade}
+\paragraph{Procura em Profundidade Limitada}\label{par:procura-profundidade-limitada}
+\paragraph{Procura em Profundidade Iterativa}\label{par:procura-profundidade-iterativa}
+
+\subsubsection{Procura em Largura}\label{subsubsec:procura-largura}
+
+\subsubsection{Procura de Custo Uniforme}\label{subsubsec:procura-custo-uniforme}
+
+
+
+
+\subsection{Procuras Informadas}\label{subsec:procuras-informadas}
+
+Uma heurística é algo que fornece informação para resolver algo de forma expedita, são estimativas rápidas e por isso não são garantidamente ótimas (não produzem indicações robustas que garantidamente levam a boas soluções, no entanto são boas indicações e ajudam a orientar a procura).
