@@ -9,8 +9,8 @@ class HeuristicaContagem(Heuristica):
     """
 
     def __init__(self, valor_final):
-        self.valor_final = valor_final
+        self.__valor_final = valor_final
 
     def h(self, estado):
         # a distância entre os valores dos estados
-        return abs(estado.valor - self.valor_final)
+        return abs(estado.valor - self.__valor_final)
