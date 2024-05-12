@@ -220,13 +220,14 @@ Este comportamento, denominado \textit{Contar Passos}, caracterizado por ser um 
 No entanto, tal comportamento não consta na implementação final do agente reativo, pois não é relevante para os objetivos propostos.
 
 
-\section{Estrutura do Projeto}\label{sec:estrutura-projeto}
+\section{Estrutura do Projeto}\label{sec:estrutura-do-projeto-2}
 
 No processo de desenvolvimento de software associado a esta fase do projeto, foi definida a seguinte estrutura em módulos e que está presente na pasta \textit{iasa\_agente/src}:
 
 \begin{itemize}
-    \item \textit{agente}: Integra a implementação do agente reativo e do seu controlo, bem como os componentes dos módulos comportamentais associados;
+    \item \textit{agente/agente\_reativo.py}: Integra a implementação do agente reativo;
+    \item \textit{agente/controlo\_react}: Integra a implementação do controlo do agente reativo, bem como os componentes dos módulos comportamentais associados;
     \item \textit{lib/ecr}: Integra a implementação da biblioteca ECR;
-    \item \textit{lib/sae}: Integra a implementação da biblioteca SAE, que foi disponibilizada para esta fase do projeto.
+    \item \textit{lib/sae}: Integra a implementação da biblioteca SAE, que foi disponibilizada para esta fase do projeto;
     \item ficheiro \textit{teste.py}: Executa o agente reativo implementado no ambiente simulado com a configuração escolhida, providenciado pela biblioteca SAE.
 \end{itemize}
