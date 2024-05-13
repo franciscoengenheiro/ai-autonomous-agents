@@ -11,11 +11,9 @@ class ProcuraMelhorPrim(ProcuraGrafo):
         self._avaliador = avaliador
         frontPrioridade = FronteiraPrioridade(avaliador)
         super().__init__(frontPrioridade)
-    
+
     def _manter(self, no):
         """
         Em relação à funcionalidade da procura em grafo, de forma a que o nó possa ser mantido, além de não estar nos nós explorados, o custo do nó tem de ser menor que o custo do nó explorado.
         """
-
         return super()._manter(no) or no.custo < self._explorados[no.estado].custo
-    

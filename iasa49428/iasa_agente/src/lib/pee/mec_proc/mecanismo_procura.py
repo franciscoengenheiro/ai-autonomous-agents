@@ -3,11 +3,11 @@ from pee.mec_proc.no import No
 from pee.mec_proc.solucao import Solucao
 
 class MecanismoProcura(ABC):
-    
+
     """
     Mecanismo de procura genérico que permite abstrair a forma como a procura é feita, não estando portanto, comprometido com a implementação do algoritmo de procura.
     """
-    
+
     def __init__(self, fronteira):
         self._fronteira = fronteira
 
@@ -18,15 +18,15 @@ class MecanismoProcura(ABC):
         """
 
         self._fronteira.iniciar()
-    
+
     @abstractmethod
     def _memorizar(self, no):
         """
         Permite abstrair a forma como o nó é memorizado sem se comprometer com a implementação do algoritmo de procura.
         Inicial:
-        BFS: 
+        BFS:
         - Inserir na Fronteira com LIFO (Last In First Out)
-        DFS: 
+        DFS:
         - Inserir na Fronteira com FIFO (First In First Out)
         - Procurar no dicionário dos nós explorados (fronteira de exploração, nós gerados mas não expandidos, abertos + nós expandidos, fechados) se o nó já foi explorado
 
@@ -36,7 +36,7 @@ class MecanismoProcura(ABC):
         DFS:
         - Se o estado do nó sucessor não está no dicionário dos nós explorados, então o nó sucessor é inserido na fronteira de exploração e posteriomente adicionado ao dicionário
         """
-    
+
     def procurar(self, problema):
 
         """
@@ -61,15 +61,17 @@ class MecanismoProcura(ABC):
             nos_sucessores = self._expandir(problema, no)
             for no_sucessor in nos_sucessores:
                 self._memorizar(no_sucessor)
-                    
+
     def _expandir(self, problema, no):
 
         """
         Expandir um nó, tendo em conta o problema que se pretende resolver, tem associados os seguintes passos:
-        1. Para cada operador gerar a transição do estado do nó para o estado sucessor
+        1. Para cada operador gerar a transição de estado do nó, que vai permitir obter o estado sucessor
         2. Se o estado sucessor existir:
-            3. Calcular o custo da transição (obtido através do operador pelo estado do nó e pelo estado sucessor)
-            4. Criar um nó sucessor com o estado sucessor, o operador usado, o nó pai e o custo calculado anteriormente
+            3. Calcular o custo do nó sucessor (custo do nó antecessor + custo da transição para o estado sucessor);
+            4. Criar o nó sucessor com o estado sucessor, o operador que gerou a transição, o nó antecessor e o custo calculado
+            5. Guardar o nó sucessor na lista de sucessores
+        6. Devolver a lista de sucessores
         """
 
         sucessores = []
