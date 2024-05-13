@@ -1,33 +1,38 @@
 from math import dist
+from typing import override
 from agente.controlo_delib.modelo.estado_agente import EstadoAgente
 from agente.controlo_delib.modelo.operador_mover import OperadorMover
+from plan.modelo.modelo_plan import ModeloPlan
 from sae import Direccao
 
 
-class ModeloMundo:
+class ModeloMundo(ModeloPlan):
 
     """
     Corresponde às representações internas do ambiente. 
     A memoria é organizada internamente para poder ter a representação do domínio do problema.
     Na arquitetura deliberativa, o módulo de memória é indispensável e dá suporte à simulação interna.
-    Qualquer sistema para poder antecipar o futuro tem que ter conhecimento (modelo do mundo) (ou vem da experiencia ou vem de algo que já tem esse conhecimento e o transmite para o agente). Caso particular da representação do modelo do problema.
+    Qualquer sistema para poder antecipar o futuro, tem que ter conhecimento (modelo do mundo) (ou vem da experiencia ou vem de algo que já tem esse conhecimento e o transmite para o agente). Caso particular da representação do modelo do problema.
     """
     
     def __init__(self):
-        # Map from Elemento enum class 
         self.__estado = None
         self.__estados = []
         self.__operadores = []
         self.__elementos = {}
         self.__alterado = False
     
+    @override
     def obter_estado(self):
         return self.__estado
 
+    @override
     def obter_estados(self):
         return self.__estados
     
+    @override
     def obter_operadores(self):
+        self.__operadores = [OperadorMover(self, direccao) for direccao in Direccao]
         return self.__operadores
     
     def obter_elemento(self, estado):
@@ -39,43 +44,43 @@ class ModeloMundo:
         return self.__elementos[estado.posicao]
     
     def distancia(self, estado):
-        posicao = estado.posicao
-        # get euclidean distance between two points
-        return dist(self.__estado.posicao, posicao)
+
+        """
+        Calcula a distância euclidiana entre a posição atual do agente e a nova posição.
+        """
+
+        nova_posicao = estado.posicao
+        return dist(self.__estado.posicao, nova_posicao)
     
     def actualizar(self, percepcao):
 
         """
         Atualiza o modelo do mundo com a percepção que o agente obteve do ambiente.
-        Atualizar, neste contexto, significa atualizar o estado do agente, os elementos e as posições, bem como os operadores.
+        Atualizar, neste contexto, significa atualizar o estado do agente e os elementos que o rodeiam.
         """
 
         # percepcao.posicao
         # percepcao.elementos
         # percepcao.posicoes
-        self.__alterado = self.__foi_alterado(percepcao)
-        self.__estado = EstadoAgente(percepcao.posicao)
-        self.__elementos = percepcao.elementos
-        for posicao in percepcao.posicoes: # posições válidas
-            self.__estados.append(EstadoAgente(posicao))
-        self.__operadores = [OperadorMover(self, direccao) for direccao in Direccao]
+        novo_estado = EstadoAgente(percepcao.posicao)
+        if novo_estado != self.__estado: # comparar estados (aka posições)
+            self.__estado = novo_estado
+            self.__elementos = percepcao.elementos
+            for posicao_valida in percepcao.posicoes: # representa um conjunto de posições válidas
+                self.__estados.append(EstadoAgente(posicao_valida))
+            self.__alterado = True
+        else:
+            self.__alterado = False
         
     def mostrar(self, vista):
         raise NotImplementedError("Por implementar")
 
-    def __foi_alterado(self, percepcao):
-
-        """
-        Verifica se o modelo do mundo foi alterado.
-        """
-
-        if self.__estado is None:
-            return False
-        else:
-            # TODO: estados mudar para posicoes: self.__estados != percepcao.posicoes
-            return self.__estado.posicao != percepcao.posicao or self.__elementos != percepcao.elementos or self.__estados != percepcao.posicoes
-
     @property
     def alterado(self):
+        
+        """
+        Indica se o modelo do mundo foi alterado.
+        """
+
         return self.__alterado
         

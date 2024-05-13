@@ -54,4 +54,11 @@ Conceito de Reconsideração: O mundo alterou-se e tem impacto nos objetivos do 
 deliberar e planear. (reconsiderar os objetivos e planos de ação)
 
 
-ALTERAD NO MODELO do mundo -> necessário para o processo de reconsideração
+ALTERAÇÃO NO MODELO do mundo -> necessário para o processo de reconsideração
+
+Planeadores tem que ser compativeis, pois vão representar ambientes estáticos e dinâmicos.
+
+Plano é uma sequencia de ações que o agente tem que executar para atingir um determinado objetivo, ao qual é possivel consultar por estado e obter o operador
+
+
+é uma metrica 

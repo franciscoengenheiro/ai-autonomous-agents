@@ -5,7 +5,7 @@ from sae import Controlo
 class ControloDeliberativo(Controlo):
 
     """
-    Corresponde a um componente que exerce raciocínio automático, mais concretamente, prático (orientado para a ação - interação premanente com o mundo, ao qual está associado o processo de tomada de decisão)
+    Corresponde a um componente que exerce raciocínio automático, mais concretamente, prático (orientado para a ação - interação permanente com o mundo, ao qual está associado o processo de tomada de decisão)
     Está inserido numa arquitetura deliberativa, que é uma arquitetura de controlo de agentes que se baseia na deliberação, ou seja, na ponderação de alternativas e na escolha da melhor opção. Além daquilo que a arquitetura reativa faz (presente e passado), a deliberativa é capaz de planear e antecipar (futuro).
     Input:
     - objetivos a atingir
@@ -16,7 +16,7 @@ class ControloDeliberativo(Controlo):
     Apresenta 2 vertentes:
     - Raciocinio sobre fins (deliberativo) - opções -> objetivos
     - Raciocinio sobre meios (planeamento) - ações -> planos
-    Sequencia de ações -> Planos de ação -> Vão caracterizar o comportamento do agente e não as reações, pelos quais os agentes vão passar para atingir os objetivos.
+    Sequencia de ações -> Planos de ação: vão caracterizar o comportamento do agente e não as reações, pelos quais os agentes vão passar para atingir os objetivos.
     """
 
     def __init__(self, planeador):
@@ -31,12 +31,12 @@ class ControloDeliberativo(Controlo):
 
         """
         Processo da tomada de decisão do agente:
-        1. Nota: SAE faz a observação do mundo (geração de perceções), e portanto esse passo não é necessário nesta fase.
+        1. Nota: SAE faz a observação do mundo (geração de perceções), e portanto esse passo é omitido nesta implementação.
         2. Atualizar o modelo do mundo
         3. Se for necessário reconsiderar:
         4.    Deliberar
         5.    Planear
-        6. Executa o plano de acção
+        6. Executar o plano de acção
         """
         self.__assimilar(percepcao)
         reconsiderar = self.__reconsiderar()
@@ -66,7 +66,9 @@ class ControloDeliberativo(Controlo):
     def __deliberar(self):
 
         """
-        Significa ponderar alternativas e escolher a melhor opção. Neste caso, a melhor opção é a que leva o agente a atingir os objetivos. Este método é delegado ao mecanismo deliberativo. Faz parte do processo de tomada de decisão, nomeadamente, depois de uma reconsideração.
+        Significa ponderar alternativas e escolher a melhor opção. Neste caso, a melhor opção é a que leva o agente a atingir os objetivos. 
+        Este método é delegado ao mecanismo deliberativo. 
+        Faz parte do processo de tomada de decisão, nomeadamente, depois de uma reconsideração.
         """
 
         objetivos = self.__mecdelib.deliberar()
@@ -75,7 +77,9 @@ class ControloDeliberativo(Controlo):
     def __planear(self):
 
         """
-        Planeia a sequência de ações que o agente deve executar para atingir os objetivos. Este método é delegado ao planeador. Faz parte do processo de tomada de decisão, nomeadamente, depois de uma reconsideração.
+        Planeia a sequência de ações que o agente deve executar para atingir os objetivos. 
+        Este método é delegado ao planeador.
+        Faz parte do processo de tomada de decisão, nomeadamente, depois de uma reconsideração, mais concretamente, depois de deliberar.
         """
 
         self.__plano = self.__planeador.planear(self.__modelo_mundo, self.__objetivos)
@@ -94,5 +98,10 @@ class ControloDeliberativo(Controlo):
                 return accao
     
     def __mostrar(self):
+
+        """
+        Mostra o modelo do mundo e o plano de ação.
+        """
+
         self.__plano.mostrar(self.vista)
         self.__modelo_mundo.mostrar(self.vista)

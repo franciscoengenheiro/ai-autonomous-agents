@@ -23,8 +23,8 @@ class OperadorMover(Operador):
         posicao = estado.posicao
         angulo = self.__accao.ang
         passo = self.__accao.passo
-        dx = round(passo * cos(angulo)) # round to the nearest integer
-        dy = round(-passo * sin(angulo)) 
+        dx = round(passo * cos(angulo)) # arredondar para o inteiro mais próximo
+        dy = round(-passo * sin(angulo)) # arredondar para o inteiro mais próxim
         nova_posicao = (posicao.x + dx, posicao.y + dy)
         estado_gerado = EstadoAgente(nova_posicao)
         if estado_gerado in self.__modelo_mundo.estados():
