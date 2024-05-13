@@ -8,4 +8,4 @@ from agente.agente_delib_pee import AgenteDeiberativoPee as Agente
 # Execute simulation:
 # param 1: index of the chosen ambient configuration
 # param 2: agent to be tested
-Simulador(1, Agente()).executar()
+Simulador(4, Agente()).executar()

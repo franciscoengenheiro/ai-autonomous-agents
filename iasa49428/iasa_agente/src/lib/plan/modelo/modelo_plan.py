@@ -5,18 +5,18 @@ class ModeloPlan(ABC):
     @abstractmethod
     def obter_estado(self):
         """
-        TODO RETORNA UM PLANO
+        Retorna o estado atual do agente.
         """
 
     @abstractmethod
     def obter_estados(self):
         """
-        TODO
+        Retorna os estados das posições válidas.
         """
 
     @abstractmethod
     def obter_operadores(self):
         """
-        TODO
+        Retorna os operadores utilizados para gerar os estados sucessores, associados a este modelo.
         """
     

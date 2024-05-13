@@ -1,5 +1,5 @@
 from agente.controlo_delib.modelo.modelo_mundo import ModeloMundo
-from sae.ambiente.elemento import Elemento
+from sae import Elemento
 
 class MecDelib:
 

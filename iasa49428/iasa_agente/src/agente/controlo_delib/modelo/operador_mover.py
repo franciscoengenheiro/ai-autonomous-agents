@@ -20,12 +20,12 @@ class OperadorMover(Operador):
         Gera a transformação de um estado para outro. Neste contexto, num ambiente bidimensional, a passagem de uma posição para outra é feita através de um passo e uma direção (translação geométrica). 
         """    
 
-        posicao = estado.posicao
         angulo = self.__accao.ang
         passo = self.__accao.passo
+        x, y = estado.posicao
         dx = round(passo * cos(angulo)) # arredondar para o inteiro mais próximo
         dy = round(-passo * sin(angulo)) # arredondar para o inteiro mais próxim
-        nova_posicao = (posicao[0] + dx, posicao[1] + dy)
+        nova_posicao = (x + dx, y + dy)
         estado_gerado = EstadoAgente(nova_posicao)
         if estado_gerado in self.__modelo_mundo.obter_estados():
             return estado_gerado

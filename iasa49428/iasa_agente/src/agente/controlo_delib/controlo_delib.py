@@ -2,7 +2,7 @@ from agente.controlo_delib.mec_delib import MecDelib
 from agente.controlo_delib.modelo.modelo_mundo import ModeloMundo
 from sae import Controlo
 
-class ControloDeliberativo(Controlo):
+class ControloDelib(Controlo):
 
     """
     Corresponde a um componente que exerce raciocínio automático, mais concretamente, prático (orientado para a ação - interação permanente com o mundo, ao qual está associado o processo de tomada de decisão)
@@ -42,6 +42,7 @@ class ControloDeliberativo(Controlo):
         if self.__reconsiderar():
             self.__deliberar()
             self.__planear()
+        self.__mostrar()
         accao = self.__executar()
         return accao
     
@@ -84,9 +85,9 @@ class ControloDeliberativo(Controlo):
     def __executar(self):
 
         """
-        Executa o plano de ação. Se o plano existir, então o agente executa a próxima ação do plano, caso contrário, o plano está desincronizado com o modelo do mundo e por isso é necessário descartar o plano.
+        Executa o plano de ação. Se o plano existir, então o agente executa a próxima ação do plano, caso contrário, o plano está dessincronizado (i.e., o estado atual do agente não é compátivel com o estado do passo solução) com o modelo do mundo e por isso é necessário descartar o plano.
         """   
-        self.__mostrar()
+
         if self.__plano:
             estado = self.__modelo_mundo.obter_estado()
             operador = self.__plano.obter_accao(estado)

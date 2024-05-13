@@ -1,10 +1,11 @@
+from typing import override
 from mod.problema import Problema
 
 
 class ProblemaPlan(Problema):
 
     """
-    TODO
+    Tendo em conta que o modelo do mundo, num controlo deliberativo, já detem o estado e os operadores, este problema apenas representa um problema de planeamento, com um estado final a atingir. Este problema é utilizado por um planeador para encontrar um plano de ações sempre que um objetivo é atingido.
     """
 
     def __init__(self, modelo_plan, estado_final):
@@ -14,10 +15,6 @@ class ProblemaPlan(Problema):
         self.__estado_final = estado_final
         super().__init__(estado_inicial, operadores)
     
+    @override
     def objetivo(self, estado):
-
-        """
-        TODO
-        """
-
         return estado == self.__estado_final

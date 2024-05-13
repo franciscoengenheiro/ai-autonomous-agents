@@ -10,7 +10,7 @@ from plan.planeador import Planeador
 class PlaneadorPee(Planeador):
 
     """
-    TODO
+    Representa um planeador deliberativo que utiliza um algoritmo de procura de melhor primeiro (e não um em concreto de forma a alterar, possívelmente, o mecanismo de procura dinamicamente e)), e por isso, especializado em procura em espaço de estados, def forma a encontrar um plano de acções para cada objetivo a atingir.
     """
 
     def __init__(self):
@@ -18,16 +18,11 @@ class PlaneadorPee(Planeador):
 
     @override
     def planear(self, modelo_plan, objectivos):
-        """
-        TODO
-        """
-    
         if objectivos:
             estado_final = objectivos[0]
             problema = ProblemaPlan(modelo_plan, estado_final)
             heuristica = HeurDist(estado_final)
             solucao = self.__mec_pee.procurar(problema, heuristica)
-
             # Mostrar a solução
             if solucao:
                 return PlanoPee(solucao)

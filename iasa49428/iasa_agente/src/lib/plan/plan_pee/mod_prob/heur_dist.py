@@ -6,7 +6,7 @@ from pee.melhor_prim.aval.heuristica import Heuristica
 class HeurDist(Heuristica):
 
     """
-    TODO
+    Heurística que calcula a distância euclidiana entre duas posições no plano.
     """
 
     def __init__(self, estado_final):
