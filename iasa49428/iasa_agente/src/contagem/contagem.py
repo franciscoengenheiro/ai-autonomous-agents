@@ -24,7 +24,7 @@ HEURISTICA = HeuristicaContagem(VALOR_FINAL)
 # print the maximum number of nodes in memory
 
 mec_proc = MecanismoProcura()
-print(mec_proc.__class__.__name__)
+# print(mec_proc.__class__.__name__)
 solucao = mec_proc.procurar(PROBLEMA, HEURISTICA)
 
 # Mostrar a solução

@@ -13,9 +13,11 @@ class MecDelib:
     def deliberar(self):
         
         """
-        Gera uma lista de objetivos, estados. Neste caso, a lista de objetivos é composta por posições que contêm o elemento alvo.
+        Gera uma lista de objetivos, estados. Neste caso, a lista de objetivos é composta por posições que contêm o elemento alvo. Como cada objetivo é um estado, é feita uma ordenação dos objetivos com base na distância euclidiana entre a posição atual do agente e a posição do objetivo.
         """
         
         estados = self.__modelo_mundo.obter_estados()
         objetivos = list(filter(lambda elem: self.__modelo_mundo.obter_elemento(elem) == Elemento.ALVO, estados))
-        return objetivos
+        if objetivos:
+            objetivos.sort(key=self.__modelo_mundo.distancia) # função de avaliação
+            return objetivos

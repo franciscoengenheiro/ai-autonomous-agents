@@ -21,11 +21,11 @@ class ControloDeliberativo(Controlo):
 
     def __init__(self, planeador):
         self.__planeador = planeador
-        self.__mecdelib = MecDelib()
-        self.__modelo_mundo = ModeloMundo()
+        modelo_mundo = ModeloMundo()
+        self.__modelo_mundo = modelo_mundo
+        self.__mecdelib = MecDelib(modelo_mundo)
         self.__objetivos = None
-        self.__plano = None # plano a executar
-        raise NotImplementedError("Por implementar")    
+        self.__plano = None # plano a executar   
 
     def processar(self, percepcao):
 
@@ -39,8 +39,7 @@ class ControloDeliberativo(Controlo):
         6. Executar o plano de acção
         """
         self.__assimilar(percepcao)
-        reconsiderar = self.__reconsiderar()
-        if reconsiderar:
+        if self.__reconsiderar():
             self.__deliberar()
             self.__planear()
         accao = self.__executar()
@@ -60,8 +59,7 @@ class ControloDeliberativo(Controlo):
         Se o plano não existir ou o modelo do mundo foi alterado, então é necessário reconsiderar.
         """
 
-        if self.__plano is None or self.__modelo_mundo.alterado:
-            return True
+        return not self.__plano or self.__modelo_mundo.alterado
 
     def __deliberar(self):
 
@@ -71,8 +69,7 @@ class ControloDeliberativo(Controlo):
         Faz parte do processo de tomada de decisão, nomeadamente, depois de uma reconsideração.
         """
 
-        objetivos = self.__mecdelib.deliberar()
-        self.__objetivos = objetivos
+        self.__objetivos = self.__mecdelib.deliberar()
     
     def __planear(self):
 
@@ -87,15 +84,16 @@ class ControloDeliberativo(Controlo):
     def __executar(self):
 
         """
-        Executa o plano de ação. Se o plano existir, então o agente executa a próxima ação do plano.
+        Executa o plano de ação. Se o plano existir, então o agente executa a próxima ação do plano, caso contrário, o plano está desincronizado com o modelo do mundo e por isso é necessário descartar o plano.
         """   
-
-        if self.__plano is not None:
+        self.__mostrar()
+        if self.__plano:
             estado = self.__modelo_mundo.obter_estado()
             operador = self.__plano.obter_accao(estado)
-            accao = operador.accao
-            if accao is not None:
-                return accao
+            if operador:
+                return operador.accao
+            else:
+                self.__plano = None
     
     def __mostrar(self):
 
@@ -103,5 +101,13 @@ class ControloDeliberativo(Controlo):
         Mostra o modelo do mundo e o plano de ação.
         """
 
-        self.__plano.mostrar(self.vista)
+        # Para não acumular informação na consola
+        self.vista.limpar()
         self.__modelo_mundo.mostrar(self.vista)
+        if self.__plano: 
+            # Mostrar o plano
+            self.__plano.mostrar(self.vista)
+        if self.__objetivos:
+            # Mostrar os objetivos
+            for objetivo in self.__objetivos:
+                self.vista.marcar_posicao(objetivo.posicao)

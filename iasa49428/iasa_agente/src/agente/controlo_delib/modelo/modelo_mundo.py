@@ -4,6 +4,7 @@ from agente.controlo_delib.modelo.estado_agente import EstadoAgente
 from agente.controlo_delib.modelo.operador_mover import OperadorMover
 from plan.modelo.modelo_plan import ModeloPlan
 from sae import Direccao
+from sae.ambiente.elemento import Elemento
 
 
 class ModeloMundo(ModeloPlan):
@@ -17,13 +18,17 @@ class ModeloMundo(ModeloPlan):
     
     def __init__(self):
         self.__estado = None
-        self.__estados = []
-        self.__operadores = []
+        self.__estados = [] # estados validos
         self.__elementos = {}
-        self.__alterado = False
+        self.__recolha = False # se um elemento foi recolhido então o ambiente foi alterado
     
     @override
     def obter_estado(self):
+
+        """
+        Retorna o estado atual do agente.
+        """
+
         return self.__estado
 
     @override
@@ -32,8 +37,7 @@ class ModeloMundo(ModeloPlan):
     
     @override
     def obter_operadores(self):
-        self.__operadores = [OperadorMover(self, direccao) for direccao in Direccao]
-        return self.__operadores
+        return [OperadorMover(self, direccao) for direccao in Direccao]
     
     def obter_elemento(self, estado):
         
@@ -41,7 +45,8 @@ class ModeloMundo(ModeloPlan):
         Retorna o elemento associado à posicao de um estado.
         """
 
-        return self.__elementos[estado.posicao]
+        # usar get para evitar erros, None é o valor por defeito
+        return self.__elementos.get(estado.posicao)
     
     def distancia(self, estado):
 
@@ -59,28 +64,24 @@ class ModeloMundo(ModeloPlan):
         Atualizar, neste contexto, significa atualizar o estado do agente e os elementos que o rodeiam.
         """
 
-        # percepcao.posicao
-        # percepcao.elementos
-        # percepcao.posicoes
-        novo_estado = EstadoAgente(percepcao.posicao)
-        if novo_estado != self.__estado: # comparar estados (aka posições)
-            self.__estado = novo_estado
-            self.__elementos = percepcao.elementos
-            for posicao_valida in percepcao.posicoes: # representa um conjunto de posições válidas
-                self.__estados.append(EstadoAgente(posicao_valida))
-            self.__alterado = True
-        else:
-            self.__alterado = False
+        self.__estado = EstadoAgente(percepcao.posicao)
+        self.__elementos = percepcao.elementos
+        # representa um conjunto de posições válidas
+        self.__estados = [EstadoAgente(posicao) for posicao in percepcao.posicoes]
+        self.__recolha = percepcao.recolha
         
     def mostrar(self, vista):
-        raise NotImplementedError("Por implementar")
+        for posicao, elemento in self.__elementos.items():
+            if elemento in [Elemento.ALVO, Elemento.OBSTACULO]:
+                vista.mostrar_elemento(posicao, elemento)
+        vista.marcar_posicao(self.__estado.posicao)
 
     @property
     def alterado(self):
         
         """
-        Indica se o modelo do mundo foi alterado.
+        Indica se o modelo do mundo foi alterado. Se um elemento alvo foi recolhido, então o ambiente foi alterado.
         """
 
-        return self.__alterado
+        return self.__recolha
         

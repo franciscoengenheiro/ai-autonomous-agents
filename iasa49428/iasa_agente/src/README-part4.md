@@ -62,3 +62,7 @@ Plano é uma sequencia de ações que o agente tem que executar para atingir um 
 
 
 é uma metrica 
+
+O PLANO PODE ALTERAR CONSOANTE O TEMPO (ANALOGIA, CAMIAO QUE SEGUIA UM TRAJETO MAS POR CAUSA DE AREIA NO CAMINHO TEVE QUE ALTERAR O TRAJETO)
+
+IMPORTANTE: !! FOR ALTERADO NO PLANO pee E NÃO vai ser implementado o metodo valido nem vai ser usada a propriedade solução.

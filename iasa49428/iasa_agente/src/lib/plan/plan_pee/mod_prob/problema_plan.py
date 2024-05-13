@@ -8,7 +8,11 @@ class ProblemaPlan(Problema):
     """
 
     def __init__(self, modelo_plan, estado_final):
-        raise NotImplementedError
+        # obter estado inicial de forma dinamica e a partir daí obter operadores
+        estado_inicial = modelo_plan.obter_estado()
+        operadores = modelo_plan.obter_operadores()
+        self.__estado_final = estado_final
+        super().__init__(estado_inicial, operadores)
     
     def objetivo(self, estado):
 
@@ -16,4 +20,4 @@ class ProblemaPlan(Problema):
         TODO
         """
 
-        raise NotImplementedError
+        return estado == self.__estado_final

@@ -8,24 +8,26 @@ class PlanoPee(Plano):
     """
 
     def __init__(self, solucao):
-        raise NotImplementedError
+        self.__passos = [passo for passo in solucao] # porque a solução é um iterável
     
     @override
     def obter_accao(self, estado):
         """
-        TODO
+        Quero a acção para este estado onde o agente se encontra, pois pode ter sido alterado.
+        Perceber se é compatível com o plano, e se for, devolve a próxima acção a executar consoante a solução recebida.
+        Executar um passo do plano e se esse passo for consistente com o plano atual, então devolve o operador associado a esse passo.
         """
-        raise NotImplementedError
-    
-    def valido(self, estado):
-        """
-        TODO
-        """
-        raise NotImplementedError
+        if self.__passos:
+            primeiro_passo = self.__passos.pop(0)
+            if primeiro_passo.estado == estado:
+                return primeiro_passo.operador
     
     @override
     def mostrar(self, vista):
         """
         TODO
         """
-        raise NotImplementedError
+
+        if self.__passos:
+            for passo in self.__passos:
+                vista.mostrar_vector(passo.estado.posicao, passo.operador.ang)

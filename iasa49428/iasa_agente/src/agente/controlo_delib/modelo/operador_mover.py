@@ -25,9 +25,9 @@ class OperadorMover(Operador):
         passo = self.__accao.passo
         dx = round(passo * cos(angulo)) # arredondar para o inteiro mais próximo
         dy = round(-passo * sin(angulo)) # arredondar para o inteiro mais próxim
-        nova_posicao = (posicao.x + dx, posicao.y + dy)
+        nova_posicao = (posicao[0] + dx, posicao[1] + dy)
         estado_gerado = EstadoAgente(nova_posicao)
-        if estado_gerado in self.__modelo_mundo.estados():
+        if estado_gerado in self.__modelo_mundo.obter_estados():
             return estado_gerado
     
     def custo(self, estado, estado_suc):

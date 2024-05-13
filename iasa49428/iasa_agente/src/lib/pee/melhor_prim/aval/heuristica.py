@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class Heuristica(ABC):
 
     """
-    Representa uma heurística que pode ser utilizada por um algoritmo de procura informada para estimar o custo de um estado atingir o estado objetivo.
+    Representa uma heurística que pode ser utilizada por um algoritmo de procura informada para estimar o custo de um estado atingir o estado objetivo, é possível que não seja admissível, ou seja, que não seja menor ou igual ao custo real.
     """
     
     @abstractmethod
