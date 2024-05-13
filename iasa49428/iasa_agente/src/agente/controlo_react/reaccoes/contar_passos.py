@@ -11,17 +11,17 @@ class ContarPassos(Comportamento):
 
     def __init__(self):
         self.__passos = 0
-        aproximar_dir_norte = AproximarDir(Direccao.NORTE)
-        self.__resposta = RespostaMover(aproximar_dir_norte)
+        self.__resposta = RespostaMover(Direccao.NORTE)
 
     def activar(self, percepcao):
-
-        self.__passos += 1
-        print(f"Passos: {self.__passos}")
 
         """
         Se este método não retornar nenhuma ação, então o comportamento seguinte é selecionado da
         da lista de comportamentos do comportamento composto, que utiliza uma hierarquia de comportamentos
         """
+
+        self.__passos += 1
+        print(f"Passos: {self.__passos}")
+
         if self.__passos >= 10:
             return self.__resposta.activar(percepcao)        

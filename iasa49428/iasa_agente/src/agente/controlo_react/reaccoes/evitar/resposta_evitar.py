@@ -42,6 +42,6 @@ class RespostaEvitar(RespostaMover):
         """
 
         # Edit: foi alterado a implementação deste método para usar list comprehension
-        dir_livres = [direccao for direccao in self.__direccoes if not(percepcao.contacto_obst(direccao))]
+        dir_livres = [direccao for direccao in self.__direccoes if not percepcao.contacto_obst(direccao)]
         if dir_livres:
             return choice(dir_livres)

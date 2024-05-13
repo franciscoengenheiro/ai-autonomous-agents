@@ -13,7 +13,7 @@ class Prioridade(ComportComp):
         Retorna a primeira acção da lista de acções, que é a acção de maior prioridade, iterando a lista de acções e guardando referência para a acção de maior prioridade. Mesmo que existam várias acções com a mesma prioridade, a primeira acção desse conjunto é retornada. Poderá não ser retornada nenhuma acção caso a lista de acções esteja vazia.
         """
         if accoes:
-            funcao_prioridade = lambda it: it.prioridade # função transformadora
+            funcao_prioridade = lambda accao: accao.prioridade # função transformadora
             return max(accoes, key=funcao_prioridade)
 
 
