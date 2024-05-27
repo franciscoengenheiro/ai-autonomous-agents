@@ -20,7 +20,7 @@ class MecUtil:
         - Ciclo interor: percorre todos os estados, calculando a utilidade de cada estado.
         """
         estados = self.__modelo.S()
-        U = {estado: 0 for estado in estados}
+        U = {estado: 0.0 for estado in estados}
         while True:
             Uanterior = U.copy()
             delta = 0
@@ -29,7 +29,7 @@ class MecUtil:
                 util_accoes = [
                     self.util_accao(estado, accao, Uanterior) for accao in operadores
                 ]
-                U[estado] = max(util_accoes, 0)
+                U[estado] = max(util_accoes, default=0.0)
                 delta = max(delta, abs(U[estado] - Uanterior[estado]))
             if delta <= self.__delta_max:
                 break  # do while work around
@@ -47,8 +47,7 @@ class MecUtil:
         return sum(
             [
                 self.__modelo.T(s, a, sn)
-                * (self.__modelo.R(s, a, sn) 
-                + self.__gama * U[sn])
-                for sn in self.__modelo.S()
+                * (self.__modelo.R(s, a, sn) + self.__gama * U[sn])
+                for sn in self.__modelo.succ(s, a)
             ]
         )

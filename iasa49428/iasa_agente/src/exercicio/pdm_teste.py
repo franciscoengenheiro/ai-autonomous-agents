@@ -1,7 +1,7 @@
 from lib.pdm.pdm import PDM
-from exercicio.mod_pdm.mod_prob_pdm import ModProbPDM
+from exercicio.mod_pdm.mod_prob_pdm import ModProbPdm
 
-modelo = ModProbPDM()
+modelo = ModProbPdm()
 gama = 0.5
 delta_max = 0.0
 pdm = PDM(modelo, gama, delta_max)

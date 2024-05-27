@@ -30,6 +30,9 @@ class ModeloPDM(ABC):
     def R(self, s, a, sn):
         """
         Representa a recompensa de um estado s para um estado sn, com base numa acção a.
+        Duas possibilidades:
+        - R(s, a): se a recompensa só depende do estado e da acção
+        - R(s): se a recompensa só depende do estado
         """
     
     @abstractmethod

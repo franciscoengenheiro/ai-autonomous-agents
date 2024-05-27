@@ -4,13 +4,13 @@ from pdm.mec_util import MecUtil
 class PDM():
 
     def __init__(self, modelo, gama, delta_max):
+        self.__modelo = modelo
         self.__mec_util = MecUtil(modelo, gama, delta_max)
-        raise NotImplementedError("Not implemented yet")
     
     def politica(self, U):
 
         """
-        Calcula a política óptima (π*) com base na utilidade de cada acção.
+        Calcula a política óptima (π*) com base na utilidade de cada acção (maximiza a utilidade esperada)
         π*(𝑠) = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑎 𝑈(𝑠, 𝑎)
         pol(s) = a
 
@@ -26,7 +26,8 @@ class PDM():
         for estado in estados:
             operadores = self.__modelo.A(estado)
             # pol[s] = max(A, key = lambda a: U(s,a))
-            politica[estado] = max(operadores, key = lambda a: self.__mec_util.util_accao(estado, a, U))
+            if operadores:
+                politica[estado] = max(operadores, key = lambda a: self.__mec_util.util_accao(estado, a, U))
         return politica
     
     def resolver(self):

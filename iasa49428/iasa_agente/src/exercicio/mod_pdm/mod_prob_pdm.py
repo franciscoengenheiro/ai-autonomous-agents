@@ -1,6 +1,6 @@
 from typing import override
 
-from pdm.modelo_pdm import ModeloPDM
+from pdm.modelo.modelo_pdm import ModeloPDM
 
 
 class ModProbPdm(ModeloPDM):
