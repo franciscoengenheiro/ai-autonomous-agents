@@ -1,43 +1,36 @@
 from abc import ABC, abstractmethod
 
 
-
 class ModeloPDM(ABC):
 
     """
-    TODO
+    Define um modelo de um Processo de Decisão de Markov (PDM).
     """
     
     @abstractmethod
     def S(self):
 
         """
-        TODO
+        Representa o conjunto de estados possíveis.
         """
-
-        raise NotImplementedError("Not implemented yet")
     
     @abstractmethod
     def A(self, s):
-
         """
-        TODO
+        Representa o conjunto de acções possíveis num estado s.
         """
-
-        raise NotImplementedError("Not implemented yet")
 
     @abstractmethod
-    def T(self, s, a, sn):
-            
+    def T(self, s, a, sn): 
         """
-        TODO
+        Representa a probabilidade de transição de um estado s para um estado sn, com base numa acção a.
         """
-
-        raise NotImplementedError("Not implemented yet")
     
     @abstractmethod
     def R(self, s, a, sn):
-        raise NotImplementedError("Not implemented yet")
+        """
+        Representa a recompensa de um estado s para um estado sn, com base numa acção a.
+        """
     
     @abstractmethod
     def succ(self, s, a):
@@ -46,8 +39,6 @@ class ModeloPDM(ABC):
         Permite obter o estado sucessor de um estado s, com base numa acção a.
         Utiliza a função T para obter o estado sucessor.
         """
-
-        raise NotImplementedError("Not implemented yet")
 
 
     

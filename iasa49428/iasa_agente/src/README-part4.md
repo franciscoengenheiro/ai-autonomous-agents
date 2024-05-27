@@ -192,3 +192,20 @@ U(s) = soma(a, pol(s,a) * U(s, a)), a utilidade de um estado é a soma da probab
 Transformar a recursividade em iteratividade (guardando soluções intermédias) Teoria da programação dinamica
 
 algoritmo: utilidade a zero para todos os estados, a exceção do sitio onde estão as recompenas, para cada estado vai ser calculada a utilidade, tendo por base a utilidade anterior
+
+conjunto de estados
+conjunto de ações
+modelo de transição (probabilidade de transição de estado)
+modelo de recompensas
+
+recompensas (infinitas ou recompensas descontadas no tempo (perda de oportunidade - gama(0, 1)))
+
+politica é uma função que dado o estado indica a ação a ser tomada (deterministica), não deterministica (probabilistica) dá a probabilidade de escolher uma ação
+
+recompensa que ganha a fazer uma determinada ação + soma(gama * utilidade do estado seguinte)
+
+politica ótima: maximiza a utilidade esperada
+
+No calculo da utilidade é usada programação iterativa em vez de recursiva, para guardar soluções intermédiasn(em memória em vez de usar o stack)
+
+A politica converge mais cedo que a utilidade, por isso o delta max é usado para verificar a convergência da politica (rever slide 19)
