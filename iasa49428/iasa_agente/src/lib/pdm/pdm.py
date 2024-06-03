@@ -27,11 +27,11 @@ class PDM():
             operadores = self.__modelo.A(estado)
             # pol[s] = max(A, key = lambda a: U(s,a))
             if operadores:
-                politica[estado] = max(operadores, key = lambda a: self.__mec_util.util_accao(estado, a, U))
+                politica[estado] = max(operadores, key = lambda a: self.__mec_util.util_accao(estado, a, U), default=0)
         return politica
     
     def resolver(self):
-
+        
         # resolver o problema de decisão de Markov
         # devolve a utilidade final e a política
         Ufinal = self.__mec_util.utilidade()

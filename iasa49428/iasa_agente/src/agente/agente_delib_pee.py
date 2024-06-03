@@ -1,9 +1,8 @@
 from agente.controlo_delib.controlo_delib import ControloDelib
-from agente.controlo_delib.modelo.modelo_mundo import ModeloMundo
 from plan.plan_pee.planeador_pee import PlaneadorPee
 from sae import Agente
 
-class AgenteDeiberativoPee(Agente):
+class AgenteDeliberativoPee(Agente):
 
     """
     Define um Agente com um controlo deliberativo para a procura em espaço de estados (pee).

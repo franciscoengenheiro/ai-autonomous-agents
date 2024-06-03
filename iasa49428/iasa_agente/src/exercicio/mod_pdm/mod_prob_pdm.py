@@ -46,7 +46,7 @@ class ModProbPdm(ModeloPDM):
             return 0.0
 
     @override
-    def succ(self, s, a):
+    def suc(self, s, a):
         # Edit: a better way: [max(1, s-1) if a == '<' else min(7, s+1)]
         if s == 1 and a == "<" or s == 7 and a == ">":
             return [s]

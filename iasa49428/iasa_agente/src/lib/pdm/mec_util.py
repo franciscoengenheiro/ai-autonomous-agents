@@ -49,6 +49,6 @@ class MecUtil:
             [
                 self.__modelo.T(s, a, sn)
                 * (self.__modelo.R(s, a, sn) + self.__gama * U[sn])
-                for sn in self.__modelo.succ(s, a)
+                for sn in self.__modelo.suc(s, a)
             ]
         )

@@ -36,7 +36,7 @@ class ModeloPDM(ABC):
         """
     
     @abstractmethod
-    def succ(self, s, a):
+    def suc(self, s, a):
 
         """
         Permite obter o estado sucessor de um estado s, com base numa acção a.

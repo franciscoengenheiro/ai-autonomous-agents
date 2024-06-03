@@ -1,3 +1,5 @@
+from pdm.pdm import PDM
+from plan.modelo.modelo_pdm_plan import ModeloPDMPlan
 from plan.plan_pdm.plano_pdm import PlanoPDM
 from plan.planeador import Planeador
 
@@ -21,6 +23,6 @@ class PlaneadorPDM(Planeador):
         if objectivos:
             # instancia o modelo pdm (modelopdmplan)
             modelo_plan = ModeloPDMPlan(modelo_plan, objectivos)
-            pdm = pdm(modelo_plan, self.__gama, self.__delta_max)
+            pdm = PDM(modelo_plan, self.__gama, self.__delta_max)
             utilidade, politica = pdm.resolver()
             return PlanoPDM(utilidade, politica)
