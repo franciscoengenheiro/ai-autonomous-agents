@@ -209,3 +209,61 @@ politica ótima: maximiza a utilidade esperada
 No calculo da utilidade é usada programação iterativa em vez de recursiva, para guardar soluções intermédiasn(em memória em vez de usar o stack)
 
 A politica converge mais cedo que a utilidade, por isso o delta max é usado para verificar a convergência da politica (rever slide 19)
+
+restrições sobre o problema que reduzem a complexidade e possibilidade de calcular a politica ótima (racionalidade limitada)
+
+Como é que funciona um processo de decisão sequencial?
+R: Agir e observar o mundo. 
+
+Aprendizagem por reforço (interativa), o sistema vai vendo o que é certo e errado (tentando) e vai aprendendo com o tempo, e vai ajustando a politica, para maximizar a utilidade esperada.
+
+prompt injection: a vulnerability that affects some AI/ML models, particularly certain types of language models. Prompt injection attacks aim to elicit an unintended response from LLM-based tools. One type of attack involves manipulating or injecting malicious content into prompts to exploit the system. (see about this)
+
+Resultado:
+Qual é o estado para qual o sistema converge?
+Qual é a recompensa que o sistema vai ter?
+
+A memmória é o grau mais básico da inteligência. Mas aprender não é memorizar é ganhar capacidade de adaptação.
+
+3 elementos importantes na aprendizagem (IA restrita)
+- qual é a tarefa a ser aprendida (T)
+- métrica de desempenho (D)
+- com base na experiência, como é que o sistema vai aprender (E)
+
+Na IA geral, o sistema é capaz de ter um desempenho signficativo em qualquer tarefa, sem ter sido programado para isso (conhecimento alargado do mundo). Nível de abrangência do conhecimento do mundo.
+
+Métrica implicita nas associações estimulo-resposta (aprendizagem por associação)
+
+Apredizagem por Reforço:
+
+
+Aprendizagem de Valor de Ação:
+
+Qn(a) = Qn-1(a) + 1*n (Ran - Qn-1(a))
+, onde Ran - Qn-1(a) é o erro de previsão e só funciona para distribuições estacionárias (a recompensa é constante, não varia ao longo do tempo)
+
+Distribuição não estacionária (a recompensa não é constante, varia ao longo do tempo)
+
+Fator alfa (0, 1) - taxa de aprendizagem (0, 1), que é o fator de ajuste da aprendizagem, que é aplicado ao erro de previsão, para ajustar a previsão, de forma exponencial, por cada unidade de tempo que passa. Regula o efeito das amostras passadas e presentes.
+
+Se alfa = 0, o sistema não aprende com o sistema, porque o erro de previsão é anulado. Se alfa = 1, o sistema aprende com o sistema, porque o erro de previsão é maximizado (torna-se um agente reactivo, é guiado pela recompensa imediata)
+
+Compromisso Explorar/Aproveitar (trade-off)
+Explorar: para obter conhecimento
+Aproveitar: o conhecimento adquirido para maximizar a recompensa
+
+Greedy vs E-Greedy
+
+Epsilon (0, 1) - fator de exploração, que é o fator de ajuste da exploração, que é aplicado à taxa de aprendizagem, para ajustar a exploração, de forma exponencial, por cada unidade de tempo que passa. Regula o efeito das amostras passadas e presentes.
+Se o sistema já tem a experiência total então o Epsilon é zero, porque o sistema já tem a experiência total. Se o sistema não tem a experiência total então o Epsilon é um, porque o sistema não tem a experiência total.
+
+E de acordo com métricas que o sistema consulta para ter ideia de quanto já aprendeu em relação ao que pode ser aprendido, o sistema ajusta o Epsilon, para explorar ou aproveitar o conhecimento adquirido.
+
+Aprender a propria politica:
+Dado um estado o valor de fazer uma determinada ação é esta.      
+
+Aprendizagem Por Reforço: Q(s,a) = R(s,a) + gama * max(Q(s',a'))
+
+Algoritmo SARSA (State-Action-Reward-State-Action):
+- o sistema vai tentar resolver o problema em tentativas (episódios),
+- cria uma estimativa interna do valor de cada ação em cada estado.

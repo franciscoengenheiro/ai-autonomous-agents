@@ -11,7 +11,7 @@ class ModeloPDM(ABC):
     def S(self):
 
         """
-        Representa o conjunto de estados possíveis.
+        Representa o conjunto de estados válidos.
         """
     
     @abstractmethod

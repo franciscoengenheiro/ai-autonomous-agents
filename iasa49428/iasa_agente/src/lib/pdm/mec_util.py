@@ -9,6 +9,7 @@ class MecUtil:
         self.__gama = gama
 
     def utilidade(self):
+        
         """
         Calcula a utilidade para cada estado com base na equação de Bellman.
         A utilidade desse estado tem que ser ponderada com a utilidade dos estados seguintes, de forma a maximizar a utilidade da acção a escolher.
