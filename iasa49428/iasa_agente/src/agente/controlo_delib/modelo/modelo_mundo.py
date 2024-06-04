@@ -21,6 +21,7 @@ class ModeloMundo(ModeloPlan):
         self.__estado = None
         self.__estados = [] # estados validos
         self.__elementos = {}
+        self.__operadores = [OperadorMover(self, direccao) for direccao in Direccao]
         self.__recolha = False # se um elemento foi recolhido então o ambiente foi alterado
     
     @override
@@ -33,7 +34,7 @@ class ModeloMundo(ModeloPlan):
     
     @override
     def obter_operadores(self):
-        return [OperadorMover(self, direccao) for direccao in Direccao]
+        return self.__operadores
     
     def obter_elemento(self, estado):
         

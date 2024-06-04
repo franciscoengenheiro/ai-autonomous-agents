@@ -12,8 +12,6 @@ VALOR_FINAL = 9
 
 mec_proc = MecanismoProcura()
 PROBLEMA = ProblemaDeposito(VALOR_INICIAL, VALOR_FINAL)
-
-# print(mec_proc.__class__.__name__)
 solucao = mec_proc.procurar(PROBLEMA)
 
 # Mostrar a solução

@@ -34,7 +34,7 @@ class ModeloPDM(ABC):
         - R(s, a): se a recompensa só depende do estado e da acção
         - R(s): se a recompensa só depende do estado
         """
-    
+
     @abstractmethod
     def suc(self, s, a):
 

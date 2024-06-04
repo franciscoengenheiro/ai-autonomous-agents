@@ -9,6 +9,6 @@ class AgenteDeliberativoPDM(Agente):
     """
 
     def __init__(self):
-        planeador = PlaneadorPDM() # o gama aumenta o nr de iterações para a convergência dispara
+        planeador = PlaneadorPDM(gama=0.98) # o gama aumenta o nr de iterações para a convergência disparar
         controlo_delib = ControloDelib(planeador)
         super().__init__(controlo_delib)

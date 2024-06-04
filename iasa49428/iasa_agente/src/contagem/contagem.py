@@ -18,7 +18,7 @@ HEURISTICA = HeuristicaContagem(VALOR_FINAL)
 
 # mechanism name
 # print the solution as an array
-# print soluition dimension
+# print solution dimension
 # print the solution cost
 # print the number of nodes processed
 # print the maximum number of nodes in memory

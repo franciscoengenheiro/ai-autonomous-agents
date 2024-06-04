@@ -33,7 +33,7 @@ class MecUtil:
                 U[estado] = max(util_accoes, default=0.0)
                 delta = max(delta, abs(U[estado] - Uanterior[estado]))
             if delta <= self.__delta_max:
-                break  # do while work around
+                break # do while work around
         return U
 
     def util_accao(self, s, a, U):
@@ -43,7 +43,7 @@ class MecUtil:
         U(s') é a utilidade a longo prazo descontado pelo factor de desconto gama.
 
         Soma da probabilidade de transição de s para s' vezes a recompensa de s para s' mais gama vezes a utilidade de s'. Sendo s' um estado sucessor de s.
-        """
+        """        
 
         return sum(
             [

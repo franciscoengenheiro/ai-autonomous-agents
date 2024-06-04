@@ -9,4 +9,4 @@ from agente.agente_delib_pdm import AgenteDeliberativoPDM as Agente
 # Execute simulation:
 # param 1: index of the chosen ambient configuration
 # param 2: agent to be tested
-Simulador(2, Agente()).executar()
+Simulador(4, Agente()).executar()
