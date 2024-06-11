@@ -1,6 +1,11 @@
 \chapter{Projeto - Parte 3}\label{ch:projeto-parte3}
 
-TODO: Nesta fase do projeto, o objetivo foi criar, em \textit{python}
+Nesta fase do projeto, foram abordadas as temáticas de raciocínio automático e implementados mecanismos de procura em espaços de estados, que servem como base para a implementação de um futuro agente deliberativo.
+Foi também realizada uma biblioteca para modelação de problemas, servindo como argumento para que a aplicação de um determinado mecanismo de procura não fosse dependente da especificidade do problema.
+
+No final desta fase, foi modelado um problema de procura concreto, de forma a aplicar as diferentes estratégias de procura implementadas e avaliar o seu desempenho.
+
+Tal como em fases anteriores, a implementação foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas.
 
 \section{Raciocínio Automático}\label{sec:raciocinio-automatico}
 
@@ -17,7 +22,7 @@ Associado ao processo de raciocínio automático, estão dois tipos de atividade
 
 De forma a resolver um determinado problema, através do raciocínio automático, é necessário representar o conhecimento do seu domínio através de representações simbólicas internas ao sistema - modelo do problema - com a informação necessária para a resolução do mesmo.
 Estas representações servem de base à simulação para exploração e avaliação de opções possíveis, e são obtidas através de processos de codificação (i.e., da informação concreta do problema em estruturas simbólicas internas) e de descodificação (i.e., processo inverso).
-A imagem~\ref{fig:representacao-problema} ilustra um exemplo de codificação e descodificação de um problema.
+Um exemplo de codificação e descodificação de um problema é ilustrado na figura~\ref{fig:representacao-problema}.
 
 \begin{figure}[H]
     \begin{center}
@@ -31,7 +36,8 @@ A imagem~\ref{fig:representacao-problema} ilustra um exemplo de codificação e 
 \subsection{Modelação de um Problema}\label{subsec:modelacao-problema}
 
 O modelo de um problema é uma representação simbólica interna ao sistema, que contém a informação necessária para a resolução do problema.
-O mecanismo de raciocínio automático é responsável por manipular esta representação, de forma a inferir conclusões e a resolver o problema. Esta representação tem como base os seguintes conceitos:
+O mecanismo de raciocínio automático é responsável por manipular esta representação, de forma a inferir conclusões e a resolver o problema.
+Esta representação tem como base os seguintes conceitos:
 
 \begin{itemize}
     \item \textbf{Estado}: Representação única e simbólica de um conjunto de informações concretas que caracterizam um estado da modelação de um problema. No âmbito do raciocínio automático, os estados abstraem os aspetos (configurações) estruturais que caracterizam o problema. Ao conjunto de estados possíveis de um problema e às transições entre eles, dá-se o nome de espaço de estados;
@@ -40,7 +46,7 @@ O mecanismo de raciocínio automático é responsável por manipular esta repres
     Associado a um operador estão duas funções: uma que gera o estado sucessor a partir de um dado estado e outra que define o custo associado a essa transição, e que pode depender ou não do estado atual e do estado sucessor;
     \item \textbf{Transição}: Em contraste com o operador, a transição é a ação efetiva da passagem de um estado para outro (geram o estado sucessor), que ocorre quando um operador é aplicado sobre as representações internas dos estados.
     \item \textbf{Problema}: Dá suporte ao raciocínio automático, modelando um problema ao qual está inerente uma finalidade;
-    Associado a um problema está o estado inicial, um conjunto de operadores e uma função predicado~\cite{stanford:fp:function-predicates} que verifica se um estado recebido é um estado objetivo ou objetivos explicítos.
+    Associado a um problema está o estado inicial, um conjunto de operadores e uma função predicado~\cite{stanford:fp:function-predicates} que verifica se um estado recebido é um estado objetivo (i.e., que satisfaz a finalidade do problema).
     O problema considera-se resolvido quando um estado objetivo é atingido.
 \end{itemize}
 
@@ -172,7 +178,7 @@ O algoritmo de procura em profundidade é ilustrado na figura~\ref{fig:alg-proc-
 
 De notar que, a ordem de geração dos nós sucessores depende da ordem dos operadores aplicados~\cite{isel:iasa:slides:proc-espaco-estados-parte-1} e que a complexidade espacial deste algoritmo é de $O(bm)$ se for implementado de forma recursiva, e de $O(m)$ se for implementado de forma iterativa.
 
-\paragraph{Procura em Profundidade Limitada}\label{par:procura-profundidade-limitada}
+\subsubsection{Procura em Profundidade Limitada}\label{subsubsec:procura-profundidade-limitada}
 
 A procura em profundidade limitada, é uma variação da procura em profundidade, onde é definido um limite de profundidade, $l$, para a exploração da árvore de procura.
 Com esta procura introduz-se um novo possível estado, o estado de fracasso, ou seja, se a profundidade máxima for atingida e não existir um nó objetivo, a procura termina sem solução.
@@ -189,7 +195,7 @@ O algoritmo de procura em profundidade limitada é ilustrado na figura~\ref{fig:
     \label{fig:alg-proc-prof-limitada}
 \end{figure}
 
-\paragraph{Procura em Profundidade Iterativa}\label{par:procura-profundidade-iterativa}
+\subsubsection{Procura em Profundidade Iterativa}\label{subsubsec:procura-profundidade-iterativa}
 
 A procura em profundidade iterativa, é uma variação da procura em profundidade limitada, onde é realizada uma procura em profundidade com um limite de profundidade, $l$.
 Caso não seja encontrada uma solução, é realizada uma nova procura em profundidade com um limite de profundidade superior ao que foi utilizado anteriormente, e assim sucessivamente até que a solução seja encontrada.
@@ -291,7 +297,8 @@ O algoritmo de procura de melhor primeiro é ilustrado na figura~\ref{fig:alg-pr
 A procura sôfrega, também conhecida por procura gananciosa (\textit{Greedy Search}), é um mecanismo de procura por melhor primeiro, caracterizado por expandir o nó que tem o menor valor de uma função de avaliação, $f(n)$.
 O avaliador, associado a esta procura e que determina a prioridade do nó, é exclusivamente a função heurística, $h(n)$, que representa a estimativa do custo do melhor caminho desde o nó $n$ até ao nó objetivo.
 
-Esta estratégia tenta minimizar a estimativa de custo para atingir o objetivo não tendo em conta o percurso já explorado (só olha para a frente). Desta forma produz soluções subótimas, porque a função de heurística pode não ser admissível, ou seja, $h(n)$ pode ser maior que o custo real, $h^*(n)$.
+Esta estratégia tenta minimizar a estimativa de custo para atingir o objetivo não tendo em conta o percurso já explorado (só olha para a frente).
+Desta forma produz soluções subótimas, porque a função de heurística pode não ser admissível, ou seja, $h(n)$ pode ser maior que o custo real, $h^*(n)$.
 
 \subsubsection{Procura A*}\label{subsubsec:procura-a-estrela}
 
@@ -332,13 +339,60 @@ Na figura~\ref{fig:comp-metodos-proc} é ilustrada a solução encontrada pela p
     \label{fig:comp-metodos-proc}
 \end{figure}
 
-\section{Problema de Contagem}
 
-TODO: falar sobre como foi feita a moduleção do problema de contagem (src/contagem/)
+\section{Aplicação das Estratégias de Procura}\label{sec:aplicacao-estrategias-procura}
 
-\subsection{Escolha da Estratégia de Procura}
+De forma a aplicar as estratégias de procura mencionadas a algo concreto, foi modelado um problema de contagem usando os componentes descritos na secção~\ref{subsec:modelacao-problema}.
 
-TODO: falar sobre a escolha da estratégia de procura e a implementação respetiva falar sobre os resultados da aplicação de cada estratégia de procura (para o problema de contagem) (src/contagem/)
+O problema de contagem é caracterizado por um valor inicial, um valor final e um conjunto de incrementos possíveis,
+onde o objetivo é atingir ou superar o valor final a partir do valor inicial, através destes.
+Por exemplo, se: o valor inicial for 0, o valor final for 9 e os incrementos possíveis forem [1, 2], então a solução ótima deverá ser, por exemplo, os estados: [0, 2, 4, 6, 8], com os incrementos [2, 2, 2, 2, 1].
+
+Para as procuras informadas, foi necessário definir uma heurística admissível que refletisse a distância entre valores, para o sistema
+poder optar por transições de estado que minimizam a distância ao estado objetivo.
+
+Com o problema modelado foram aplicadas as estratégias de procura estudadas e analisados os resultados obtidos,
+nomeadamente a solução encontrada, o custo e a dimensão associada, bem como o número de nós processados e o número máximo de nós mantidos em memória (i.e., de forma a inferir a complexidade espacial).
+Os resultados obtidos estão representados na tabela~\ref{tab:resultados-procura-contagem}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Resultados da aplicação das estratégias de procura ao problema de contagem.}
+    \label{tab:resultados-procura-contagem}
+    \vspace{0.2cm}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Mecanismo de Procura} & \textbf{Solução} & \textbf{Custo} & \multicolumn{2}{c|}{\textbf{Máximo de Nós}} \\ \cline{4-5}
+        &                             &      & \textbf{processados} & \textbf{memória} \\
+
+        \hline
+        ProcuraProfundidade & [0, 2, 4, 6, 8]             & 20.0 & 6                    & 6                \\
+        \hline
+        ProcuraProfLim      & [0, 2, 4, 6, 8]             & 20.0 & 6                    & 6                \\
+        \hline
+        ProcuraProfIter     & [0, 2, 4, 6, 8]             & 20.0 & 6                    & 6                \\
+        \hline
+        ProcuraLargura      & [0, 1, 3, 5, 7]             & 17.0 & 10                   & 2                \\
+        \hline
+        ProcuraCustoUnif    & [0, 1, 2, 3, 4, 5, 6, 7, 8] & 9.0  & 16                   & 5                \\
+        \hline
+        ProcuraSofrega      & [0, 2, 4, 6, 8]             & 17.0 & 6                    & 6                \\
+        \hline
+        ProcuraAA           & [0, 1, 2, 3, 4, 5, 6, 7, 8] & 9.0  & 10                   & 10               \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+Através dos resultados obtidos, é possível concluir que a procura de custo uniforme e a procura A* são as estratégias que encontram a solução ótima, sendo que a procura A* apresenta o maior balanceamento entre a complexidade temporal e espacial.
+As outras estratégias encontram soluções subótimas, no entanto, a procura em largura apresenta uma das soluções com menor dimensão e com menor número de nós mantidos em memória.
+É também possível observar que a procura sôfrega sacrifica o custo da solução em prol da complexidade temporal (apresenta uma das soluções com o menor número de nós processados), sugerindo uma abordagem gulosa, como era expectável.
+
+De forma a testar o possível aparecimento de ciclos nas estratégias de procura que não são em grafo, foi adicionado um terceiro operador à modelação do problema de contagem - o operador (-1).
+Com a adição deste operador, verificou-se que, nas estratégias de procura em profundidade, a procura é infinita, visto que existe a formação de ciclos (e.g., [-1, 1, 2, -1, 1, 2, -1, \ldots]).
+
+Este exercício permitiu perceber que a escolha da estratégia de procura ideal dependerá de uma análise cuidada dos fatores associados ao problema em questão, de forma a garantir a resolução eficiente e eficaz do mesmo.
+
 
 \section{Estrutura do Projeto}\label{sec:estrutura-do-projeto-3}
 
@@ -347,7 +401,7 @@ No processo de desenvolvimento de software associado a esta fase do projeto, foi
 \begin{itemize}
     \item \textit{agente/contagem}: Integra a modulação que foi feita para um determinado problema de contagem, bem como o ficheiro onde lhe são aplicadas as estratégias de procura estudadas;
     \item \textit{lib/mod}: Contém classes que ajudam a modular um problema de forma abstrata (i.e., conceito de operador, estado)
-    \item \textit{lib/pee}: Contém sub-módulos que permitem modular as diferentes estratégias de procura em espaço de estados estudadas:
+    \item \textit{lib/pee}: Contém sub-módulos que permitem modular as diferentes estratégias de procura em espaço de estados (pee) estudadas:
     \begin{itemize}
         \item \textit{largura}: Contém classes que representam a estratégia de procura em largura e os seus componentes (e.g., fronteira-fifo);
         \item \textit{profundidade}: Contém classes que representam a estratégia de procura em profundidade, os seus componentes (e.g., fronteira-lifo) e variantes (e.g., profundidade-limitada, profundidade-iterativa);

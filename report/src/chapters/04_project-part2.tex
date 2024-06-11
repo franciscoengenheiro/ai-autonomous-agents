@@ -1,6 +1,6 @@
 \chapter{Projeto - Parte 2}\label{ch:projeto-parte2}
 
-Nesta fase do projeto, o objetivo foi criar, em \textit{python}, um sistema inteligente capaz de se movimentar num espaço com dimensões fixas onde existem obstáculos.
+Nesta fase do projeto, o objetivo foi criar um sistema inteligente capaz de se movimentar num espaço com dimensões fixas onde existem obstáculos.
 A finalidade do agente prospetor é recolher os alvos e evitar os obstáculos presentes no ambiente (ver figura~\ref{fig:agente-prospetor}).
 O agente pode ser considerado homólogo a um robô móvel autónomo (e.g., um robô que aspira sozinho a casa), que se pode mover nos quatro sentidos cardeais (i.e., norte, sul, este e oeste).
 
@@ -12,7 +12,10 @@ O agente pode ser considerado homólogo a um robô móvel autónomo (e.g., um ro
     Retirado de~\cite{isel:iasa:slides:arq-agentes-reativos-parte-2}, slide 13.}\label{fig:agente-prospetor}
 \end{figure}
 
-Para que o agente possa atingir os objetivos propostos, foi necessário implementar (ver secção~\ref{sec:implementacao-agente-reativo}) um agente reativo e os módulos comportamentais associados, que definem os objetivos de forma implícita.
+Para que o agente possa atingir os objetivos propostos, foi necessário implementar um agente reativo e os seus módulos comportamentais associados.
+O agente reativo foi implementado com base na biblioteca ECR (Esquemas Comportamentais Reativos) criada para esta fase do projeto, que expõe os mecanismos base de comportamento (e.g., reação, estímulo, resposta).
+A interação com o ambiente foi realizada através da biblioteca SAE (Simulador de Ambiente de Execução),
+que foi disponibilizada para esta fase do projeto.
 
 Tal como em fases anteriores, a implementação foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas.
 
@@ -173,7 +176,6 @@ A interface gráfica é composta por duas áreas de visualização (ver figura~\
     Retirado de~\cite{isel:iasa:slides:sae-documentacao}, pág.
     3.}\label{fig:sae-interface-grafica}
 \end{figure}
-
 
 \section{Caracterização do Ambiente}\label{sec:caracterizacao-ambiente}
 
