@@ -87,4 +87,129 @@ Portanto, um agente com racionalidade limitada tenta chegar a uma solução sati
 Divide o problema em subproblemas mais simples, e resolve-os sequencialmente, de forma a atingir o objetivo final.
 
 
-\section{Implementação do Agente Deliberativo}\label{sec:implementacao-agente-deliberativo}
+\section{Planeamento Automático}\label{sec:planeamento-automatico}
+
+O planeamento automático é um processo deliberativo, que faz parte do raciocínio prático,
+que tem por objetivo
+gerar sequências de ação, designadas planos~\cite{isel:iasa:slides:plan-autom-pee}.
+Um processo de planeamento requer um modelo de planeamento que define a representação abstrata do problema a resolver, com os mesmos conceitos que foram abordados na secção~\ref{subsec:modelacao-problema}.
+Dado um modelo de planeamento e um conjunto de objetivos provenientes do processo de deliberação, o planeador gera um plano de ação que permite ao agente concretizar esses objetivos.
+
+Este processo é realizado através de métodos de raciocínio automático, como a procura em
+espaço de estados e a procura por processos de decisão de Markov.
+
+\subsection{Planeador Baseado em PEE}\label{subsec:planeador-baseado-em-pee}
+
+No caso de um planeador baseado em procura em espaços de estados (PEE), é necessário considerar~\cite{isel:iasa:slides:plan-autom-pee}:
+
+\begin{itemize}
+    \item Modelo do problema de planeamento.
+    \item Heurística a utilizar (se necessário).
+    \item Mecanismo de procura.
+\end{itemize}
+
+\subsection{Planeador Baseado em PDM}\label{subsec:planeador-baseado-em-pdm}
+
+No caso de um planeador baseado em processos de decisão de Markov (PDM), a representação do domínio do problema é feita sobre a forma de um processo de decisão de Markov, que se define como um modelo matemático que descreve um sistema que evolui ao longo do tempo, com base em estados e ações, e que é utilizado para modelar situações de decisão sequencial sob incerteza~\cite{isel:iasa:slides:plan-autom-pdm}.
+
+Ao contrário do planeador baseado em PEE, o planeador baseado em PDM não gera um plano de ação, mas sim uma política ótima, que é uma função que mapeia estados em ações, e que é utilizada para determinar a ação a executar em cada estado, de forma a maximizar a recompensa esperada.
+
+Além disso, em vez de só ter em conta o custo, o planeador baseado em PDM tem em conta a utilidade de uma ação que depende de uma sequência de decisões, da possibilidade de ganhos e perdas, da incerteza na decisão e do efeito cumulativo~\cite{isel:iasa:slides:processos-decisao-sequencial}.
+
+
+\section{Processos de Decisão Sequencial}\label{sec:processos-de-decisao-sequencial}
+
+Num processo de decisão geral, cada estado $s$ é caracterizado por um conjunto de atributos que descrevem o estado do mundo, e cada ação $a$ é uma transformação que altera o estado do mundo, levando a um novo estado $s'$~\cite{isel:iasa:slides:processos-decisao-sequencial}.
+O valor (utilidade) desses estados e decisões pode não ser conhecido de imediato, sendo percebido apenas de forma diferida no tempo, conforme os encadeamentos de estados e decisões futuras, conforme representado na figura~\ref{fig:processo-decisao-sequencial}.
+
+Num processo de decisão sequencial, a evolução entre estados ocorre por efeito de ações que, no caso geral, podem ser não deterministas, ou seja, o resultado das ações pode não ser completamente previsível, podendo existir incerteza no seu resultado.
+Esse tipo de processos corresponde a espaços de estados (ambientes) não deterministas (estocásticos), nos quais as transições entre estados ocorrem por efeito das ações, cada uma com uma probabilidade associada de forma a representar a incerteza do ambiente. A cada transição pode estar associada uma recompensa, que representa o ganho ou perda relacionado a essa transição de estado~\cite{isel:iasa:slides:processos-decisao-sequencial}.
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/processo-decisao-sequencial}}
+    \end{center}
+    \caption{Processo de decisão sequencial.
+    Retirado de~\cite{isel:iasa:slides:processos-decisao-sequencial}, slide 3.}
+    \label{fig:processo-decisao-sequencial}
+\end{figure}
+
+
+\section{Cadeias de Markov}\label{sec:cadeias-de-markov}
+
+Uma cadeia de Markov é um processo estocástico que evolui ao longo do tempo, com
+base em estados e transições entre esses estados, e que obedece à propriedade de Markov~\cite{isel:iasa:slides:processos-decisao-sequencial}.
+
+A propriedade de Markov é uma propriedade fundamental em processos estocásticos, que se caracteriza por a distribuição probabilística condicional dos estados futuros de um processo depender exclusivamente do estado presente (i.e., a previsão dos estados seguintes só depende do estado presente)~\cite{isel:iasa:slides:processos-decisao-sequencial}.
+
+Formalmente, uma cadeia de Markov é definida por um conjunto de estados $S$ e por uma função de transição $T$, que define a probabilidade de transição de um estado para outro,
+conforme representado na figura~\ref{fig:cadeia-de-markov}.
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/cadeia-markov}}
+    \end{center}
+    \caption{Cadeia de Markov.
+    Retirado de~\cite{isel:iasa:slides:processos-decisao-sequencial}, slide 7.}
+    \label{fig:cadeia-de-markov}
+\end{figure}
+
+\section{Processos de Decisão de Markov}\label{sec:processos-de-decisao-de-markov}
+
+O processo de decisão de Markov (PDM) é um processo de controlo estocástico em tempo discreto, e que fornece modelo matemático para modelar situações de decisão sequencial sob incerteza~\cite{wiki:mdp}, que resulta da impossibilidade de se obter informação completa relativa ao domínio do problema (e.g., navegação em veículos autónomos).
+Caracteriza-se como uma extensão de uma cadeia de Markov, que inclui, além dos estados e transições; ações e recompensas,
+de forma a obter uma política.
+Formalmente, é representado pelo seguinte conjunto de elementos:
+
+\begin{itemize}
+    \item $S$: conjunto finito de estados.
+    \item \textbf{Modelo de transição}: \( T(s, a, s') \), onde \( s \) é o estado atual, \( a \) é a ação a ser tomada, e \( s' \) é o estado futuro. \( T(s, a, s') \) é a probabilidade de mudança de estado de \( s \) para \( s' \) após a ação \( a \) ser tomada.
+    \item \textbf{Modelo de recompensa}: \( R(s, a, s') \), onde \( s \) é o estado atual, \( a \) é a ação a ser tomada, e \( s' \) é o estado futuro. \( R(s, a, s') \) é a recompensa associada à transição de estado de \( s \) para \( s' \) após a ação \( a \) ser tomada.
+    \item \textbf{Factor de desconto}: \( \gamma \), onde \( 0 \leq \gamma \leq 1 \), que é o fator de desconto aplicado à recompensa. Por cada unidade de tempo que passa, a recompensa é descontada por um fator de \( \gamma \), de forma exponencial. Se \( \gamma = 0 \), a tomada de decisão só depende do presente, porque o futuro é anulado.
+\end{itemize}
+
+\subsection{Utilidade}\label{subsec:utilidade}
+
+O valor (utilidade) de um estado caracteriza-se com o efeito acumulativo que vai tendo do mundo, através dos ganhos e perdas que vai tendo, diferido no tempo, visto que pode existir perda de oportunidade na passagem do tempo (e.g., no mercado financeiro, o valor de uma ação é volatil e varia ao longo do tempo, ganhar ou perder dinheiro).
+No entanto, poderão existir estados em que não existem ganhos e perdas.
+
+A utilidade representa o valor de se estar num estado, para efeito de concretização de um objetivo do sistema, mas representa o valor a longo prazo (na história de evolução do sistema) (e.g., um automóvel pode ter que acelarar, gastando mais combustivel, para evitar um acidente, mas a longo prazo, o valor de evitar o acidente é maior do que o valor de gastar mais combustivel).
+
+
+\subsection{Política}\label{subsec:politica-otima}
+
+Uma política é uma função que mapeia estados em ações, e que é utilizada para determinar a ação a executar em cada estado, definindo a estratégia de tomada de decisão do agente.
+
+Uma política é caracterizada em dois tipos:
+
+\begin{itemize}
+    \item \textbf{Determinística}: mapeia cada estado em apenas uma ação ($\pi : S \rightarrow A(s); \quad s \in S$);
+    \item \textbf{Estocástica}: mapeia cada estado numa distribuição de probabilidade sobre as ações possíveis ($\pi : S \times A(s) \rightarrow [0,1]; \quad s \in S$).
+\end{itemize}
+
+
+\subsection{Objetivo}\label{subsec:objetivo}
+
+O objetivo de um processo de decisão de Markov é determinar a política ótima ($\pi^*$), que é a política que maximiza a utilidade esperada, ou seja, a política que maximiza a recompensa esperada ao longo do tempo~\cite{isel:iasa:slides:processos-decisao-sequencial}.
+
+Devido à propriedade de Markov, a utilidade de um estado é a soma da recompensa imediata e da utilidade esperada do estado seguinte, ponderada pelo fator de desconto $\gamma$, para cada ação possível, conforme a equação de Bellman~\cite{isel:iasa:slides:processos-decisao-sequencial}:
+
+\begin{equation}
+    U(s) = \sum_{a} \pi(s, a) \sum_{s'} T(s, a, s') [R(s, a, s') + \gamma U(s')]
+\end{equation}
+
+A política ótima ($\pi^*$) é obtida através da seguinte equação de Bellman:
+
+\begin{equation}
+    \pi^*(s) = \argmax_{a} \sum_{s'} T(s, a, s') [R(s, a, s') + \gamma U(s')]
+\end{equation}
+
+TODO()
+
+
+\section{Implementação do Agente Deliberativo com PEE}\label{sec:implementacao-agente-deliberativo-com-pee}
+TODO()
+
+
+\section{Implementação do Agente Deliberativo com PDM}\label{sec:implementacao-agente-deliberativo-com-pdm}
+TODO()

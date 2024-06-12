@@ -2,7 +2,6 @@
 
 Neste capítulo, serão identificados e descritos os erros cometidos nas entregas realizadas, com a indicação do problema e da respectiva correção, justificada com base nos conhecimentos adquiridos.
 
-
 \section{Problema de Contagem}\label{sec:problema-de-contagem}
 
 De forma a complementar o problema de contagem com toda a informação necessária para comparar a aplicação das diferentes estratégias de procura estudadas, foi necessário adicionar contadores que permitissem medir número máximo de nós em memória e o número de nós expandidos, correspondente à complexidade espacial e temporal, respetivamente.
@@ -14,6 +13,12 @@ No entanto, para as procuras em grafo que mantêm informação de nós explorado
 Na procura iterativa em profundidade, foi necessário adicionar um acumulador de nós processados, visto que esta procura é uma procura em profundidade que é executada várias vezes, sendo necessário manter a contagem de nós processados em cada execução.
 Foi redefinido o método de obtenção de nós processados para que fosse o resultado do acumulador de nós processados.
 
+\section{Procura Iterativa em Profundidade}\label{sec:procura-iterativa-em-profundidade}
+
+Durante a comparação das diferentes estratégias de procura, foi detetado que a procura iterativa em profundidade não estava a ser executada corretamente. A profundidade máxima de procura permanecia sempre no valor default e não era alterada dinamicamente através do setter disponível para o efeito. Este problema deveu-se a um erro ortográfico na variável associada ao setter, o que impediu a sua chamada.
+
+Infelizmente, este erro passou despercebido porque o Python não gerou um erro, ao contrário do que ocorreria em Java, por exemplo, que geraria um erro de compilação.
+Além disso, o ciclo de procura não começava com a profundidade em zero, mas sim em um, o que contribuiu para a execução incorreta do algoritmo.
 
 \section{Agente Deliberativo com PDM}\label{sec:agente-deliberativo-com-pdm}
 
