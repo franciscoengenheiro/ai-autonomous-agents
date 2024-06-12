@@ -7,6 +7,7 @@ No final desta fase, foi modelado um problema de procura concreto, de forma a ap
 
 Tal como em fases anteriores, a implementação foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas.
 
+
 \section{Raciocínio Automático}\label{sec:raciocinio-automatico}
 
 O raciocínio automático é uma área da inteligência artificial que se dedica a desenvolver algoritmos capazes de inferir conclusões a partir de um conjunto de premissas.
@@ -198,11 +199,12 @@ O algoritmo de procura em profundidade limitada é ilustrado na figura~\ref{fig:
 \subsubsection{Procura em Profundidade Iterativa}\label{subsubsec:procura-profundidade-iterativa}
 
 A procura em profundidade iterativa, é uma variação da procura em profundidade limitada, onde é realizada uma procura em profundidade com um limite de profundidade, $l$.
-Caso não seja encontrada uma solução, é realizada uma nova procura em profundidade com um limite de profundidade superior ao que foi utilizado anteriormente, e assim sucessivamente até que a solução seja encontrada.
+Caso não seja encontrada uma solução, é realizada uma nova procura em profundidade com um limite de profundidade superior ao que foi utilizado anteriormente, e assim sucessivamente até que a solução seja encontrada (se existir).
 
 Combina vantagens da procura em profundidade e da procura em largura, visto que a procura em profundidade é mais eficiente em termos de memória e a procura em largura é mais eficiente em termos de tempo.
 
 É completa, caso a profundidade seja finita, e ótima, caso o custo de cada ação seja maior que zero~\cite{ist:leic:resumos:procura-cega}.
+No entanto, se incremento de profundidade for maior que 1, deixa de ser uma procura ótima.
 
 \subsubsection{Procura em Largura}\label{subsubsec:procura-largura}
 
@@ -275,14 +277,14 @@ Uma analogia seria, por exemplo, um detetor de metais, que apita cada vez mais a
 
 A procura de melhor primeiro, também conhecida por \textit{Best-First Search} (BFS), é um mecanismo de procura por grafo caracterizado por expandir o nó que tem o menor valor de uma função de avaliação, $f(n)$, que é uma estimativa do custo do caminho mais curto desde o nó até ao nó objetivo.
 
-A função de avaliação, $f(n)$, pode representar a prioridade de um nó, e é calculada através da soma de duas funções: $g(n)$, que representa o custo do caminho percorrido desde o estado inicial até ao nó $n$; e $h(n)$, que representa a estimativa do custo do melhor caminho desde o nó $n$ até ao nó objetivo.
+A função de avaliação, $f(n)$, representa a prioridade de um nó, e é calculada através da soma de duas funções: $g(n)$, que representa o custo do caminho percorrido desde o estado inicial até ao nó $n$; e $h(n)$, que representa a estimativa do custo do melhor caminho desde o nó $n$ até ao nó objetivo.
 
 Utiliza uma fronteira por prioridade, que internamente usa uma \textit{min priority queue}, onde os nós são ordenados de acordo com o valor da função de avaliação, $f(n)$, de forma crescente.
 Desta forma, o nó com menor valor de $f(n)$ é o primeiro a ser expandido.
 
 A procura de melhor primeiro é garantidamente completa e ótima, se a função de avaliação, $f(n)$, for admissível, ou seja, se a função heurística, $h(n)$, for menor ou igual ao custo real, $h^*(n)$, do melhor caminho desde o nó $n$ até ao nó objetivo~\cite{ist:leic:resumos:procura-cega}.
 
-O algoritmo de procura de melhor primeiro é ilustrado na figura~\ref{fig:alg-proc-melh-prim}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura..
+O algoritmo de procura de melhor primeiro é ilustrado na figura~\ref{fig:alg-proc-melh-prim}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura.
 
 \begin{figure}[H]
     \begin{center}
@@ -364,32 +366,32 @@ Os resultados obtidos estão representados na tabela~\ref{tab:resultados-procura
         \hline
         \textbf{Mecanismo de Procura} & \textbf{Solução} & \textbf{Custo} & \multicolumn{2}{c|}{\textbf{Máximo de Nós}} \\ \cline{4-5}
         &                             &      & \textbf{processados} & \textbf{memória} \\
-
         \hline
-        ProcuraProfundidade & [0, 2, 4, 6, 8]             & 20.0 & 6                    & 6                \\
+        ProcuraProfundidade & [2, 2, 2, 2, 2]             & 20.0 & 6                    & 6                \\
         \hline
-        ProcuraProfLim      & [0, 2, 4, 6, 8]             & 20.0 & 6                    & 6                \\
+        ProcuraProfLim      & [2, 2, 2, 2, 2]             & 20.0 & 6                    & 6                \\
         \hline
-        ProcuraProfIter     & [0, 2, 4, 6, 8]             & 20.0 & 6                    & 6                \\
+        ProcuraProfIter     & [2, 2, 2, 2, 2]             & 20.0 & 63                   & 6                \\
         \hline
-        ProcuraLargura      & [0, 1, 3, 5, 7]             & 17.0 & 10                   & 2                \\
+        ProcuraLargura      & [1, 2, 2, 2, 2]             & 17.0 & 10                   & 11               \\
         \hline
-        ProcuraCustoUnif    & [0, 1, 2, 3, 4, 5, 6, 7, 8] & 9.0  & 16                   & 5                \\
+        ProcuraCustoUnif    & [1, 1, 1, 1, 1, 1, 1, 1, 1] & 9.0  & 16                   & 11               \\
         \hline
-        ProcuraSofrega      & [0, 2, 4, 6, 8]             & 17.0 & 6                    & 6                \\
+        ProcuraSofrega      & [2, 2, 2, 2, 1]             & 17.0 & 6                    & 11               \\
         \hline
-        ProcuraAA           & [0, 1, 2, 3, 4, 5, 6, 7, 8] & 9.0  & 10                   & 10               \\
+        ProcuraAA           & [1, 1, 1, 1, 1, 1, 1, 1, 1] & 9.0  & 10                   & 11               \\
         \hline
     \end{tabular}
 \end{table}
 
 
 Através dos resultados obtidos, é possível concluir que a procura de custo uniforme e a procura A* são as estratégias que encontram a solução ótima, sendo que a procura A* apresenta o maior balanceamento entre a complexidade temporal e espacial.
-As outras estratégias encontram soluções subótimas, no entanto, a procura em largura apresenta uma das soluções com menor dimensão e com menor número de nós mantidos em memória.
+As outras estratégias encontram soluções subótimas.
 É também possível observar que a procura sôfrega sacrifica o custo da solução em prol da complexidade temporal (apresenta uma das soluções com o menor número de nós processados), sugerindo uma abordagem gulosa, como era expectável.
 
 De forma a testar o possível aparecimento de ciclos nas estratégias de procura que não são em grafo, foi adicionado um terceiro operador à modelação do problema de contagem - o operador (-1).
 Com a adição deste operador, verificou-se que, nas estratégias de procura em profundidade, a procura é infinita, visto que existe a formação de ciclos (e.g., [-1, 1, 2, -1, 1, 2, -1, \ldots]).
+Já nas outras procuras, a adição deste operador não afetou o resultado obtido, visto que estas, por serem em grafo, evitam o aparecimento de ciclos.
 
 Este exercício permitiu perceber que a escolha da estratégia de procura ideal dependerá de uma análise cuidada dos fatores associados ao problema em questão, de forma a garantir a resolução eficiente e eficaz do mesmo.
 

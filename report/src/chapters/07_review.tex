@@ -1,3 +1,38 @@
 \chapter{Revisão do Projeto}\label{ch:revisao-projeto}
 
-\lipsum[1-2]
+Neste capítulo, serão identificados e descritos os erros cometidos nas entregas realizadas, com a indicação do problema e da respectiva correção, justificada com base nos conhecimentos adquiridos.
+
+
+\section{Problema de Contagem}\label{sec:problema-de-contagem}
+
+De forma a complementar o problema de contagem com toda a informação necessária para comparar a aplicação das diferentes estratégias de procura estudadas, foi necessário adicionar contadores que permitissem medir número máximo de nós em memória e o número de nós expandidos, correspondente à complexidade espacial e temporal, respetivamente.
+
+Como todas as estratégias de procura implementadas têm como base um mecanismo de procura, foram acrescentados métodos com uma implementação base que permitissem a contagem dos nós expandidos e em memória.
+Enquanto que, para realizar a contagem de nós expandidos foi necessário manter um contador de nós expandidos que é incrementado por cada nó que é removido da fronteira para processamento; para realizar a contagem de nós em memória foi necessário manter informação acerca do número máximo de nós na fronteira de exploração.
+No entanto, para as procuras em grafo que mantêm informação de nós explorados, foi redefinido o método de obtenção de nós em memória para que fosse o número de nós explorados, pois já englobam os nós na fronteira de exploração.
+
+Na procura iterativa em profundidade, foi necessário adicionar um acumulador de nós processados, visto que esta procura é uma procura em profundidade que é executada várias vezes, sendo necessário manter a contagem de nós processados em cada execução.
+Foi redefinido o método de obtenção de nós processados para que fosse o resultado do acumulador de nós processados.
+
+
+\section{Agente Deliberativo com PDM}\label{sec:agente-deliberativo-com-pdm}
+
+Na última aula prática não foi possível concluir a implementação do agente deliberativo para a procura com processos de decisão de Markov (PDM), devido a um problema que não foi detetado aquando da implementação do agente deliberativo na procura por espaço de estados (PEE).
+
+Ambos utilizam o controlo deliberativo que apresenta um módulo que corresponde às representações internas do mundo - modelo do mundo.
+Este módulo que apresenta um método para obter os operadores, estava a criar novas cópias dos operadores disponíveis a cada chamada, o que estava incorreto, pois os operadores devem ser sempre os mesmos.
+Como tal, foi corrigido o método para que devolvesse sempre a mesma lista de operadores, inicializada no construtor do modelo do mundo.
+Este problema não foi descoberto na implementação do agente deliberativo para a procura por espaço de estados, pois o agente apenas constroi um plano de ação por cada reflexão, enquanto que na procura com processos de decisão de Markov, o agente tem de refletir várias vezes para ter uma política ótima, o que levou a que fosse criada uma nova lista de operadores a cada reflexão.
+
+Ainda no módulo do agente deliberativo, quando usadas simulações do ambiente mais complexas, o agente deliberativo não conseguia convergir para uma política ótima, devido à falta de exploração do espaço de estados (i.e., logo de início, o agente não se mexia para explorar o ambiente).
+De forma a corrigir este comportamento, foi alterado o gama no \texttt{PlaneadorPDM} para um valor mais próximo de 1, visto que é o factor de desconto que controla a importância de recompensas futuras, e, consequentemente, a exploração num determinado momento em prol da ação com o conhecimento atual.
+
+
+\section{Comentários}\label{sec:comentarios}
+
+Na revisão do projeto foram encontrados os seguintes módulos sem comentários por esquecimento, que foram corrigidos com a adição de comentários que descrevem o propósito de cada método e a sua implementação:
+
+\begin{itemize}
+    \item \texttt{PlanoPDM};
+    \item \texttt{PlaneadorPDM}.
+\end{itemize}
