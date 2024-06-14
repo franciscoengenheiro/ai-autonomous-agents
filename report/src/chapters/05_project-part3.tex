@@ -203,7 +203,7 @@ Caso não seja encontrada uma solução, é realizada uma nova procura em profun
 
 Combina vantagens da procura em profundidade e da procura em largura, visto que a procura em profundidade é mais eficiente em termos de memória e a procura em largura é mais eficiente em termos de tempo.
 
-É completa, caso a profundidade seja finita, e ótima, caso o custo de cada ação seja maior que zero~\cite{ist:leic:resumos:procura-cega}.
+É completa, caso a profundidade seja finita, e ótima, caso o custo de cada ação seja maior que 0~\cite{ist:leic:resumos:procura-cega}.
 No entanto, se incremento de profundidade for maior que 1, deixa de ser uma procura ótima.
 
 \subsubsection{Procura em Largura}\label{subsubsec:procura-largura}
@@ -257,7 +257,7 @@ Poderá ser constituída por alguns dos seguintes componentes, através da trans
     \item $g(n)$, o custo do caminho percorrido desde o estado inicial até ao nó $n$;
     \item $h(n)$, a estimativa do custo do melhor caminho desde o nó $n$ até ao nó objetivo,
     e que corresponde ao conceito de função heurística.
-    Num nó objetivo, $h(n)$ é igual a zero;
+    Num nó objetivo, $h(n)$ é igual a 0;
     \item $h^*(n)$, o custo real do melhor caminho desde o nó $n$ até ao nó objetivo, isto é, a estimativa exata.
 \end{itemize}
 
@@ -286,6 +286,7 @@ Desta forma, o nó com menor valor de $f(n)$ é o primeiro a ser expandido.
 A procura de melhor primeiro é garantidamente completa e ótima, se a função de avaliação, $f(n)$, for admissível, ou seja, se a função heurística, $h(n)$, for menor ou igual ao custo real, $h^*(n)$, do melhor caminho desde o nó $n$ até ao nó objetivo~\cite{ist:leic:resumos:procura-cega}.
 
 O algoritmo de procura de melhor primeiro é ilustrado na figura~\ref{fig:alg-proc-melh-prim}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura.
+Portanto, no ato de memorização do nó, além de se ver se o nó já foi explorado (procura em grafo), também é necessário verificar se o custo do nó é menor que o custo do nó já explorado.
 
 \begin{figure}[H]
     \begin{center}

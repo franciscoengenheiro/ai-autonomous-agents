@@ -1,6 +1,6 @@
 \chapter{Projeto - Parte 2}\label{ch:projeto-parte2}
 
-Nesta fase do projeto, o objetivo foi criar um sistema inteligente capaz de se movimentar num espaço com dimensões fixas onde existem obstáculos.
+Nesta fase do projeto, o objetivo foi criar um sistema inteligente capaz de se movimentar num espaço bidimensional com dimensões fixas onde existem obstáculos.
 A finalidade do agente prospetor é recolher os alvos e evitar os obstáculos presentes no ambiente (ver figura~\ref{fig:agente-prospetor}).
 O agente pode ser considerado homólogo a um robô móvel autónomo (e.g., um robô que aspira sozinho a casa), que se pode mover nos quatro sentidos cardeais (i.e., norte, sul, este e oeste).
 
@@ -218,8 +218,8 @@ Em relação ao ponto \textbf{2}, foram implementados os seguintes comportamento
 Além dos comportamentos descritos, para os comportamentos compostos, foram implementados estímulos, respostas e reações, de forma a garantir a descrição e execução correta dos comportamentos associados.
 
 Em paralelo ao desenvolvimento da implementação descrita e de forma a introduzir os conceitos de arquitetura reativa com memória, mais concretamente, o conceito de comportamento com estado (ver secção~\ref{sec:arquiteturas-reativa-memoria}), foi introduzido um comportamento que não caracteriza nenhum objetivo inicial descrito.
-Este comportamento, denominado \textit{Contar Passos}, caracterizado por ser um comportamento fixo com memória, foi implementado com a finalidade de contar os passos do agente e tomar decisões com base no número de passos efetuados (e.g., ao fim de um determinado número de passos, o agente muda de direção).
-No entanto, tal comportamento não consta na implementação final do agente reativo, pois não é relevante para os objetivos propostos.
+Este comportamento, denominado \textit{Contar Passos}, caracterizado por ser um comportamento fixo com memória, foi implementado com a finalidade de contar os passos do agente e tomar decisões com base no número de passos efetuados (e.g., ao fim de um determinado número de passos, o agente deve mudar de direção).
+No entanto, tal comportamento não consta na implementação final do agente reativo, visto que não foi considerado relevante para a execução dos objetivos propostos.
 
 
 \section{Estrutura do Projeto}\label{sec:estrutura-do-projeto-2}
