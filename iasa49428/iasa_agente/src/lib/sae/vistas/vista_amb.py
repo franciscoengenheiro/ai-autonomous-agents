@@ -7,7 +7,8 @@ from ..erro import Erro, ErroParam
 from ..ambiente.ambiente import Elemento
 from .visualizador import AMARELO, Visualizador
 
-#_____________________________________________________________
+# _____________________________________________________________
+
 
 class VistaAmb(Visualizador):
     def mostrar_elemento(self, posicao, elemento):
@@ -22,10 +23,10 @@ class VistaAmb(Visualizador):
             elif elemento == Elemento.OBSTACULO:
                 self.obstaculo(posicao)
             elif elemento == Elemento.VAZIO:
-                self.vazio(posicao)  
+                self.vazio(posicao)
         except:
             raise ErroParam(Erro.PARAM_INV, [posicao, elemento])
-             
+
     def mostrar_valor_posicao(self, posicao, valor, vmin=-2, vmax=1000):
         """
         Mostrar posição com cor correspondente ao valor
@@ -39,14 +40,14 @@ class VistaAmb(Visualizador):
             r, g, b = 0, 0, 0
             if valor > 0:
                 g = min(valor / vmax, 1) * 255
-            elif valor < 0: 
+            elif valor < 0:
                 r = min(valor / vmin, 1) * 255
             cor = (r, g, b)
             # Mostrar posição com cor respectiva
             self.rect(posicao, 0, cor, 0)
         except:
             raise ErroParam(Erro.PARAM_INV, [posicao, valor, vmin, vmax])
-            
+
     def marcar_posicao(self, posicao, margem=2, cor=AMARELO, linha=1):
         """
         Marcar posição
@@ -59,7 +60,7 @@ class VistaAmb(Visualizador):
             self.marcar([posicao], margem, cor, linha)
         except:
             raise ErroParam(Erro.PARAM_INV, [posicao, margem, cor, linha])
-        
+
     def mostrar_vector(self, posicao, angulo):
         """
         Visualizar vector
@@ -70,5 +71,3 @@ class VistaAmb(Visualizador):
             super().vector(posicao, 1, angulo)
         except:
             raise ErroParam(Erro.PARAM_INV, [posicao, angulo])
-        
-            

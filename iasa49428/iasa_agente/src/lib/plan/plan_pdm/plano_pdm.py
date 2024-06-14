@@ -3,6 +3,10 @@ from plan.plano import Plano
 
 class PlanoPDM(Plano):
 
+    """
+    Representa um plano de acções a executar por um agente deliberativo, especificamente para procuras com processos de decisão de Markov (PDM).
+    """
+
     def __init__(self, utilidade, politica):
         self.__utilidade = utilidade
         self.__politica = politica

@@ -5,7 +5,7 @@ from mod.problema import Problema
 class ProblemaPlan(Problema):
 
     """
-    Tendo em conta que o modelo do mundo, num controlo deliberativo, já detem o estado e os operadores, este problema apenas representa um problema de planeamento, com um estado final a atingir. Este problema é utilizado por um planeador para encontrar um plano de ações sempre que um objetivo é atingido.
+    Tendo em conta que o modelo do mundo, num controlo deliberativo, já detem o estado e os operadores, este problema apenas representa um problema de planeamento, com um estado final a atingir. Este problema é utilizado por um planeador para encontrar um plano de ações a executar, dado um modelo do mundo e objetivos a atingir.
     """
 
     def __init__(self, modelo_plan, estado_final):

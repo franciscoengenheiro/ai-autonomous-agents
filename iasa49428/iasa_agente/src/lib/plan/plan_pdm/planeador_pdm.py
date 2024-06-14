@@ -7,7 +7,7 @@ from plan.planeador import Planeador
 class PlaneadorPDM(Planeador):
 
     """
-    TODO
+    Representa um planeador deliberativo que utiliza um processo de decisão de Markov (PDM) para encontrar um plano de ações consoante os objetivos a atingir.
     """
 
     def __init__(self, gama = 0.85, delta_max = 1):
@@ -16,10 +16,6 @@ class PlaneadorPDM(Planeador):
 
     def planear(self, modelo_plan, objectivos):
 
-        """
-        TODO
-        """
-        # se existir bojetivos planea instancia o planeador
         if objectivos:
             # instancia o modelo pdm (modelopdmplan)
             modelo_plan = ModeloPDMPlan(modelo_plan, objectivos)

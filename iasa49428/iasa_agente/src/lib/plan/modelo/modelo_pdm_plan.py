@@ -7,7 +7,7 @@ class ModeloPDMPlan(ModeloPDM, ModeloPlan):
         self.__modelo_plan = modelo_plan # usa fatorização por delegação
         self.__objectivos = objectivos
         self.__rmax = rmax
-        # para o calculo ser mais rápido, pois está pre-calculado
+        # para o calculo ser mais rápido, pois o ambiente é determinístico
         self.__transicoes = {
             # chave: estado, valor: {acção: estado}
             (s, a): a.aplicar(s)
@@ -33,12 +33,11 @@ class ModeloPDMPlan(ModeloPDM, ModeloPlan):
         return self.obter_operadores() if s not in self.__objectivos else []
     
     def T(self, s, a, sn):
-        # if a can be executed is 1, otherwise is 0 (deterministic ambient)
+        # probabilidade de transição de um estado para outro é 1 se a transição for válida, caso contrário, 0
         return 1 if sn == self.__transicoes.get((s, a)) else 0
     
     def R(self, s, a, sn):
-        # if the state is an objective, the reward is rmax, otherwise 0
-        # n existe recompensa negativa porque os estados válidos não apresentam obstáculos
+        # recompensa máxima se o estado for um objectivo, caso contrário, o custo da ação de forma negativa
         return self.__rmax if sn in self.__objectivos else -a.custo(s, sn)
     
     def suc(self, s, a):

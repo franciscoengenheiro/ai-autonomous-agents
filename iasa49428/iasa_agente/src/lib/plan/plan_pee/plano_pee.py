@@ -4,7 +4,7 @@ from plan.plano import Plano
 class PlanoPee(Plano):
 
     """
-    Representa um plano de acções a executar por um agente deliberativo, especificamente para a exploração num espaço de estados.
+    Representa um plano de acções a executar por um agente deliberativo, especificamente para a exploração em espaço de estados.
     """
     
     def __init__(self, solucao):

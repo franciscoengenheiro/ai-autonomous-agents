@@ -10,16 +10,10 @@ class PDM():
     def politica(self, U):
 
         """
-        Calcula a política óptima (π*) com base na utilidade de cada acção (maximiza a utilidade esperada)
+        Calcula a política óptima (π*) com base na utilidade estimada (U) para cada estado mediante uma acção.
         π*(𝑠) = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑎 𝑈(𝑠, 𝑎)
-        pol(s) = a
-
-        U(s, a) = soma(T(s, a, s') * [R(s, a, s') + gama * U(s')])
-        
-        Escolher a acção que tem a maior utilidade
-        Usar a função util_accao para calcular a utilidade de cada acção
-        O argmax é o valor que conseguimos maximizar. 
-        Pedimos ao max que o conjunto de elementos A, ir analisá-los todos, verificar no parâmetro key que é uma função lambda que irá  verificar esse elemento.
+        pol(s) = max(A, key = lambda a: U(s,a)), sendo A o conjunto de acções possíveis num estado s
+        U(s, a) = soma(T(s, a, s') * [R(s, a, s') + gama * U(s')]), para cada estado sucessor s' de s
         """
         politica = {}
         estados = self.__modelo.S()
@@ -31,9 +25,14 @@ class PDM():
         return politica
     
     def resolver(self):
+
+        """
+        Resolve o problema de decisão de Markov: 
+        - Calcula a utilidade final
+        - Calcula a política óptima com base na utilidade final
+        Retorna essa informação
+        """
         
-        # resolver o problema de decisão de Markov
-        # devolve a utilidade final e a política
         Ufinal = self.__mec_util.utilidade()
         politica = self.politica(Ufinal)
         return Ufinal, politica

@@ -1,3 +1,4 @@
+from typing import override
 from pee.mec_proc.mecanismo_procura import MecanismoProcura
 
 class ProcuraGrafo(MecanismoProcura):
@@ -24,3 +25,8 @@ class ProcuraGrafo(MecanismoProcura):
         Indica se o nó é para manter ou não na fronteira. Se o nó já foi explorado, então não é para manter.
         """
         return no.estado not in self._explorados
+    
+    @override
+    def get_max_nos_em_memoria(self):
+        return len(self._explorados)
+    

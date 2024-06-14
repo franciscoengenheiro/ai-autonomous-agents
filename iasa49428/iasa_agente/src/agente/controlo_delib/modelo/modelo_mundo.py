@@ -14,7 +14,7 @@ class ModeloMundo(ModeloPlan):
     A memoria é organizada internamente para poder ter a representação do domínio do problema.
     Na arquitetura deliberativa, o módulo de memória é indispensável e dá suporte à simulação interna.
     Qualquer sistema para poder antecipar o futuro, tem que ter conhecimento (modelo do mundo) (ou vem da experiencia ou vem de algo que já tem esse conhecimento e o transmite para o agente). Caso particular da representação do modelo do problema.
-    Estende a classe ModeloPlan, que é uma classe abstrata que representa um modelo do mundo para um planeador deliberativo, de forma a não se comprometer a implementação deste modelo com um planeador específico.
+    Estende a classe ModeloPlan, que é uma classe abstrata que representa um modelo do mundo para um planeador deliberativo, de forma a não se comprometer a implementação deste modelo com um planeador específico (pdm, pee)
     """
     
     def __init__(self):

@@ -4,6 +4,7 @@ from pdm.modelo.modelo_pdm import ModeloPDM
 
 
 class ModProbPdm(ModeloPDM):
+    
     """
     Representa um modelo de um Processo de Decisão de Markov (PDM) determinístico.
 

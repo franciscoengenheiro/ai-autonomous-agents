@@ -10,6 +10,8 @@ class MecanismoProcura(ABC):
 
     def __init__(self, fronteira):
         self._fronteira = fronteira
+        self.__nos_processados = 0
+        self.__max_nos_em_memoria = 0
 
     def _iniciar_memoria(self):
 
@@ -54,13 +56,20 @@ class MecanismoProcura(ABC):
         self._iniciar_memoria()
         no = No(problema.estado_inicial)
         self._memorizar(no)
+        self.__nos_processados = 0
+        self.__max_nos_em_memoria = 1
         while not self._fronteira.vazia:
             no = self._fronteira.remover()
+
+            # Atualizar a contagem de nós processados
+            self.__nos_processados += 1
+
             if problema.objetivo(no.estado):
                 return Solucao(no)
             nos_sucessores = self._expandir(problema, no)
             for no_sucessor in nos_sucessores:
                 self._memorizar(no_sucessor)
+                self.__max_nos_em_memoria = max(self.__max_nos_em_memoria, self._fronteira.dimensao)
 
     def _expandir(self, problema, no):
 
@@ -83,3 +92,9 @@ class MecanismoProcura(ABC):
                 no_sucessor = No(estado_sucessor, operador, no, custo)
                 sucessores.append(no_sucessor)
         return sucessores
+    
+    def get_nos_processados(self):
+        return self.__nos_processados
+
+    def get_max_nos_em_memoria(self):
+        return self.__max_nos_em_memoria

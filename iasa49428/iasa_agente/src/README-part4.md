@@ -10,7 +10,7 @@ Futuro: Antecipar
 
 Processo deliberativo: processo em que o agente intencionalmente, com o proposito de atingir um determinado objetivo, simula as situações futuras, avalia as consequências de suas ações e escolhe a melhor ação a ser tomada.
 
-Na arquitetura deliberativa, o módulo de memória é indispensável e dá suporte à simulação interna. Processos internos -> planos de ação (o sistema por simulação interna vai)
+Na arquitetura deliberativa, o módulo de memória é indispensável e dá suporte à simulação interna. Processos internos -> planos de ação
 
 Sequencia de ações -> Planos de ação -> Vão caracterizar o comportamento do agente e não as reações. Pelos quais os agentes vão passar para atingir os objetivos.
 
@@ -24,6 +24,9 @@ SLIDE 8 (usar o desenho no projeto)
 Qualquer sistema para poder antecipar o futuro tem que ter conhecimento (modelo do mundo) (ou vem da experiencia ou vem de algo que já tem esse conhecimento e o transmite para o agente). Caso particular da representação do modelo do problema.
 
 consegue simular para cada opção as multiplas, quais as sequencias de evolução possíveis. (simulação interna)
+
+
+
 
 Racicionio Automático: Dividido em 2 partes:
 
@@ -172,6 +175,7 @@ O agente tem um plano, mas ações são não deterministicas, e o agente tem que
 
 Recompensa de -1, para considerar o gasto de energia, se houver colisão (esquerda ou direita) existe uma perda de -10 (por exemplo) A recompensa não é deterministica no estado, mas sim não deterministica.
 
+
 Equação de Bellman (essencia do raciocinio), corresponde ao principio da decisão ótima, que é a que maximiza a utilidade esperada.
 U(s) = ?
 A utilitidade de um estado é a recompença mais game*U(s') (onde s' é o estado futuro, e U(s') é a utilidade do estado futuro, e gama é o fator de desconto, que é aplicado à recompensa, de forma exponencial, por cada unidade de tempo que passa).
@@ -214,6 +218,9 @@ restrições sobre o problema que reduzem a complexidade e possibilidade de calc
 
 Como é que funciona um processo de decisão sequencial?
 R: Agir e observar o mundo. 
+
+
+
 
 Aprendizagem por reforço (interativa), o sistema vai vendo o que é certo e errado (tentando) e vai aprendendo com o tempo, e vai ajustando a politica, para maximizar a utilidade esperada.
 
