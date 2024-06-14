@@ -4,12 +4,7 @@
 % see https://tex.stackexchange.com/questions/44694/fontenc-vs-inputenc
 \usepackage[portuguese]{babel}
 \usepackage{multirow}
-\usepackage{amsmath}
 \usepackage[squares, numbers, sort\&compress]{natbib}
-\addto{\captionsportuguese}{\renewcommand{\bibname}{Referências}}
-\addto{\captionsportuguese}{\renewcommand{\contentsname}{Índice}}
-\addto{\captionsportuguese}{\renewcommand{\appendixname}{Apêndice}}
-
 \usepackage{lipsum} % gerador de texto
 \usepackage{graphicx}
 \usepackage{url}
@@ -19,6 +14,9 @@
 \usepackage{algpseudocode}
 \renewcommand{\algorithmicrequire}{\textbf{Dados: }}
 \renewcommand{\algorithmicensure}{\textbf{Resultado: }}
+\addto{\captionsportuguese}{\renewcommand{\bibname}{Referências}}
+\addto{\captionsportuguese}{\renewcommand{\contentsname}{Índice}}
+\addto{\captionsportuguese}{\renewcommand{\appendixname}{Apêndice}}
 
 % Definições das dimensões das páginas
 \setlength{\textheight}{24.00cm}

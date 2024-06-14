@@ -1,18 +1,18 @@
 \chapter{Projeto - Parte 2}\label{ch:projeto-parte2}
 
 Nesta fase do projeto, o objetivo foi criar um sistema inteligente capaz de se movimentar num espaço bidimensional com dimensões fixas onde existem obstáculos.
-A finalidade do agente prospetor é recolher os alvos e evitar os obstáculos presentes no ambiente (ver figura~\ref{fig:agente-prospetor}).
+O objetivo do agente é recolher os alvos e evitar os obstáculos presentes no ambiente (ver figura~\ref{fig:agente-prospetor}).
 O agente pode ser considerado homólogo a um robô móvel autónomo (e.g., um robô que aspira sozinho a casa), que se pode mover nos quatro sentidos cardeais (i.e., norte, sul, este e oeste).
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{100mm}{!}{\includegraphics{../figures/agente-prospetor}}
+        \resizebox{100mm}{!}{\includegraphics{../figures/agente-reativo}}
     \end{center}
     \caption{Representação visual desta fase do projeto.
     Retirado de~\cite{isel:iasa:slides:arq-agentes-reativos-parte-2}, slide 13.}\label{fig:agente-prospetor}
 \end{figure}
 
-Para que o agente possa atingir os objetivos propostos, foi necessário implementar um agente reativo e os seus módulos comportamentais associados.
+Para que o agente possa atingir os objetivos propostos, foi necessário implementar um agente com uma arquitetura reativa simples (i.e., sem memória) e com módulos comportamentais que lhe permitem atingir os objetivos propostos.
 O agente reativo foi implementado com base na biblioteca ECR (Esquemas Comportamentais Reativos) criada para esta fase do projeto, que expõe os mecanismos base de comportamento (e.g., reação, estímulo, resposta).
 A interação com o ambiente foi realizada através da biblioteca SAE (Simulador de Ambiente de Execução),
 que foi disponibilizada para esta fase do projeto.

@@ -1,6 +1,34 @@
 \chapter{Projeto - Parte 4}\label{ch:projeto-parte4}
 
-TODO()
+Nesta parte do projeto, foram abordados conceitos de planeamento e aprendizagem automática, através da implementação de um agente deliberativo com procura em espaços de estados (PEE) e com processos de decisão de Markov (PDM).
+
+Foi utilizado o mesmo ambiente da parte 2, que consiste num espaço bidimensional com dimensões fixas onde existem alvos e obstáculos, e onde o agente tem por objetivo recolher os alvos e evitar os obstáculos.
+
+Como pode ser observado na figura~\ref{fig:agente-delib-pee}, o agente deliberativo utiliza uma estratégia de procura em espaços de estados para encontrar o caminho ideal até os alvos.
+Essa abordagem permite ao agente planear suas ações com base na exploração de diferentes estados possíveis do ambiente.
+
+Por outro lado, a figura~\ref{fig:agente-delib-pdm} mostra o agente deliberativo utilizando processos de decisão de Markov.
+Esta abordagem faz uso de modelos probabilísticos para decidir a melhor ação a ser tomada em cada estado, tendo em conta a possível incerteza do ambiente.
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/agente-delib-pee}}
+    \end{center}
+    \caption{Agente deliberativo com procura em espaços de estados.}
+    \label{fig:agente-delib-pee}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{100mm}{!}{\includegraphics{../figures/agente-delib-pdm}}
+    \end{center}
+    \caption{Agente deliberativo com procura por processos de decisão de Markov.}
+    \label{fig:agente-delib-pdm}
+\end{figure}
+
+Para que o agente possa atingir os objetivos propostos, foi necessário implementar uma arquitetura deliberativa, que permite antecipar ao agente analisar o ambiente e antecipar o futuro, de forma a planear as ações a serem tomadas.
+
+Tal como em fases anteriores, a implementação foi feita com base na consulta e compressão de diagramas UML e de sequência de forma a garantir a correta implementação dos diferentes subsistemas.
 
 
 \section{Arquitetura Deliberativa}\label{sec:arquitetura-deliberativa}
@@ -354,9 +382,9 @@ O planeador para a procura em espaços de estados, que foi apresentado de forma 
 apresenta a seguinte implementação:
 
 \begin{itemize}
-    \item Modelo do problema de planeamento: Tendo em conta que o modelo do mundo no controlo deliberativo já detém o estado e os operadores, este problema apenas representa um problema de planeamento, com um estado final a atingir (objetivo);
-    \item Heurística: Utilizada para guiar a procura, a heurística calcula a distância euclidiana entre duas posições no plano;
-    \item Mecanismo de procura: Foi utilizado um mecanismo de procura de melhor primeiro (ver secção~\ref{subsubsec:procura-melhor-primeiro}), de forma a não comprometer a implementação do planeador com um mecanismo de procura em concreto (i.e., permitindo a alteração do mecanismo de procura dinamicamente se necessário).
+    \item \textbf{Modelo do problema de planeamento}: Tendo em conta que o modelo do mundo no controlo deliberativo já detém o estado e os operadores, este problema apenas representa um problema de planeamento, com um estado final a atingir (objetivo);
+    \item \textbf{Heurística}: Utilizada para guiar a procura, a heurística calcula a distância euclidiana entre duas posições no plano;
+    \item \textbf{Mecanismo de procura}: Foi utilizado um mecanismo de procura de melhor primeiro (ver secção~\ref{subsubsec:procura-melhor-primeiro}), de forma a não comprometer a implementação do planeador com um mecanismo de procura em concreto.
 \end{itemize}
 
 Se for encontrada solução, é criado um plano de ação que é executado pelo agente, e que é composto por uma sequência de ações que permitem ao agente concretizar os objetivos.
@@ -366,8 +394,8 @@ Se for encontrada solução, é criado um plano de ação que é executado pelo 
 Existem alguns pressupostos que foram considerados para a implementação deste planeador:
 
 \begin{itemize}
-    \item Parameterização da recompensa máxima: A recompensa máxima foi definida com um valor elevado de forma a permitir distinguir de forma clara entre situações de ganho e de perda;
-    \item Devido ao ambiente ser determinístico, foi pré-calculado o conjunto das possíveis transições de estado, de forma a permitir a execução do planeador de forma eficiente;
+    \item \textbf{Parameterização da recompensa máxima}: A recompensa máxima foi definida com um valor elevado de forma a permitir distinguir de forma clara entre situações de ganho e de perda;
+    \item \textbf{Devido ao ambiente ser determinístico}, foi pré-calculado o conjunto das possíveis transições de estado, de forma a permitir a execução do planeador de forma eficiente;
 \end{itemize}
 
 O planeador para procura com processos de decisão de Markov, que foi apresentado de forma abstrata na secção~\ref{subsec:planeador-baseado-em-pdm},

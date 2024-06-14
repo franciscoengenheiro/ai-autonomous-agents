@@ -225,7 +225,7 @@ Tal permite obter descer a complexidade temporal e espacial de $O(b^d+1)$ para $
     \label{fig:alg-proc-largura-teste}
 \end{figure}
 
-O algoritmo de procura em largura é ilustrado na figura~\ref{fig:alg-proc-largura}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura. no respetivo processo de procura.
+O algoritmo de procura em largura é ilustrado na figura~\ref{fig:alg-proc-largura}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura.
 
 \begin{figure}[H]
     \begin{center}
@@ -237,7 +237,8 @@ O algoritmo de procura em largura é ilustrado na figura~\ref{fig:alg-proc-largu
 
 \subsubsection{Procura de Custo Uniforme}\label{subsubsec:procura-custo-uniforme}
 
-A procura de custo uniforme, corresponde a um caso particular da procura por melhor primeiro (ver secção~\ref{subsubsec:procura-melhor-primeiro}), onde a função de avaliação, $f(n)$, é igual ao custo do caminho percorrido desde o estado inicial até ao nó, ou seja, $f(n) = g(n)$. Portanto, o avaliador associado a esta procura é exclusivamente a função de custo, $g(n)$.
+A procura de custo uniforme, corresponde a um caso particular da procura por melhor primeiro (ver secção~\ref{subsubsec:procura-melhor-primeiro}), onde a função de avaliação, $f(n)$, é igual ao custo do caminho percorrido desde o estado inicial até ao nó, ou seja, $f(n) = g(n)$.
+Portanto, o avaliador associado a esta procura é exclusivamente a função de custo, $g(n)$.
 
 Como a procura de custo uniforme é também uma procura por grafo (ver secção~\ref{subsec:procura-grafo}), a memorização dos nós só é realizada se os nós sucessores não estiverem na lista de nós explorados ou se o custo do nó for menor que o custo do nó explorado (ver figura~\ref{fig:alg-proc-melh-prim}).
 
@@ -247,7 +248,8 @@ As procuras informadas são estratégias de procura que utilizam informação ad
 Caracterizam uma exploração \textbf{seletiva} do espaço de estados.
 
 Este tipo de procuras, baseiam-se, de uma forma geral, na estratégia de procura de melhor primeiro (ver secção~\ref{subsubsec:procura-melhor-primeiro}).
-Esta estratégia, recorre a uma função de avaliação, $f(n)$, para escolher a ordem de expansão dos nós. É o avalidor que determina o valor de $f(n)$ de um determinado nó, e que vai depender da estratégia de procura utilizada.
+Esta estratégia, recorre a uma função de avaliação, $f(n)$, para escolher a ordem de expansão dos nós.
+É o avalidor que determina o valor de $f(n)$ de um determinado nó, e que vai depender da estratégia de procura utilizada.
 
 A função de avaliação, $f(n)$, é modelada como uma estimativa do custo entre um nó $n$, e o objetivo.
 A figura~\ref{fig:proc-informada} ilustra a função de avaliação de um procura informada.
@@ -390,12 +392,11 @@ Os resultados obtidos estão representados na tabela~\ref{tab:resultados-procura
 Através dos resultados obtidos, é possível concluir que a procura de custo uniforme e a procura A* são as estratégias que encontram a solução ótima, sendo que a procura A* apresenta o maior balanceamento entre a complexidade temporal e espacial.
 As outras estratégias encontram soluções subótimas.
 É também possível observar que a procura sôfrega sacrifica o custo da solução em prol da complexidade temporal (apresenta uma das soluções com o menor número de nós processados), sugerindo uma abordagem gulosa, como era expectável.
+Já a procura em profundidade iterativa é a que apresenta o maior número de nós processados.
 
 De forma a testar o possível aparecimento de ciclos nas estratégias de procura que não são em grafo, foi adicionado um terceiro operador à modelação do problema de contagem - o operador (-1).
 Com a adição deste operador, verificou-se que, nas estratégias de procura em profundidade, a procura é infinita, visto que existe a formação de ciclos (e.g., [-1, 1, 2, -1, 1, 2, -1, \ldots]).
 Já nas outras procuras, a adição deste operador não afetou o resultado obtido, visto que estas, por serem em grafo, evitam o aparecimento de ciclos.
-
-Este exercício permitiu perceber que a escolha da estratégia de procura ideal dependerá de uma análise cuidada dos fatores associados ao problema em questão, de forma a garantir a resolução eficiente e eficaz do mesmo.
 
 
 \section{Estrutura do Projeto}\label{sec:estrutura-do-projeto-3}
