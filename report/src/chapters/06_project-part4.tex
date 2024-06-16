@@ -214,7 +214,7 @@ Formalmente, é representado pelo seguinte conjunto de elementos:
     \item \textbf{Modelo de recompensa}: \( R(s, a, s') \), onde \( s \) é o estado atual, \( a \) é a ação a ser tomada, e \( s' \) é o estado futuro.
     é a recompensa associada à transição de estado de \( s \) para \( s' \) após a ação \( a \) ser tomada.
     Este modelo está descrito no caso geral, mas poderá estar dependente apenas do estado atual e da ação tomada ou apenas do estado atual;
-    \item \textbf{Factor de desconto}: \( \gamma \), onde \( 0 \leq \gamma \leq 1 \), que é o fator de retenção aplicado à recompensa.
+    \item \textbf{Fator de desconto}: \( \gamma \), onde \( 0 \leq \gamma \leq 1 \), que é o fator de retenção aplicado à recompensa.
     Por cada unidade de tempo que passa, a recompensa é descontada por um fator de \( \gamma \), de forma exponencial.
     Se \( \gamma = 0 \), a tomada de decisão só depende do presente, porque o futuro é anulado.
 \end{itemize}
@@ -375,16 +375,17 @@ Considerando que o objetivo do agente é movimentar-se num ambiente bidimensiona
     Neste contexto, o modelo do mundo é representado por:
     \begin{itemize}
         \item \textbf{EstadoAgente}: Representa um estado possível onde o agente pode estar, que é
-        caracterizado pelas coordenadas bidimensionais da posição do agente no ambiente.
+        caracterizado pelas coordenadas bidimensionais da posição do agente no ambiente;
         \item \textbf{OperadorMover}: Gera a transformação de um estado para outro.
         No contexto de um ambiente bidimensional, a passagem de uma posição para outra é feita através de um passo e uma direção (translação geométrica).
     \end{itemize}
-    É também importante realçar que a alteração do mundo é apenas detetada quando um elemento alvo é recolhido, visto que o ambiente é estático.
+    É também importante realçar que a alteração do mundo é apenas detetada quando um elemento alvo é recolhido, visto que o ambiente é estático;
     \item \textbf{Mecanismo Deliberativo}: Responsável pelo processo de deliberação, que gera objetivos com base nas opções disponíveis.
-    Neste contexto, os objetivos caracterizam-se pelas posições/estados no ambiente que o agente pretende alcançar, organizados pela sua distância ao agente (i.e., objetivos mais próximos têm maior prioridade).
+    Neste contexto, os objetivos caracterizam-se pelas posições/estados no ambiente que o agente pretende alcançar, organizados pela sua distância ao agente (i.e., objetivos mais próximos têm maior prioridade);
     \item \textbf{Planeador}: Responsável por gerar planos de ação com base em objetivos.
-    Foi definido de forma abstrata, de forma a poder ser utilizado tanto com a procura por espaços de estados como com a procura por processos de decisão de Markov (ver secção~\ref{sec:planeamento-automatico})
+    Foi definido de forma abstrata, de forma a poder ser utilizado tanto com a procura por espaços de estados como com a procura por processos de decisão de Markov (ver secção~\ref{sec:planeamento-automatico});
     \item \textbf{Controlo Deliberativo}: Orquestra todo o processo deliberativo com todos os componentes já mencionados, implementando o processo de tomada de decisão~\ref{enum:processo-tomada-decisao}.
+    No entanto, o passo de observação do ambiente é omitido da implementação, visto que é realizado pela biblioteca SAE (ver secção~\ref{sec:biblioteca-sae}).
 \end{itemize}
 
 
@@ -411,7 +412,7 @@ Existem alguns pressupostos que foram considerados para a implementação deste 
 
 \begin{itemize}
     \item \textbf{Parameterização da recompensa máxima}: A recompensa máxima foi definida com um valor elevado de forma a permitir distinguir, de forma clara, entre situações de ganho e de perda;
-    \item \textbf{Transições Disponíveis em memória}: Devido ao ambiente ser determinístico, foi pré-calculado o conjunto das possíveis transições de estado, de forma a permitir a execução do planeador de forma eficiente.
+    \item \textbf{Transições Disponíveis em memória}: Devido ao ambiente ser determinístico, foi pré-calculado o conjunto das possíveis transições de estado, de forma a reduzir a complexidade temporal da procura;
 \end{itemize}
 
 O planeador para procura com processos de decisão de Markov, que foi apresentado de forma abstrata na secção~\ref{subsec:planeador-baseado-em-pdm},
@@ -422,7 +423,10 @@ apresenta a seguinte implementação:
     \item \textbf{Ações (\(A\))}: Obtidas através do modelo do mundo, se o estado não for um estado objetivo, caso contrário, não há ações para esse estado (estado terminal);
     \item \textbf{Modelo de Transição (\(T(s, a, s')\))}: Devido à implementação deste modelo num ambiente determinístico, a probabilidade de transição é 1, se o estado seguinte \(s'\) fizer parte das transições possíveis do estado atual \(s\) dado a ação \(a\), e 0 caso contrário;
     \item \textbf{Modelo de Recompensa (\(R(s, a, s')\))}: Se o estado sucessor \(s'\) é um objetivo, a recompensa é a recompensa máxima, caso contrário, a recompensa é negativa e baseada no custo da ação tomada.
-    Neste caso, o custo é a distância euclidiana entre as coordenadas bidimensionais de dois estados (posições no plano), de forma a representar a penalização por movimento (energia gasta).
+    Neste caso, o custo é a distância euclidiana entre as coordenadas bidimensionais de dois estados (posições no plano), de forma a representar a penalização por movimento (energia gasta);
+    \item \textbf{Fator de Desconto (\(\gamma\))}: Foi definido com um valor de 0.85, relativamente próximo de 1, de
+    forma a permitir que o agente valorize quase tanto as recompensas futuras como as recompensas imediatas.
+    Desta forma, garantindo que existe exploração do ambiente, mas que o agente não fica preso em políticas subótimas.
 \end{itemize}
 
 Quando o processo de decisão de Markov é resolvido, é obtida uma política ótima que é utilizada para guiar o agente na execução de ações (plano), de forma a maximizar a recompensa esperada.
@@ -438,17 +442,17 @@ No processo de desenvolvimento de software associado a esta fase do projeto, foi
     \item \textit{agente/controlo\_delib}: Integra a implementação do controlo do agente deliberativo e dos diferentes módulos que lhe estão associados (e.g., modelo do mundo, mecanismo de deliberação, etc);
     \item \textit{agente/deposito}: Integra a modulação que foi feita para um determinado problema de depositos de água;
     \item \textit{agente/exercicio/mod\_pdm}: Integra a modulação de um problema de decisão de Markov concreto;
-    \textit{lib/pdm}: Contém sub-módulos que permitem modelar e resolver problemas de decisão de Markov (pdm):
+    \textit{lib/pdm}: Contém sub-módulos que permitem modelar e resolver problemas de decisão de Markov (PDM):
     \begin{itemize}
-        \item \textit{modelo}: Define de forma abstrata um modelo de um pdm;
+        \item \textit{modelo}: Define de forma abstrata um modelo de um PDM;
         \item \textit{mec\_util.py}: Define a implementação do mecanismo de cálculo de utilidade;
-        \item \textit{pdm.py}: Integra a implementação da resolução concreta de um pdm, ou seja, onde é calculada a utilidade de cada estado e a política ótima a seguir;
+        \item \textit{pdm.py}: Integra a implementação da resolução concreta de um PDM, ou seja, onde é calculada a utilidade de cada estado e a política ótima a seguir;
     \end{itemize}
-    \item \textit{lib/plan}: Contém sub-módulos que permitem criar planos para um pdm e um pee através de planeadores:
+    \item \textit{lib/plan}: Contém sub-módulos que permitem criar planos tanto para uma procura com PDM como para uma procura com PEE, através dos respetivos planeadores:
     \begin{itemize}
         \item \textit{modelo}: Define de forma abstrata os modelos utilizados pelos planeadores implementados;
-        \item \textit{plan\_pdm}: Alberga o planeador e o respetivo plano para um pdm;
-        \item \textit{plan\_pee}: Alberga o planeador e o respetivo plano para um pee;
+        \item \textit{plan\_pdm}: Alberga o planeador e o respetivo plano para um PDM;
+        \item \textit{plan\_pee}: Alberga o planeador e o respetivo plano para um PEE;
         \item \textit{planeador.py}: Define de forma abstrata um planeador;
         \item \textit{plano.py}: Define de forma abstrata um plano;
     \end{itemize}

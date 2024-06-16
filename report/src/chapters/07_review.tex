@@ -34,7 +34,7 @@ Este problema não foi descoberto na implementação do agente deliberativo para
 Devido ao facto do método não ser determinístico e ter sido utilizado para criar uma estrutura de dados em memória para guardar todas as transições possíveis, o agente deliberativo não conseguia convergir para uma política ótima e por isso não se movia no ambiente.
 
 Ainda no módulo do agente deliberativo, quando usadas simulações do ambiente mais complexas, o agente deliberativo não conseguia convergir para uma política ótima, devido à falta de exploração do espaço de estados (i.e., logo de início, o agente não se mexia para explorar o ambiente).
-De forma a corrigir este comportamento, foi alterado o gama no \texttt{PlaneadorPDM} para um valor mais próximo de 1, visto que é o factor de desconto que controla a importância de recompensas futuras, e, consequentemente, a exploração num determinado momento em prol da ação com o conhecimento atual.
+De forma a corrigir este comportamento, foi alterado o $\gamma$ no \texttt{PlaneadorPDM} para um valor ainda mais próximo de 1, visto que é o factor de desconto que controla a importância de recompensas futuras, e, consequentemente, a exploração num determinado momento em prol de agir com o conhecimento atual.
 
 \section{Mecanismo de Procura no Planeador PEE}\label{sec:mecanismo-de-procura-no-planeador-pee}
 
