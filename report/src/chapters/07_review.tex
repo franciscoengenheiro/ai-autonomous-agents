@@ -4,42 +4,55 @@ Neste capítulo, são identificados e descritos os erros cometidos nas entregas 
 
 \section{Problema de Contagem}\label{sec:problema-de-contagem}
 
-De forma a complementar o problema de contagem com toda a informação necessária para comparar a aplicação das diferentes estratégias de procura estudadas, foi necessário adicionar contadores que permitissem medir número máximo de nós em memória e o número de nós expandidos, correspondente à complexidade espacial e temporal, respetivamente.
+De forma a complementar o problema de contagem com toda a informação necessária para comparar a aplicação das diferentes estratégias de procura estudadas, foi necessário adicionar contadores que permitissem medir número máximo de nós em memória e o número de nós expandidos, correspondentes à complexidade espacial e temporal, respetivamente.
 
-Como todas as estratégias de procura implementadas têm como base um mecanismo de procura, foram acrescentados métodos com uma implementação base que permitissem a contagem dos nós expandidos e em memória.
-Enquanto que, para realizar a contagem de nós expandidos foi necessário manter um contador de nós expandidos que é incrementado por cada nó que é removido da fronteira para processamento; para realizar a contagem de nós em memória foi necessário manter informação acerca do número máximo de nós na fronteira de exploração.
-No entanto, para as procuras em grafo que mantêm informação de nós explorados, foi redefinido o método de obtenção de nós em memória para que fosse o número de nós explorados, pois já englobam os nós na fronteira de exploração.
+Como todas as estratégias de procura implementadas têm como base o mesmo mecanismo de procura, foram acrescentados métodos com uma implementação base que permitissem a contagem dos nós expandidos e em memória.
+Para realizar a contagem de nós expandidos foi necessário manter um contador que é incrementado por cada nó que é removido da fronteira para processamento; para realizar a contagem de nós em memória foi necessário manter informação acerca do número máximo de nós na fronteira de exploração.
+No entanto, para as procuras em grafo que mantêm informação de nós explorados, foi redefinido o método de obtenção de nós em memória para que fosse o número de nós explorados.
+Isto porque, no processo de memorização associado a estas procuras, os nós que são colocados na fronteira de exploração são antes colocados na memória de nós explorados.
 
 Na procura iterativa em profundidade, foi necessário adicionar um acumulador de nós processados, visto que esta procura é uma procura em profundidade que é executada várias vezes, sendo necessário manter a contagem de nós processados em cada execução.
-Foi redefinido o método de obtenção de nós processados para que fosse o resultado do acumulador de nós processados.
+Foi então redefinido o método de obtenção de nós processados para que fosse o resultado do acumulador de nós processados.
 
 \section{Procura Iterativa em Profundidade}\label{sec:procura-iterativa-em-profundidade}
 
-Durante a comparação das diferentes estratégias de procura, foi detetado que a procura iterativa em profundidade não estava a ser executada corretamente. A profundidade máxima de procura permanecia sempre no valor default e não era alterada dinamicamente através do setter disponível para o efeito. Este problema deveu-se a um erro ortográfico na variável associada ao setter, o que impediu a sua chamada.
+Durante a comparação das diferentes estratégias de procura, foi detetado que a procura iterativa em profundidade não estava a ser executada corretamente.
+A profundidade máxima de procura permanecia sempre no valor default e não era alterada dinamicamente através do setter disponível para o efeito.
+Este problema deveu-se a um erro ortográfico na variável associada ao setter, o que impediu a sua correta chamada.
 
-Infelizmente, este erro passou despercebido porque o Python não gerou um erro, ao contrário do que ocorreria em Java, por exemplo, que geraria um erro de compilação.
-Além disso, o ciclo de procura não começava com a profundidade em 0, mas sim em 1, o que contribuiu para a execução incorreta do algoritmo.
+Infelizmente, este erro passou despercebido porque o Python não gerou um erro, ao contrário do que ocorreria em Java, por exemplo, que geraria um erro de compilação (i.e., acesso a um método inexistente).
+Além disso, o ciclo de procura não começava com a profundidade em 0, mas sim em 1, o que também contribuiu para a execução incorreta do algoritmo.
 
 \section{Agente Deliberativo com PDM}\label{sec:agente-deliberativo-com-pdm}
 
 Na última aula prática não foi possível concluir a implementação do agente deliberativo para a procura com processos de decisão de Markov (PDM), devido a um problema que não foi detetado aquando da implementação do agente deliberativo na procura por espaço de estados (PEE).
 
-Ambos utilizam o controlo deliberativo que apresenta um módulo que corresponde às representações internas do mundo - modelo do mundo.
-Este módulo que apresenta um método para obter os operadores, estava a criar novas cópias dos operadores disponíveis a cada chamada, o que estava incorreto, pois os operadores devem ser sempre os mesmos.
+Ambas as procuras utilizam o controlo deliberativo que apresenta um módulo que corresponde às representações internas do mundo - modelo do mundo.
+Este módulo, que apresenta um método para obter os operadores, estava a criar novas cópias dos operadores disponíveis a cada chamada, o que estava incorreto, pois os operadores devem ser sempre os mesmos.
 Como tal, foi corrigido o método para que devolvesse sempre a mesma lista de operadores, inicializada no construtor do modelo do mundo.
-Este problema não foi descoberto na implementação do agente deliberativo para a procura por espaço de estados, pois o agente apenas constroi um plano de ação por cada reflexão, enquanto que na procura com processos de decisão de Markov, o agente tem de refletir várias vezes para ter uma política ótima, o que levou a que fosse criada uma nova lista de operadores a cada reflexão.
+Este problema não foi descoberto na implementação do agente deliberativo para a procura por espaço de estados, pois o agente apenas consulta os operadores uma vez por cada plano de ações criado, ao contrário do agente deliberativo com PDM, que consulta os operadores por cada iteração do algoritmo de valor.
+Devido ao facto do método não ser determinístico e ter sido utilizado para criar uma estrutura de dados em memória para guardar todas as transições possíveis, o agente deliberativo não conseguia convergir para uma política ótima e por isso não se movia no ambiente.
 
 Ainda no módulo do agente deliberativo, quando usadas simulações do ambiente mais complexas, o agente deliberativo não conseguia convergir para uma política ótima, devido à falta de exploração do espaço de estados (i.e., logo de início, o agente não se mexia para explorar o ambiente).
 De forma a corrigir este comportamento, foi alterado o gama no \texttt{PlaneadorPDM} para um valor mais próximo de 1, visto que é o factor de desconto que controla a importância de recompensas futuras, e, consequentemente, a exploração num determinado momento em prol da ação com o conhecimento atual.
 
+\section{Mecanismo de Procura no Planeador PEE}\label{sec:mecanismo-de-procura-no-planeador-pee}
+
+Na descrição do planeador com procura por espaço de estados (PEE), foi referido que o planeador utilizava o mecanismo de procura com a estratégia de melhor primeiro.
+No entanto, este planeador foi implementado com base numa heurística, e a mesma só pode ser utilizada em procuras informadas, como, aliás a implementação da biblioteca com as estratégias de procura reflete.
+
+Sabendo que a procura por custo uniforme é um caso particular da procura por melhor primeiro, mas não é uma procura informada, visto que utiliza um avaliador de nós que não representa uma heurística admissível, foi necessário alterar o tipo do mecanismo de procura para uma estratégia de procura informada, de forma a refletir a implementação realizada.
 
 \section{Comentários}\label{sec:comentarios}
 
-Na revisão do projeto foram encontrados os seguintes módulos sem comentários por esquecimento, que foram corrigidos com a adição de comentários que descrevem o propósito de cada método e a sua implementação:
+Na revisão do projeto foram encontrados os seguintes módulos sem comentários por esquecimento ou com comentários insuficientes/incompletos, e que foram corrigidos:
 
 \begin{itemize}
     \item \texttt{PlanoPDM};
+    \item \texttt{Planeador};
     \item \texttt{PlaneadorPDM};
+    \item \texttt{PlaneadorPEE};
+    \item \texttt{ProblemaPlan};
     \item \texttt{MecUtil};
     \item \texttt{PDM};
 \end{itemize}

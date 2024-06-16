@@ -1,7 +1,7 @@
 \chapter{Projeto - Parte 3}\label{ch:projeto-parte3}
 
 Nesta fase do projeto, foram abordadas as temáticas de raciocínio automático e implementados mecanismos de procura em espaços de estados, que servem como base para a implementação de um futuro agente deliberativo.
-Foi também realizada uma biblioteca para modelação de problemas, servindo como argumento para que a aplicação de um determinado mecanismo de procura não fosse dependente da especificidade do problema.
+Foi também realizada uma biblioteca para modelação de problemas, servindo como argumento para que a aplicação de uma determinada estratégia de procura não fosse dependente da especificidade do problema.
 
 No final desta fase, foi modelado um problema de procura concreto, de forma a aplicar as diferentes estratégias de procura implementadas e avaliar o seu desempenho.
 
@@ -13,7 +13,7 @@ Tal como em fases anteriores, a implementação foi feita com base na consulta e
 O raciocínio automático é uma área da inteligência artificial que se dedica a desenvolver algoritmos capazes de inferir conclusões a partir de um conjunto de premissas.
 Pode ser visto como um processo computacional, onde se parte de uma representação de conhecimento de um determinado problema e se chega a conclusões, com base em regras de inferência (i.e., processo de manipulação de representações simbólicas para deduzir novas informações baseadas em conhecimento do domínio).
 
-Associado ao processo de raciocínio automático, estão dois tipos de atividades principais:
+Associado ao processo de raciocínio automático, existem dois tipos de atividades principais:
 
 \begin{itemize}
     \item \textbf{Exploração}: A exploração das opções possíveis, e que requer antecipação e previsão das suas consequências (raciocínio prospetivo) (e.g., num determinado momento, quantas jogadas possíveis existem num jogo de xadrez para que o jogador possa ganhar o jogo);
@@ -36,7 +36,7 @@ Um exemplo de codificação e descodificação de um problema é ilustrado na fi
 
 \subsection{Modelação de um Problema}\label{subsec:modelacao-problema}
 
-O modelo de um problema é uma representação simbólica interna ao sistema, que contém a informação necessária para a resolução do problema.
+O modelo de um problema é uma representação simbólica interna ao sistema, que contém a informação necessária para a resolução do mesmo.
 O mecanismo de raciocínio automático é responsável por manipular esta representação, de forma a inferir conclusões e a resolver o problema.
 Esta representação tem como base os seguintes conceitos:
 
@@ -45,10 +45,9 @@ Esta representação tem como base os seguintes conceitos:
     \item \textbf{Operadores}: Representação de uma ação geradora de uma transição de um estado para outro.
     No âmbito do raciocínio automático, os operadores abstraem as transformações (dinâmicas) que ocorrem.
     Associado a um operador estão duas funções: uma que gera o estado sucessor a partir de um dado estado e outra que define o custo associado a essa transição, e que pode depender ou não do estado atual e do estado sucessor;
-    \item \textbf{Transição}: Em contraste com o operador, a transição é a ação efetiva da passagem de um estado para outro (geram o estado sucessor), que ocorre quando um operador é aplicado sobre as representações internas dos estados.
-    \item \textbf{Problema}: Dá suporte ao raciocínio automático, modelando um problema ao qual está inerente uma finalidade;
-    Associado a um problema está o estado inicial, um conjunto de operadores e uma função predicado~\cite{stanford:fp:function-predicates} que verifica se um estado recebido é um estado objetivo (i.e., que satisfaz a finalidade do problema).
-    O problema considera-se resolvido quando um estado objetivo é atingido.
+    \item \textbf{Transição}: Em contraste com o operador, a transição é a ação efetiva da passagem de um estado para outro, que ocorre quando um operador é aplicado sobre as representações internas dos estados;
+    \item \textbf{Problema}: Dá suporte ao raciocínio automático, modelando um problema ao qual está inerente uma finalidade. Associado a um problema está o estado inicial, um conjunto de operadores e uma função predicado~\cite{stanford:fp:function-predicates} que verifica se um estado recebido é um estado objetivo (i.e., que satisfaz a finalidade do problema).
+    O problema considera-se resolvido quando um estado objetivo é atingido, podendo existir vários estados objetivos.
 \end{itemize}
 
 
@@ -61,15 +60,15 @@ Caracteriza-se pelos seguintes conceitos:
 
 \begin{itemize}
     \item \textbf{Nó}: Representa um estado do problema.
-    Além disso, contém informação, tal como: operador (que foi aplicado para gerar o estado sucessor, e que pode não existir); antecessor (nó antecessor ao qual foi aplicado o operador para gerar este nó, e que pode não existir).
-    E informação complementar para controlo do processo de procura: profundidade (do nó na árvore de procura, incremental a cada nível da árvore de procura); custo (associado ao caminho que vai do nó raiz ao nó, incremental a cada transição de um nó para o nó sucessor).
-    Existe ainda o conceito de nós abertos (que ainda não foram expandidos) e nós fechados (que já foram expandidos);
-    Os nós são comparáveis entre si através do seu custo;
-    \item \textbf{Fronteira}: Representa os nós folhas da árvore de procura.
+    Além disso, contém informação adicional, nomeadamente: operador (que foi aplicado para gerar o estado sucessor, e que pode não existir); antecessor (nó ao qual foi aplicado o operador para gerar este nó, e que pode não existir).
+    E informação complementar para controlo do processo de procura: profundidade (incremental a cada nível da árvore de procura); custo (associado ao caminho que vai do nó raiz ao nó, incremental a cada transição de um nó para o nó sucessor).
+    Existe ainda o conceito de nós abertos (que ainda não foram expandidos) e nós fechados (que já foram expandidos).
+    Mais ainda, os nós são comparáveis entre si através do seu custo;
+    \item \textbf{Fronteira}: Representa os nós folha da árvore de procura.
     Estes nós são candidatos a serem expandidos.
     A forma como é feita essa expansão dependerá da estratégia de procura utilizada (ver secção~\ref{sec:estrategias-procura});
-    \item \textbf{Solução}: Representa um percurso (sequência de estados e operadores), no espaço de estados, mais concretamente, corresponde ao caminho que vai do nó raiz (estado inicial) a um dos nós objetivo (estado objetivo) encontrado.
-    Podem existir várias soluções para um problema de procura, que dependem também da estratégia de procura utilizada, ou até mesmo não existir solução.
+    \item \textbf{Solução}: Representa um percurso (sequência de estados e operadores) no espaço de estados, mais concretamente, corresponde ao caminho que vai do nó raiz (estado inicial) a um dos nós objetivo (estado objetivo) encontrado.
+    Dependendo da estratégia de procura utilizada, podem existir várias soluções para um problema de procura, ou até mesmo não existir solução.
 \end{itemize}
 
 \subsection{Processo de Procura}\label{subsec:processo-procura}
@@ -85,20 +84,20 @@ O processo de procura (ver figura~\ref{fig:processo-procura}) é um processo ite
         \item Remover um nó da fronteira;
         \item Verificar se o estado que lhe está associado é um estado objetivo.
         Se for um estado objetivo, o processo de procura termina, e é devolvida a solução que contém esse nó;
-        \item O nó removido é expandido, gerando os nós sucessores;
-        \item Os nós sucessores são memorizados (depende da estratégia de procura utilizada).
+        \item Não sendo um estado objetivo, o nó removido é expandido, gerando os nós sucessores;
+        \item Os nós sucessores são memorizados (depende da estratégia de procura utilizada);
     \end{itemize}
     \item Se a fronteira estiver vazia, o processo de procura termina com a indicação de que não existe solução.
 \end{itemize}
 
-A expansão de um nó, mencionada no processo de procura anterior, é também um processo iterativo, que tem como objetivo gerar os nós sucessores de um nó.
-É caracterizada, de forma abstrata, pelos seguintes:
+A expansão de um nó, mencionada no processo de procura anterior, é também um processo iterativo, que tem como objetivo gerar os nós sucessores de um determinado nó.
+É caracterizada, de forma abstrata, pelos seguintes passos:
 
 \begin{itemize}
-    \item Para cada operador, gerar a transição de estado do nó, que vai permitir obter o estado sucessor;
+    \item Para cada operador, gerar a transição de estado do nó, que vai permitir obter um estado sucessor;
     \item Se o estado sucessor existir:
     \begin{itemize}
-        \item Calcular o custo do nó sucessor (custo do nó antecessor + custo da transição para o estado sucessor);
+        \item Calcular o custo do nó sucessor (custo do nó antecessor \( + \) custo da transição para o estado sucessor);
         \item Criar o nó sucessor com o estado sucessor obtido, o operador que gerou a transição, o nó antecessor e o custo calculado anteriormente;
         \item Guardar o nó sucessor gerado numa lista.
     \end{itemize}
@@ -116,19 +115,19 @@ A expansão de um nó, mencionada no processo de procura anterior, é também um
 
 
 \section{Estratégias de Procura}\label{sec:estrategias-procura}
-As estratégias de procura são responsáveis por definir a forma como a árvore de procura é explorada, ou seja, a ordem pela qual os nós são expandidos.
-Existem várias estratégias de procura que se podem dividir em dois grandes grupos: estratégias de procura não informada (cega) (ver secção~\ref{subsec:procuras-nao-informadas}) e estratégias de procura informada (heurística) (ver secção~\ref{subsec:procuras-informadas}).
-Além desta divisão, existe o conceito de procura em grafo (ver secção~\ref{subsec:procura-grafo}), que é uma técnica de procura que evita o aparecimento de ciclos que possam existir na árvore de procura (estados repetidos).
+As estratégias de procura são responsáveis por definir a forma como a árvore de procura é explorada, ou seja, a ordem pela qual os nós são expandidos (na fronteira) e memorizados.
+Existem várias estratégias de procura que se podem dividir em dois grandes grupos: estratégias de procura não informada (cega) e estratégias de procura informada (heurística).
+Além desta divisão, existe o conceito de procura em grafo, que é uma técnica de procura que evita o aparecimento de ciclos que possam existir na árvore de procura (estados repetidos).
 
 Alguns dos critérios de classificação das estratégias de procura são~\cite{ist:leic:resumos:procura-cega, isel:iasa:slides:proc-espaco-estados-parte-2}:
 
 \begin{itemize}
     \item \textbf{Completa}: Se a estratégia encontra \textbf{sempre} uma solução para o problema proposto, caso exista (e caso não exista, diz que não há solução).
-    \item \textbf{Ótima}: Se a estratégia encontra a solução com o menor custo possível.
-    \item \textbf{Complexidade de espaço}: Espaço de memória necessário para encontrar a solução (i.e., número máximo de nós que a estratégia mantém em memória)
-    \item \textbf{Complexidade de tempo}: Tempo necessário para encontrar a solução (i.e., número de operações necessárias para encontrar a solução)
-    \item \textbf{Profundidade Máxima}: Corresponde à quantidade máxima de espaços entre um qualquer par de estados, ou seja, a profundidade máxima ($m$) da árvore de procura.
-    \item \textbf{Fator de Ramificação}: Número máximo de sucessores de um dado nó ($b$).
+    \item \textbf{Ótima}: Se a estratégia encontra a solução com o menor custo possível;
+    \item \textbf{Complexidade de espaço}: Espaço de memória necessário para encontrar a solução (i.e., número máximo de nós que a estratégia mantém em memória);
+    \item \textbf{Complexidade de tempo}: Tempo necessário para encontrar a solução (i.e., número de operações necessárias para encontrar a solução).
+    \item \textbf{Profundidade Máxima}: Corresponde à quantidade máxima ($m$) de espaços entre um qualquer par de estados;
+    \item \textbf{Fator de Ramificação}: Número máximo de sucessores de um dado nó ($b$);
     \item \textbf{Profundidade da solução}: Profundidade do nó objetivo na árvore de procura ($d$).
 \end{itemize}
 
@@ -137,12 +136,12 @@ Alguns dos critérios de classificação das estratégias de procura são~\cite{
 Associado a uma estratégia de procura, podem estar associado o aparecimento de estados repetidos.
 Tal situação leva ao desperdício de recursos computacionais (tempo e memória), uma vez que o mesmo estado é gerado e expandido várias vezes.
 
-A solução passa por manter em memória duas listas: uma com os nós que já foram expandidos (nós fechados); e outra com os nós gerados que ainda estão por expandir (nós abertos).
-No processo de memorização dos nós, associada a este processo de procura (ver secção~\ref{subsec:processo-procura}), se o nó sucessor já existir na lista de nós abertos ou fechados, é necessário verificar se o mesmo foi atingido através de um caminho mais curto (com menor custo).
-Se for o caso, remover o nó anterior da respetiva lista e inserir o nó sucessor na lista de nós abertos.
-Se o nó sucessor não existir em nenhuma das listas, é apenas necessário inserir o nó na lista de nós abertos.
-
-De forma a simplificar este processamento, pode ser criada uma única lista de nós (nós explorados), onde são englobados os nós abertos e fechados. A lista deve ser indexada pelo estado do nó para eficiência de acesso, devido à elevada quantidade de nós que podem existir~\cite{isel:iasa:slides:proc-espaco-estados-parte-1}.
+A solução passa por manter em memória uma representação com os nós que já foram expandidos (nós fechados) e outra com os nós gerados que ainda estão por expandir (nós abertos).
+No processo de memorização dos nós, associada ao processo de procura, se o nó sucessor já existir na memória de nós abertos ou fechados, é necessário verificar se o mesmo foi atingido através de um caminho mais curto (com menor custo).
+Se for o caso, remover o nó anterior da respetiva memória e inserir o nó sucessor na memória de nós abertos.
+Se o nó sucessor não existir em nenhuma das representações em memória, é apenas necessário inserir o nó na memória de nós abertos.
+De forma a simplificar este processamento, pode ser mantida uma única memória de nós (nós explorados), onde são englobados os nós abertos e fechados.
+Esta deve ser indexada pelo estado do nó para eficiência de acesso, devido à elevada quantidade de nós que podem existir~\cite{isel:iasa:slides:proc-espaco-estados-parte-1}.
 
 \subsection{Procuras Não-Informadas}\label{subsec:procuras-nao-informadas}
 
@@ -154,20 +153,20 @@ Caracterizam uma exploração \textbf{exaustiva} do espaço de estados.
     \begin{center}
         \resizebox{100mm}{!}{\includegraphics{../figures/tabela-estrategias-procura-nao-informadas}}
     \end{center}
-    \caption{Tabela de estratégias de procura não-informadas.
+    \caption{Tabela com as características das estratégias de procura não-informadas.
     Retirado de~\cite{isel:iasa:slides:proc-espaco-estados-parte-2}, slide 12.}
     \label{fig:tabela-estrategias-procura-nao-informadas}
 \end{figure}
 
 \subsubsection{Procura em Profundidade}\label{subsubsec:procura-profundidade}
 
-A procura em profundidade, também conhecida por \textit{Depth-First Search} (DFS), é um mecanismo de procura caracterizado por explorar um ramo da árvore de procura até ao fim antes de explorar outro ramo.
+A procura em profundidade, também conhecida por \textit{Depth-First Search} (DFS), é uma estratégia de procura caracterizada por explorar um ramo da árvore de procura até ao fim antes de explorar outro ramo.
 Utiliza uma fronteira de exploração do tipo \textit{LIFO} (Last In First Out), onde os nós mais recentes são inseridos no início (de modo a serem expandidos primeiro).
 Este mecanismo não garante uma solução completa (visto que podem haver profundidades infinitas ou até mesmo ciclos) e muito menos ótima (já que o primeiro nó objetivo encontrado, se existir, é o que é retornado e que não é garantidamente o melhor).
 
-A memorização dos nós, descrita no processo de procura associado (ver secção~\ref{subsec:processo-procura}) a este mecanismo, é realizada apenas através da inserção dos nós na fronteira de exploração.
+A memorização dos nós descrita no processo de procura associado a esta estratégia, é realizada apenas através da inserção dos nós na fronteira de exploração.
 
-O algoritmo de procura em profundidade é ilustrado na figura~\ref{fig:alg-proc-profundidade}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura..
+O algoritmo de procura em profundidade é ilustrado na figura~\ref{fig:alg-proc-profundidade}, onde os retângulos a vermelho representam a memorização mencionada anteriormente.
 
 \begin{figure}[H]
     \begin{center}
@@ -177,16 +176,17 @@ O algoritmo de procura em profundidade é ilustrado na figura~\ref{fig:alg-proc-
     \label{fig:alg-proc-profundidade}
 \end{figure}
 
-De notar que, a ordem de geração dos nós sucessores depende da ordem dos operadores aplicados~\cite{isel:iasa:slides:proc-espaco-estados-parte-1} e que a complexidade espacial deste algoritmo é de $O(bm)$ se for implementado de forma recursiva, e de $O(m)$ se for implementado de forma iterativa.
+De notar que, a ordem de geração dos nós sucessores depende da ordem dos operadores aplicados~\cite{isel:iasa:slides:proc-espaco-estados-parte-1} e que a complexidade espacial deste algoritmo é de $O(bm)$ se for implementado de forma recursiva, e de $O(m)$ se for implementado de forma iterativa~\cite{ist:leic:resumos:procura-cega}.
 
 \subsubsection{Procura em Profundidade Limitada}\label{subsubsec:procura-profundidade-limitada}
 
-A procura em profundidade limitada, é uma variação da procura em profundidade, onde é definido um limite de profundidade, $l$, para a exploração da árvore de procura.
+A procura em profundidade limitada é uma variação da procura em profundidade, onde é definido um limite de profundidade, $l$, para a exploração da árvore de procura.
 Com esta procura introduz-se um novo possível estado, o estado de fracasso, ou seja, se a profundidade máxima for atingida e não existir um nó objetivo, a procura termina sem solução.
 
 Não é completa e garantidamente ótima, visto que a solução pode estar a uma profundidade maior que $l$, e que apesar de esta estratégia resolver o problema de profundidades infinitas, não resolve o problema da existência de ciclos.
 
-O algoritmo de procura em profundidade limitada é ilustrado na figura~\ref{fig:alg-proc-prof-limitada}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura..
+O algoritmo de procura em profundidade limitada é ilustrado na figura~\ref{fig:alg-proc-prof-limitada}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada no respetivo processo de procura.
+Tal como na procura em profundidade, a memorização é realizada apenas através da inserção dos nós na fronteira de exploração.
 
 \begin{figure}[H]
     \begin{center}
@@ -198,7 +198,7 @@ O algoritmo de procura em profundidade limitada é ilustrado na figura~\ref{fig:
 
 \subsubsection{Procura em Profundidade Iterativa}\label{subsubsec:procura-profundidade-iterativa}
 
-A procura em profundidade iterativa, é uma variação da procura em profundidade limitada, onde é realizada uma procura em profundidade com um limite de profundidade, $l$.
+A procura em profundidade iterativa é uma variação da procura em profundidade limitada, onde são realizadas sucessivas procuras em profundidade com limites de profundidade diferentes.
 Caso não seja encontrada uma solução, é realizada uma nova procura em profundidade com um limite de profundidade superior ao que foi utilizado anteriormente, e assim sucessivamente até que a solução seja encontrada (se existir).
 
 Combina vantagens da procura em profundidade e da procura em largura, visto que a procura em profundidade é mais eficiente em termos de memória e a procura em largura é mais eficiente em termos de tempo.
@@ -212,7 +212,7 @@ A procura em largura, também conhecida por \textit{Breadth-First Search} (BFS),
 
 Este mecanismo garante uma solução completa, se o fator de ramificação ($b$) for finito, e ótima, se o custo do caminho não diminuir ao aumentar a profundidade da árvore de procura~\cite{ist:leic:resumos:procura-cega}.
 
-O teste do nó objetivo deve ser realizado assim que o nó é gerado, para evitar processamento desnecessário (ver figura~\ref{fig:alg-proc-largura-teste}).,
+O teste do nó objetivo deve ser realizado assim que o nó é gerado, para evitar processamento desnecessário (ver figura~\ref{fig:alg-proc-largura-teste}),
 já que todos os nós que existem a uma profundidade menor (com menor custo) já foram explorados e não passaram no teste.
 Tal permite obter descer a complexidade temporal e espacial de $O(b^d+1)$ para $O(b^d)$, visto que um nível da árvore de procura não é explorado a mais, nem são gerados nós desnecessários nesse nível~\cite{ist:leic:resumos:procura-cega}.
 
@@ -226,6 +226,8 @@ Tal permite obter descer a complexidade temporal e espacial de $O(b^d+1)$ para $
 \end{figure}
 
 O algoritmo de procura em largura é ilustrado na figura~\ref{fig:alg-proc-largura}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura.
+Nesta estratégia, a memorização inicial é realizada através da inserção do nó inicial na fronteira de exploração e na respetiva memória de nós explorados.
+A memorização dos nós sucessores é realizada através da inserção dos nós na fronteira de exploração e na respetiva memória de nós explorados, se o nó sucessor não estiver ainda na memória de nós explorados.
 
 \begin{figure}[H]
     \begin{center}
@@ -253,7 +255,7 @@ Esta estratégia, recorre a uma função de avaliação, $f(n)$, para escolher a
 
 A função de avaliação, $f(n)$, é modelada como uma estimativa do custo entre um nó $n$, e o objetivo.
 A figura~\ref{fig:proc-informada} ilustra a função de avaliação de um procura informada.
-Poderá ser constituída por alguns dos seguintes componentes, através da transformação destes (soma/composição/supressão, etc..)~\cite{ist:leic:resumos:procura-informada}:
+Poderá ser constituída por alguns dos seguintes componentes, através da transformação destes (e.g., soma, composição,supressão, etc..)~\cite{ist:leic:resumos:procura-informada}:
 
 \begin{itemize}
     \item $g(n)$, o custo do caminho percorrido desde o estado inicial até ao nó $n$;
@@ -288,7 +290,7 @@ Desta forma, o nó com menor valor de $f(n)$ é o primeiro a ser expandido.
 A procura de melhor primeiro é garantidamente completa e ótima, se a função de avaliação, $f(n)$, for admissível, ou seja, se a função heurística, $h(n)$, for menor ou igual ao custo real, $h^*(n)$, do melhor caminho desde o nó $n$ até ao nó objetivo~\cite{ist:leic:resumos:procura-cega}.
 
 O algoritmo de procura de melhor primeiro é ilustrado na figura~\ref{fig:alg-proc-melh-prim}, onde os retângulos a vermelho representam a memorização dos nós que é efetuada (ver secção~\ref{subsec:processo-procura}) no respetivo processo de procura.
-Portanto, no ato de memorização do nó, além de se ver se o nó já foi explorado (procura em grafo), também é necessário verificar se o custo do nó é menor que o custo do nó já explorado.
+Portanto, no ato de memorização do nó, além de se ver se o nó já foi explorado (procura em grafo), também é necessário verificar se o custo do nó é menor que o custo do nó já explorado, e só se umas das condições anteriores se verificar é que o nó é inserido na fronteira de exploração e na respetiva memória de nós explorados.
 
 \begin{figure}[H]
     \begin{center}
@@ -334,7 +336,7 @@ Desta forma, é necessário manter os nós anteriormente explorados para compara
 
 De notar que, uma heurística consistente é sempre admissível, visto que respeita a desigualdade triangular, no entanto, o contrário não é verdade.
 
-Na figura~\ref{fig:comp-metodos-proc} é ilustrada a solução encontrada pela procura A* para um determinado problema, quando comparada com a procura de custo uniforme e a procura sôfrega.
+Na figura~\ref{fig:comp-metodos-proc} é ilustrada a solução encontrada pela procura A* para um determinado problema, quando comparada com a procura de custo uniforme e a procura sôfrega, visto que todas estas manipulam a mesma função de avaliação, $f(n)$, de forma diferente.
 
 \begin{figure}[H]
     \begin{center}
@@ -358,7 +360,7 @@ Para as procuras informadas, foi necessário definir uma heurística admissível
 poder optar por transições de estado que minimizam a distância ao estado objetivo.
 
 Com o problema modelado foram aplicadas as estratégias de procura estudadas e analisados os resultados obtidos,
-nomeadamente a solução encontrada, o custo e a dimensão associada, bem como o número de nós processados e o número máximo de nós mantidos em memória (i.e., de forma a inferir a complexidade espacial).
+nomeadamente a solução encontrada, o custo e a dimensão associada, bem como o número de nós processados e o número máximo de nós mantidos em memória (i.e., de forma a inferir a complexidade temporal e espacial, respetivamente).
 Os resultados obtidos estão representados na tabela~\ref{tab:resultados-procura-contagem}.
 
 \begin{table}[htbp]
@@ -392,7 +394,7 @@ Os resultados obtidos estão representados na tabela~\ref{tab:resultados-procura
 Através dos resultados obtidos, é possível concluir que a procura de custo uniforme e a procura A* são as estratégias que encontram a solução ótima, sendo que a procura A* apresenta o maior balanceamento entre a complexidade temporal e espacial.
 As outras estratégias encontram soluções subótimas.
 É também possível observar que a procura sôfrega sacrifica o custo da solução em prol da complexidade temporal (apresenta uma das soluções com o menor número de nós processados), sugerindo uma abordagem gulosa, como era expectável.
-Já a procura em profundidade iterativa é a que apresenta o maior número de nós processados.
+Já a procura em profundidade iterativa é a que apresenta o maior número de nós processados, devido aos sucessivos incrementos de profundidade.
 
 De forma a testar o possível aparecimento de ciclos nas estratégias de procura que não são em grafo, foi adicionado um terceiro operador à modelação do problema de contagem - o operador (-1).
 Com a adição deste operador, verificou-se que, nas estratégias de procura em profundidade, a procura é infinita, visto que existe a formação de ciclos (e.g., [-1, 1, 2, -1, 1, 2, -1, \ldots]).

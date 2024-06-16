@@ -30,10 +30,15 @@ Isto deve-se ao facto do ambiente ser estático, determinístico e completamente
 
 Após análise dos resultados obtidos, concluiu-se que apenas o agente deliberativo implementado pode ser considerado um agente relacional (ver secção~\ref{sec:agente-relacional}), uma vez que consegue realizar as ações corretas de forma ótima, e não apenas atingir os objetivos propostos.
 
+ É também importante realçar que, apesar da aprendizagem por reforço ter sido abordada na parte 4, não foi implementada no projeto.
+No entanto, permitiu refletir sobre o dilema entre explorar novas ações e aproveitar o conhecimento obtido até ao momento para agir em conformidade com aquilo que se sabe ser o melhor a fazer (como aliás pode ser até extrapolado para a vida real).
+Além disso, discutiram-se estratégias para resolver este dilema, despertando o interesse em explorar mais a fundo esta temática no futuro e aplicá-la num contexto concreto.
+
+
 \section{Trabalho Futuro}\label{sec:trabalho-futuro}
 
 Como trabalho futuro, seria interessante explorar configurações de ambiente não determinísticas e parcialmente observáveis, de forma a perceber como os agentes implementados se comportam nestas condições.
 Percebendo assim, a real importância da arquitetura deliberativa com processos de decisão de Markov.
 
 Estudando a biblioteca SAE, providenciada para a segunda parte do projeto, seria interessante perceber como é que se poderia adicionar um parâmetro para que os obstáculos se mexessem ou existisse uma mudança de configuração a cada x tempo, para poder observar como é que o agente se adaptava.
-Também teria que se rever a implementação, no controlo deliberativo, do modelo do mundo, porque o sinal que foi alterado apenas é dado quando um alvo é recolhido.
+Também teria que se rever a implementação, no controlo deliberativo, do modelo do mundo, porque o sinal que é dado que o estado do mundo mudou apenas tem em conta quando foi recolhido um alvo no ambiente.
