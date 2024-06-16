@@ -11,8 +11,7 @@ class PDM():
 
         """
         Calcula a política óptima (π*) com base na utilidade estimada (U) para cada estado mediante uma acção.
-        π*(𝑠) = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑎 𝑈(𝑠, 𝑎)
-        pol(s) = max(A, key = lambda a: U(s,a)), sendo A o conjunto de acções possíveis num estado s
+        π*(𝑠) = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑎 𝑈(𝑠, 𝑎) -> pol(s) = max(A, key = lambda a: U(s,a)), sendo A o conjunto de acções possíveis num estado s
         U(s, a) = soma(T(s, a, s') * [R(s, a, s') + gama * U(s')]), para cada estado sucessor s' de s
         """
         politica = {}
@@ -27,10 +26,7 @@ class PDM():
     def resolver(self):
 
         """
-        Resolve o problema de decisão de Markov: 
-        - Calcula a utilidade final
-        - Calcula a política óptima com base na utilidade final
-        Retorna essa informação
+        Resolve o problema de decisão de Markov, calculando a política ótima com base na utilidade estimada para cada estado.
         """
         
         Ufinal = self.__mec_util.utilidade()

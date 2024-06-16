@@ -1,5 +1,4 @@
 class MecUtil:
-
     """
     Classe que implementa, através das equações de Bellman, o mecanismo de utilidade para calcular a Utilidade de cada estado até a um limite máximo de diferença entre a utilidade de um estado e a utilidade do estado anterior (limiar de convergência).
     """
@@ -10,7 +9,6 @@ class MecUtil:
         self.__gama = gama
 
     def utilidade(self):
-        
         """
         Calcula a utilidade para cada estado com base na equação de Bellman.
         A utilidade desse estado tem que ser ponderada com a utilidade dos estados seguintes, de forma a maximizar a utilidade da acção a escolher.
@@ -34,7 +32,7 @@ class MecUtil:
                 U[estado] = max(util_accoes, default=0.0)
                 delta = max(delta, abs(U[estado] - Uanterior[estado]))
             if delta <= self.__delta_max:
-                break # do while work around
+                break  # do while work around
         return U
 
     def util_accao(self, s, a, U):
@@ -44,7 +42,7 @@ class MecUtil:
         U(s') é a utilidade a longo prazo descontado pelo factor de desconto gama.
 
         Soma da probabilidade de transição de s para s' vezes a recompensa de s para s' mais gama vezes a utilidade de s'. Sendo s' um estado sucessor de s.
-        """        
+        """
 
         return sum(
             [

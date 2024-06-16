@@ -1,7 +1,7 @@
 
 from typing import override
 from pee.melhor_prim.procura_aa import ProcuraAA
-from pee.melhor_prim.procura_melhor_prim import ProcuraMelhorPrim
+from pee.melhor_prim.procura_informada import ProcuraInformada
 from plan.plan_pee.mod_prob.heur_dist import HeurDist
 from plan.plan_pee.mod_prob.problema_plan import ProblemaPlan
 from plan.plan_pee.plano_pee import PlanoPee
@@ -14,7 +14,7 @@ class PlaneadorPee(Planeador):
     """
 
     def __init__(self):
-        self.__mec_pee: ProcuraMelhorPrim = ProcuraAA()
+        self.__mec_pee: ProcuraInformada = ProcuraAA()
 
     @override
     def planear(self, modelo_plan, objectivos):

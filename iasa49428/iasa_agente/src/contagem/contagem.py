@@ -1,6 +1,7 @@
 from mod_prob.heuristica_contagem import HeuristicaContagem
 from mod_prob.problema_contagem import ProblemaContagem as ProblemaContagem
 
+from pee.melhor_prim.procura_informada import ProcuraInformada
 from pee.melhor_prim.procura_sofrega import ProcuraSofrega
 from pee.melhor_prim.procura_aa import ProcuraAA
 from pee.larg.procura_largura import ProcuraLargura
@@ -11,12 +12,12 @@ from pee.melhor_prim.procura_custo_unif import ProcuraCustoUnif
 
 VALOR_INICIAL = 0
 VALOR_FINAL = 9
-INCREMENTOS = [1, 2]  # Problema encontrado com operador -1, a procura é infinita porque existem possíveis ciclos [-1, 1, 2, -1, 1, 2, -1, ...]
+INCREMENTOS = [1, 2] # Problema encontrado com operador -1, a procura é infinita porque existem possíveis ciclos [-1, 1, 2, -1, 1, 2, -1, ...]
 
 PROBLEMA = ProblemaContagem(VALOR_INICIAL, VALOR_FINAL, INCREMENTOS)
 HEURISTICA = HeuristicaContagem(VALOR_FINAL)
 
-mecanismos_procuras = [
+mecanismos_procura = [
     ProcuraProfundidade,
     ProcuraProfLim,
     ProcuraProfIter,
@@ -26,20 +27,13 @@ mecanismos_procuras = [
     ProcuraAA,
 ]
 
-# mechanism name
-# print the solution as an array
-# print solution dimension
-# print the solution cost
-# print the number of nodes processed
-# print the maximum number of nodes in memory
-
-for MecanismoProcura in mecanismos_procuras:
+for MecanismoProcura in mecanismos_procura:
     print(f"Mecanismo de Procura: {MecanismoProcura.__name__}")
 
     mec_proc = MecanismoProcura()
-    try:
+    if isinstance(mec_proc, ProcuraInformada):
         solucao = mec_proc.procurar(PROBLEMA, HEURISTICA)
-    except TypeError:
+    else:
         solucao = mec_proc.procurar(PROBLEMA)
 
     # Mostrar a solução
