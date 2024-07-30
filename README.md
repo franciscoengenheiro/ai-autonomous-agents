@@ -28,9 +28,15 @@ Each following agent has a short embedded demonstration video showcasing its beh
 
 ### Reactive Agent ⚡
 
+https://github.com/user-attachments/assets/d5197dba-a825-450f-bae7-74128defaee6
+
 ### Deliberative Agent using State Space Search 🔍
 
+https://github.com/user-attachments/assets/0f2c10af-a4d3-4ca2-b963-91eb7486ee51
+
 ### Deliberative Agent using Markov Decision Processes 🎲
+
+https://github.com/user-attachments/assets/0acb2d5f-75fa-4791-a99f-1b7b390d81a8
 
 ## How to Run 🚀
 
