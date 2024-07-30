@@ -2,7 +2,9 @@
 
 ## Project Overview 📝
 
-The project aims to introduce students to the development of autonomous agents capable of navigating dynamic environments. The project is divided into three parts, each focusing on a different type of agent: reactive, deliberative using state space search, and deliberative using Markov Decision Processes.
+The project aims
+to introduce students to the development of autonomous agents using different paradigms of artificial intelligence.
+It was a key evaluation point of the [Artificial Intelligence for Autonomous Systems](https://www.isel.pt/en/leim/artificial-intelligence-autonomous-systems) course in the [CSE](https://www.isel.pt/en/curso/bsc-degree/computer-science-and-computer-engineering) undergraduate program of [ISEL](https://www.isel.pt/en).
 
  The project is divided into three main parts,
  each focusing on a different type of agent: reactive,
@@ -21,6 +23,8 @@ The project aims to introduce students to the development of autonomous agents c
 > Be aware that the report is written in **Portuguese**.
 
 ## Agents 🤖
+
+Each following agent has a short embedded demonstration video showcasing its behavior in the environment in a specific configuration.
 
 ### Reactive Agent ⚡
 
